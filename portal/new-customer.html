@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Bling</title>
+	<!-- Favicon icon -->
+	<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+	<link href="./css/style.css" rel="stylesheet">
+
+	<style>
+		span.nav-text {
+    		color: black;
+		}
+	</style>
+
+</head>
+<body>
+<!--**********************************
+    Main wrapper start
+***********************************-->
+<div class="nav-header" align-items="center" style="background-color: #fff9c7">
+	<a href="index.html" class="brand-logo">
+		<img src="./images/bling_logo.png" alt="" style="max-width: 120px">
+	</a>
+</div>
+<div class="deznav">
+	<div class="deznav-scroll" style="background-color: #fff9c7">
+		<ul class="metismenu" id="menu">
+			<li><a href="index.html">
+				<i class="flaticon-381-phone-call"></i>
+				<span class="nav-text">Business List</span>
+			</a>
+			</li>
+			<li><a href="profile.html">
+				<i class="flaticon-381-phone-call"></i>
+				<span class="nav-text">Add New Customer</span>
+			</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="header">
+	<div style="margin-left: 50px; margin-top: 20px">
+		<nav class="navbar navbar-expand">
+			<div class="collapse navbar-collapse justify-content-between">
+				<div class="header-left">
+					<div class="dashboard_bar">
+						Dashboard
+					</div>
+				</div>
+
+				<div>
+					<a class="nav-link" href="#" role="button" data-toggle="dropdown" style="margin-right:50px">
+						<svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<a [routerLink]='["/"]' class="dropdown-item ai-icon">
+							<span class="ml-2">Logout </span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
+
+<div class="content-body rightside-event">
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header light badge-success">
+						<h4 class="card-title">Business List</h4>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-responsive-md">
+								<thead>
+								<tr>
+									<th style="width:80px;"><strong>#</strong></th>
+									<th><strong>BUSINESS NAME</strong></th>
+									<th><strong>START DATE</strong></th>
+									<th><strong>STATUS</strong></th>
+									<th></th>
+								</tr>
+								</thead>
+
+								<tbody>
+								<tr colspan="5" data-toggle="collapse" data-target="#demo1" class="accordion-toggle collapsible">
+									<td><strong>1</strong></td>
+									<td>
+										Mcdaniel Calls
+									</td>
+									<td>Tuesday</td>
+									<td><span class="badge light badge-success">On Going</span></td>
+									<td>
+										<a class="btn btn-icon btn-info light sharp"> <i class="bi bi-person-circle">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+												<path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+												<path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+												<path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+											</svg></i> </a>
+
+									</td>
+								</tr>
+								<tr class="p">
+									<td colspan="5" class="hiddenRow">
+										<div class="accordian-body collapse p-3" id="demo1">
+											<p>No : <span>1</span></p>
+											<p>Date : <span>12 Jan 2018</span> </p>
+											<p>Description : <span>Good</span> </p>
+											<p>Credit : <span>$150.00</span> </p>
+											<p>Debit : <span></span></p>
+										</div>
+									</td>
+								</tr>
+
+
+								<tr class="collapsible">
+									<td><strong>2</strong></td>
+									<td>
+										Xcommerce
+									</td>
+									<td>Tuesday</td>
+									<td><span class="badge light badge-danger">Ended</span></td>
+									<td>
+										<a class="btn btn-icon btn-info light sharp" href="profile.html"> <i class="bi bi-person-circle">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+												<path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+												<path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+												<path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+											</svg></i> </a>
+
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="footer">
+	<div class="copyright">
+		<p>Copyright © Designed &amp; Developed by <a href="https://www.bling.cloud/" target="_blank">Bling</a> 2020</p>
+	</div>
+</div>
+
+<script src="./vendor/global/global.min.js"></script>
+<script src="./js/custom.min.js"></script>
+<script src="./js/deznav-init.js"></script>
+<script>
+$('.accordion-toggle').click(function(){
+	$('.hiddenRow').hide();
+	$(this).next('tr').find('.hiddenRow').show();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Bling</title>
+	<!-- Favicon icon -->
+	<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+	<link href="./css/style.css" rel="stylesheet">
+
+	<style>
+		span.nav-text {
+    		color: black;
+		}
+
+		.pill-size {
+			font-size: 12px;
+		}
+	</style>
+
+</head>
+<body>
+<!--**********************************
+    Main wrapper start
+***********************************-->
+
+<div class="nav-header" align-items="center" style="background-color: #fff9c7; width: 220px">
+	<a href="index.html" class="brand-logo">
+		<img src="./images/bling_logo.png" alt="" style="max-width: 120px">
+	</a>
+</div>
+<div class="deznav" style="width: 220px">
+	<div class="deznav-scroll" style="background-color: #fff9c7; width: 220px">
+		<ul class="metismenu" id="menu" >
+			<li><a href="index.html">
+				<i class="flaticon-381-phone-call"></i>
+				<span class="nav-text">Business List</span>
+			</a>
+			</li>
+			<li><a href="profile.html">
+				<i class="flaticon-381-phone-call"></i>
+				<span class="nav-text">Add New Customer</span>
+			</a>
+			</li>
+		</ul>
+</div>
+</div>
+
+<div class="header light badge-success" style="height: 80px">
+	<div style="margin-top: 20px">
+		<nav class="navbar navbar-expand">
+			<div class="collapse navbar-collapse justify-content-between">
+				<div class="header-left">
+					<div class="dashboard_bar ">
+						McDaniel
+						<span class="badge light badge-warning" style="margin-left: 10px">On Going</span>
+					</div>
+				</div>
+
+				<div>
+					<a class="nav-link" href="#" role="button" data-toggle="dropdown" style="margin-right:50px">
+						<svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<a [routerLink]='["/"]' class="dropdown-item ai-icon">
+							<span class="ml-2">Logout </span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
+
+<!--**********************************
+          Content body start
+      ***********************************-->
+<div class="content-body" style="margin-left: 14.5rem">
+	<!-- row -->
+	<div style="height: 70%; overflow: hidden">
+		<div style="text-align: center;"  class="col-xl-12" id="loading" hidden>
+			<div class="spinner-border text-primary" role="status">
+				<span class="sr-only">Loading...</span>
+
+			</div>
+		</div>
+
+		</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row" style="display: flex; flex-direction: row; justify-content: space-between">
+						<div class="card light badge-primary" style="width: 40%; padding: 20px; margin-left:50px">
+							<div style="display: flex; flex-direction: row">
+								<div style="width: 90%">
+									Plan Details
+								</div>
+								<div>$99</div>
+							</div>
+							<div><p>
+								<strong>Outbound Calls.........Yes</strong><br>
+								<strong>Emails.................Yes</strong><br>
+								<strong>Messages...............Yes</strong><br>
+								<strong>Survey.................Yes</strong><br></p>
+							</div>
+						</div>
+
+						<div style="padding-right: 30px">
+							<div style="height: 50%">
+								Bling Phone number
+							</div>
+							<div style="height: 50%">
+							Manager Name<br>
+							Manager Phone number<br>
+							Manager Email<br>
+							</div>
+						</div>
+
+					</div>
+
+					<div style="height: 50px" ></div>
+					<div style="display: flex; flex-direction: row; height: 80%">
+							<div class="card" style="width: 40%; overflow: hidden">
+								<div class="row light badge-danger" style="padding: 10px; padding-left: 50px;">
+									<strong>Business Messages</strong>
+								</div>
+								<div style="height: 70%; overflow: scroll">
+									<div class="light badge-info" style="padding: 15px;" >Jan 2<br>
+										Hello my name is</div>
+									<div style="padding: 15px;" >Jan 2<br>
+										Hello my name is</div>
+								</div>
+								<div class=" row light badge-danger" style="height: 20%; padding: 20px">Send Message</div>
+
+							</div>
+						<div class="card" style="width: 60%; overflow: hidden">
+							<div style="padding-left: 20px; overflow: scroll;" class="card-body">
+								<div class="basic-list-group">
+						<div >
+							<ul class="nav nav-pills justify-content-end mb-4">
+								<li class=" nav-item pill-size" style="padding-right: 5px">
+									<a href="#list-detail" class="nav-link light badge-secondary active" data-toggle="tab" aria-expanded="false">
+										<i class="flaticon-381-home-1"></i>
+										Details</a>
+								</li>
+								<li class="nav-item pill-size" style="padding-right: 10px">
+									<a href="#list-inbound" class="nav-link light badge-secondary" data-toggle="tab" aria-expanded="false">
+										<i class="flaticon-381-incoming-call"></i>
+										Inbound Calls</a>
+								</li>
+								<li class="nav-item pill-size" style="padding-right: 10px">
+									<a href="#list-outbound" class="nav-link light badge-secondary" data-toggle="tab" aria-expanded="true">
+										<i class="flaticon-381-phone-call"></i>
+										Outbound Calls</a>
+								</li>
+								<li class="nav-item pill-size" style="padding-right: 10px">
+									<a href="#list-script" class="nav-link light badge-secondary" data-toggle="tab" aria-expanded="true">
+										<i class="flaticon-381-newspaper"></i>
+										Script</a>
+								</li>
+							</ul>
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="list-detail">
+									<table class="table table-striped"  class="table header-border" >
+
+										<tbody>
+										<tr>
+											<td><strong>
+												Voicemail Message</strong>
+											</td>
+											<td>Message</td>
+
+										</tr>
+
+										<tr>
+											<td><strong>
+												Welcome Message</strong>
+											</td>
+											<td>Message</td>
+
+										</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div class="tab-pane fade" id="list-inbound" role="tabpanel">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="filterTermInbound">
+									</div>
+
+									<div class="table-responsive">
+										<table class="table table-striped " class="table header-border table-responsive-sm" >
+											<thead>
+											<th>S.No</th>
+											<th>Phone number</th>
+											<!-- <th>Call Status</th> -->
+											<th>Inbound call recording </th>
+											<th>Date</th>
+											</thead>
+
+											<tbody>
+											<tr *ngFor="let inbound of profile.inboundCalls |  filter:filterTermInbound  let i=index">
+												<td>{{i+1}}</td>
+												<td>
+													{{ inbound.customerPhoneNumber }}
+												</td>
+												<!-- <td>{{inbound.callstatus }}</td> -->
+												<td> <audio controls>
+													<source src={{inbound.recordUrl}}>
+												</audio> </td>
+												<td>{{inbound.createdDate | date }}</td>
+
+											</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="list-outbound">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="filterTermOutbound">
+									</div>
+
+									<div class="table-responsive">
+										<table class="table table-striped" class="table header-border table-responsive-sm" >
+											<thead>
+											<th>S.No</th>
+											<th>Phone number</th>
+											<!-- <th>Call Status</th> -->
+											<th>Outbound call recording</th>
+											<th>Date</th>
+											</thead>
+
+											<tbody>
+											<tr *ngFor="let outbound of profile.outboundCalls |  filter:filterTermOutbound let i=index">
+												<td>{{i+1}}</td>
+												<td>
+													{{ outbound.customerPhoneNumber }}
+												</td>
+												<!-- <td>{{outbound.callstatus }}</td> -->
+												<td> <audio controls>
+													<source src={{outbound.recordUrl}}>
+												</audio> </td>
+												<td>{{outbound.createdDate | date }}</td>
+
+											</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="list-messages">
+
+									<div style="text-align: left;" >
+										<button class="btn btn-primary"  (click)="open(addMessage)" >Add messages</button>
+
+									</div>
+									<p></p>
+									<p></p>
+									<hr>
+									<table class="table table-striped" class="table header-border" >
+
+
+										<thead>
+										<th>S.No</th>
+										<th>Date</th>
+										<th>message content</th>
+										</thead>
+
+										<ng-container *ngFor="let bMsg of profile.businessMessageList let i =index">
+											<ng-container *ngIf="bMsg.messageFrom === 'wing'">
+												<tr class="light badge-info">
+													<td>{{i+1}}</td>
+													<!-- <td>
+													  {{ bMsg.business }}
+													</td> -->
+
+													<!-- <td> {{bMsg.messageFrom}}</td> -->
+													<td>{{bMsg.createdDate | date}}</td>
+													<td>{{bMsg.messagecontent }}</td>
+
+
+
+												</tr>
+											</ng-container>
+											<ng-container *ngIf="bMsg.messageFrom !== 'wing'">
+												<tr>
+													<td>{{i+1}}</td>
+													<!-- <td>
+													  {{ bMsg.business }}
+													</td> -->
+
+													<!-- <td> {{bMsg.messageFrom}}</td> -->
+													<td>{{bMsg.createdDate | date}}</td>
+													<td>{{bMsg.messagecontent }}</td>
+
+
+
+												</tr>
+											</ng-container>
+										</ng-container>
+
+									</table>
+								</div>
+								<div class="tab-pane fade" id="list-script">
+									<div class="col-xl-12">
+
+										<div *ngIf="!showScript">
+											<p>
+												{{profile.businessScript.script}}
+											</p>
+											<button (click)="showScriptForm()" class="btn btn-primary">
+												Update
+											</button>
+										</div>
+
+										<div *ngIf="showScript">
+
+											<p>{{bindScript}}</p>
+
+											<form [formGroup]="scriptForm" (ngSubmit)="updateScript()">
+												<input type="text"  [(ngModel)]="bindScript" formControlName="script" id="w3review" class="textarea" cols="10">
+												<div>
+													<button type="submit" class="btn btn-success">
+														Save
+													</button>
+
+													<button type="submit" (click)="cancel()" class="btn btn-danger">
+														Cancel
+													</button>
+												</div>
+
+											</form>
+
+										</div>
+
+
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+		<p>Copyright © Designed &amp; Developed by <a href="https://www.bling.cloud/" target="_blank">Bling</a> 2020</p>
+
+</div>
+
+<script src="./vendor/global/global.min.js"></script>
+<script src="./js/custom.min.js"></script>
+<script src="./js/deznav-init.js"></script>
+<script>
+$('.accordion-toggle').click(function(){
+	$('.hiddenRow').hide();
+	$(this).next('tr').find('.hiddenRow').show();
+});
+</script>
+</body>
+</html>

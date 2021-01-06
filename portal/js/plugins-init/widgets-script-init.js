@@ -407,7 +407,7 @@ if(jQuery('#chart_widget_2').length > 0 ){
         labels: ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'forteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'],
         datasets: [{
             label: 'Expense',
-            backgroundColor: '#222fb9',
+            backgroundColor: '#F9F7BA',
             hoverBackgroundColor: '#6c2586', 
             data: [
                 '20',
@@ -1178,7 +1178,7 @@ if(jQuery('#chart_widget_17').length > 0 ){
 		if(jQuery('#chart_widget_17').length > 0 ){
 	
 	const chart = $.plot('#chart_widget_17', [getRandomData()], {
-		colors: ['#222fb9'],
+		colors: ['#FFFA6F'],
 		series: {
 			lines: {
 				show: true,
