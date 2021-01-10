@@ -11770,7 +11770,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
       .deznav .metismenu > li.mm-active > a {
         color: #222fb9; }
         .deznav .metismenu > li.mm-active > a g [fill] {
-          fill: #222fb9; }
+          fill: #000000; }
     .deznav .metismenu li {
       position: relative; }
     .deznav .metismenu ul {
@@ -20029,10 +20029,10 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   background-color: rgba(110, 110, 110, 0.1); }
 
 [data-typography="opensans"] {
-  font-family: 'Open Sans', sans-serif; }
+  font-family: Arial, Helvetica, sans-serif; }
 
 [data-typography="poppins"] {
-  font-family: 'poppins', sans-serif; }
+  font-family: Arial, Helvetica, sans-serif; }
 
 [data-typography="roboto"] {
   font-family: 'Roboto', sans-serif; }
