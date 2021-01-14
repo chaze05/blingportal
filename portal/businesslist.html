@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow: hidden;" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Bling</title>
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/custombling.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="./js/businesslist.js"></script>
+
+</head>
+<body>
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+
+<!--    Nav Header-->
+	<div class="nav-header" align-items="center" style="background-color: #ffe256; width: 220px; border: 1px solid #a6a90c; border-bottom: 0px">
+		<a href="index.html" class="brand-logo">
+			<img src="./images/bling_logo.png" alt="" style="max-width: 120px">
+		</a>
+	</div>
+
+<!--    Navigation bar-->
+	<div class="deznav" style="width: 220px;">
+		<div class="deznav-scroll" style="background-color: #ffe256; width: 220px; border: 1px solid #a6a90c; border-top : 0px">
+			<ul class="metismenu" id="menu" >
+				<li><a href="index.html">
+					<i class="flaticon-381-phone-call"></i>
+					<span class="nav-text">Business List</span>
+				</a>
+				</li>
+				<li><a href="profile.html">
+					<i class="flaticon-381-phone-call"></i>
+					<span class="nav-text">Add New Customer</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+<!--    dashboard header-->
+	<div class="header" style="height: 60px; margin-left: 220px; padding-left: 40px">
+		<div style="margin-top: 20px">
+			<nav class="navbar navbar-expand">
+				<div class="justify-content-between" style="display: flex; display-direction: row; width: calc(100% - 250px)">
+					<div class="header-left">
+						<div class="dashboard_bar" style="font-weight: normal; font-size:22px; margin-top: -8px; margin-top:-12px">
+							<font color="gray">Dashboard <i><small>for</small></i></font>   <font color="#36a4fd"> &nbsp;Wing</font>
+						</div>
+					</div>
+
+					<div>
+                        <a href="index.html" class="dropdown-item ai-icon">
+                            <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                            <span class="ml-2">Logout </span>
+                        </a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+<!--    Page content-->
+
+	<div class="content-body" style="margin-right: 0px; margin-left: 200px; margin-top:0px; padding-top:4rem; overflow: hidden">
+
+        <div class="container-fluid" style="padding-top: 0px">
+			<div class="row">
+
+                <!--        Business List-->
+				<div class="col-lg-12" style="height: 85vh; width: 80vh">
+					<div class="card"  id="businesslist" style="border-radius: 0px 0px 5px 5px; height: 100%; border: 1px solid black">
+						<div class="card-header" style="border-radius: 0px 0px 0px 0px; height: 20px; background-color: #f3f596">
+							<h4 class="card-title">Business List</h4>
+						</div>
+						<div class="card-body" style="height: 100%">
+							<div class="table-responsive" style="overflow: scroll-y; max-height: calc(100% - 50px)">
+								<table class="table table-responsive-md">
+									<thead>
+									<tr>
+										<th style="width:80px;"><strong>#</strong></th>
+										<th><strong>BUSINESS NAME</strong></th>
+										<th><strong>START DATE</strong></th>
+										<th><strong>STATUS</strong></th>
+										<th><strong>MANAGER NAME</strong></th>
+										<th><strong>ACTION</strong></th>
+										<th></th>
+									</tr>
+									</thead>
+
+									<tbody id="blist">
+                                    </tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+<!--                    View Profile-->
+                    <div id="profiledetails" style="height: 100%">
+                        <a href="javascript:void()" onclick="backbusiness()">
+                            <img src="./images/back1.png" style="max-width: 40px; margin-bottom: 10px"/>
+                        </a>
+                        <div id="loader">
+                            Loading
+                        </div>
+                        <div class="card" id="bcard" style="border-radius: 0px 0px 5px 5px; border: 1px solid black; padding: 0px; max-height: calc(100% - 0px)">
+                            <div class="card-header" style="border-radius: 5px 5px 0px 0px; display:flex;
+                                    display-direction: row; height: 20px; background-color: #f3f596">
+                                <h4 class="card-title" id="businessname">McDaniel</h4>
+                                <div id="manager" style="color: black" data-toggle="tooltip" data-html="true" title="Manager Details">
+
+                                </div>
+                            </div>
+                            <div class="card-body" style="display: flex; flex-direction: row; padding: 0px;">
+                                <div style="width: 35%; padding: 10px">
+                                    <div class="card" style="padding: 20px; color: white; background-color: #313004; height: 180px; width: 100%; margin-bottom: 0px">
+                                        <div style="text-align: center;"  class="col-xl-12" id="loading" hidden>
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="sr-only">Loading...</span>
+
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; flex-direction: row">
+                                            <div style="width: 90%">
+                                                Plan Details
+                                            </div>
+                                            <div id="price">$99</div>
+                                        </div>
+                                        <div><p>
+                                            <strong id="callType">Outbound Calls</strong><br>
+                                            <strong id="email">Emails</strong><br>
+                                            <strong id="message">Messages</strong><br>
+                                            <strong id="survey">Survey</strong>
+                                        </div>
+                                    </div>
+                                    <div style="color: #313004" data-toggle="tooltip" title="Bling Phone Number" id="blingnum"></div>
+
+                                    <div style="overflow: scroll; height: calc(100% - 20px)">
+                                        <strong><p style="font-size: 12px; margin-bottom: 0px">GREETING
+                                            <button id="greetbutton">
+                                                <img src='./images/pen.png' style='max-width: 20px;'/></button></p></strong>
+                                    <div style="border: 1px solid #d4d405"> </div>
+                                    <div style="color:  black;
+                                    padding: 4px; font-size: 12px;" id="greeting">
+                                        Hi this is wing from McDaniel's office. We will be right with you.</div>
+
+                                    <strong><p style="font-size: 12px; margin-bottom: 0px">VOICEMAIL<button id="voicebutton">
+                                        <img src='./images/pen.png' style='max-width: 20px;'/></button></p></strong>
+                                    <div style="border: 1px solid #d4d405"> </div>
+                                    <div style="color:  black;
+                                    padding: 4px; font-size: 12px; display: flex; display-direction: row" id="voicemail">
+                                        Thank you for calling Mcdaniel's office.
+                                        This is Meghan. Please leave a message and I will get back to you soon.</div>
+                                    </div>
+                                </div>
+                                <div class="basic-list-group" style="width: calc(100% - 100px); margin-left: 10px; height: 100%">
+                                    <ul class="nav nav-pills" style="padding:5px">
+                                        <li class="pill-size" style="padding-right: 5px">
+                                            <a href="#list-message" class="nav-link light badge-info active" data-toggle="tab" aria-expanded="false">
+                                                <i class="flaticon-381-home-1"></i>
+                                                Messages</a>
+                                        </li>
+                                        <li class="nav-item pill-size" style="padding-right: 5px">
+                                            <a href="#list-inbound" class="nav-link light badge-info" data-toggle="tab" aria-expanded="false">
+                                                <i class="flaticon-381-incoming-call"></i>
+                                                Inbound Calls</a>
+                                        </li>
+                                        <li class="nav-item pill-size" style="padding-right: 10px">
+                                            <a href="#list-outbound" class="nav-link light badge-info" data-toggle="tab" aria-expanded="true">
+                                                <i class="flaticon-381-phone-call"></i>
+                                                Outbound Calls</a>
+                                        </li>
+                                        <li class="nav-item pill-size" style="padding-right: 10px">
+                                            <a href="#list-script" class="nav-link light badge-info" data-toggle="tab" aria-expanded="true">
+                                                <i class="flaticon-381-newspaper"></i>
+                                                Script</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="nav-tabContent" style="height: 85%;">
+                                            <div class="tab-pane fade show active" id="list-message" style="height: 100%;">
+                                                <div style="overflow: scroll; background-color: white; height: 88%" id="mlist">
+                                                </div>
+                                                <div style="display: flex; display-direction: row;height: 12%">
+                                                <input type="textarea" style="width: 90%;padding: 20px; color: black" placeholder="Send Message" id="newmessage">
+                                                <button onclick="addMessage()"><img src="./images/send.png" style="padding: 10px;max-width: 60px"/></button></input>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="list-inbound">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Search Here">
+                                                </div>
+
+                                                <div class="table-responsive" style="overflow: scroll">
+                                                    <table class="table table-striped " class="table header-border table-responsive-sm" >
+                                                        <thead>
+                                                        <th>S.No</th>
+                                                        <th>Phone number</th>
+                                                        <th>Inbound call recording </th>
+                                                        <th>Date</th>
+                                                        </thead>
+
+                                                        <tbody id="incall">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="list-outbound">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="filterTermOutbound">
+                                                </div>
+
+                                                <div class="table-responsive" style="overflow: scroll">
+                                                    <table class="table table-striped" class="table header-border table-responsive-sm" >
+                                                        <thead>
+                                                        <th>S.No</th>
+                                                        <th>Phone number</th>
+                                                        <!-- <th>Call Status</th> -->
+                                                        <th>Outbound call recording</th>
+                                                        <th>Date</th>
+                                                        </thead>
+
+                                                        <tbody id="outcall">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="list-script">
+                                                <p id="script"></p>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+
+    <div id="mymodel" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h4 class="text-center mb-4" id="modalheader">Voicemail Message</h4>
+            <div id="updating"></div>
+            <form id="voiceform" action="#">
+                <div id="vdiv">
+                <div class="form-group">
+                    <input type="textarea" class="form-control" id="voicemsg">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block" id="updatevoicemail" onclick="updateVoicemail()">Update</button>
+                </div>
+                </div>
+
+                    <div id="gdiv">
+                    <div class="form-group">
+                        <input type="textarea" class="form-control" id="greetmsg">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-block" id="updategreet" onclick="updateGreeting()">Update</button>
+                    </div>
+                    </div>
+
+                <div id="mdiv">
+                <div class="form-group">
+                    <label class="mb-1"><strong>Name:</strong></label>
+                    <input type="textarea" class="form-control" value="hello" id="formmanagername">
+                </div>
+                <div class="form-group">
+                    <label class="mb-1"><strong>Phone Number:</strong></label>
+                    <input type="textarea" class="form-control" value="Password" id="formmanagernum">
+                </div>
+                <div class="form-group">
+                    <label class="mb-1"><strong>Email:</strong></label>
+                    <input type="textarea" class="form-control" value="Password" id="formmanageremail">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block" id="updatemanager" onclick="updateManagerDetails()">Update</button>
+                </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+
+
+	<div class="footer" style="position: absolute; bottom: 0px; right:0px; font-size: 12px">
+            <div class="copyright">
+                <p>Designed &amp; Developed by <a href="https://www.bling.cloud/" target="_blank">Bling</a> in California 2020</p>
+            </div>
+        </div>
+
+    <script src="./vendor/global/global.min.js"></script>
+    <script src="./js/custom.min.js"></script>
+	<script src="./js/deznav-init.js"></script>
+</body>
+</html>
