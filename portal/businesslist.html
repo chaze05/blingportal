@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow: hidden;">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Bling</title>
+    <link href="./css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="./js/businesslist.js"></script>
+	<style>
+.nav-text {
+	color: black;
+}
+.collapsible {
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+}
+
+.active, .collapsible:hover {
+  background-color: #fffacc;
+  color: #000;
+}
+
+.hiddenRow {
+    padding: 0 4px !important;
+    background-color: #fffef3;
+    font-size: 13px;
+}
+.accordian-body span{
+	color:#a2a2a2 !important;
+}
+
+span.nav-text {
+    		color: black;
+}
+
+    .pill-size {
+        font-size: 14px;
+    }
+
+    .table td {
+  padding: 2px;
+}
+
+.table th {
+  padding: 5px;
+}
+
+.dot {
+  background-color: blue;
+  border-radius: 30%;
+  display: inline-block;
+  padding: 3px;
+}
+
+.dotbling {
+  background-color: yellow;
+  border-radius: 30%;
+  display: inline-block;
+  padding: 3px;
+}
+
+	</style>
+
+</head>
+<body>
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+
+<!--    Nav Header-->
+	<div class="nav-header" align-items="center" style="background-color: #ffe256; width: 220px; border: 1px solid #a6a90c; border-bottom: 0px">
+		<a href="index.html" class="brand-logo">
+			<img src="./images/bling_logo.png" alt="" style="max-width: 120px">
+		</a>
+	</div>
+
+<!--    Navigation bar-->
+	<div class="deznav" style="width: 220px;">
+		<div class="deznav-scroll" style="background-color: #ffe256; width: 220px; border: 1px solid #a6a90c; border-top : 0px">
+			<ul class="metismenu" id="menu" >
+				<li><a href="index.html">
+					<i class="flaticon-381-phone-call"></i>
+					<span class="nav-text">Business List</span>
+				</a>
+				</li>
+				<li><a href="profile.html">
+					<i class="flaticon-381-phone-call"></i>
+					<span class="nav-text">Add New Customer</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+<!--    dashboard header-->
+	<div class="header" style="height: 60px; margin-left: 220px; padding-left: 40px">
+		<div style="margin-top: 20px">
+			<nav class="navbar navbar-expand">
+				<div class="justify-content-between" style="display: flex; display-direction: row; width: calc(100% - 250px)">
+					<div class="header-left">
+						<div class="dashboard_bar" style="font-weight: normal; font-size:22px; margin-top: -8px; margin-top:-12px">
+							<font color="gray">Dashboard <i><small>for</small></i></font>   <font color="#36a4fd"> &nbsp;Wing</font>
+						</div>
+					</div>
+
+					<div>
+                        <a href="index.html" class="dropdown-item ai-icon">
+                            <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                            <span class="ml-2">Logout </span>
+                        </a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+<!--    Page content-->
+
+	<div class="content-body" style="margin-right: 0px; margin-left: 200px; margin-top:0px; padding-top:4rem; overflow: hidden">
+
+        <div class="container-fluid" style="padding-top: 0px">
+			<div class="row">
+
+                <!--        Business List-->
+				<div class="col-lg-12" style="height: 85vh; width: 80vh">
+					<div class="card"  id="businesslist" style="border-radius: 0px 0px 5px 5px; height: 100%; border: 1px solid black">
+						<div class="card-header" style="border-radius: 0px 0px 0px 0px; height: 20px; background-color: #f3f596">
+							<h4 class="card-title">Business List</h4>
+						</div>
+						<div class="card-body" style="height: 100%">
+							<div class="table-responsive" style="overflow: scroll-y; max-height: calc(100% - 50px)">
+								<table class="table table-responsive-md">
+									<thead>
+									<tr>
+										<th style="width:80px;"><strong>#</strong></th>
+										<th><strong>BUSINESS NAME</strong></th>
+										<th><strong>START DATE</strong></th>
+										<th><strong>STATUS</strong></th>
+										<th><strong>MANAGER NAME</strong></th>
+										<th><strong>ACTION</strong></th>
+										<th></th>
+									</tr>
+									</thead>
+
+									<tbody id="blist">
+<!--									<tr colspan="7" style="height: 40px">-->
+<!--										<td><strong>1</strong></td>-->
+<!--										<td>-->
+<!--											Mcdaniel Calls-->
+<!--										</td>-->
+<!--										<td>Tuesday</td>-->
+<!--										<td><span class="badge light badge-success">On Going</span></td>-->
+<!--										<td>Malika</td>-->
+<!--										<td>-->
+<!--											<button id="button1" onclick="buttonclick()" style="border: 0px;">-->
+<!--                                                <img src="./images/profile2.jpg" style="max-width: 40px;" />-->
+<!--                                            </button>-->
+<!--										</td>-->
+<!--                                        <td>-->
+<!--                                          <h2 data-toggle="collapse" data-target="#demo1" class="accordion-toggle collapsible" style="padding:5px">-->
+<!--                                              <center>+</center></h2>-->
+<!--                                        </td>-->
+<!--									</tr>-->
+<!--									<tr class="p">-->
+<!--										<td colspan="7" class="hiddenRow">-->
+<!--											<div class="accordian-body collapse p-3" id="demo1">-->
+<!--												<p>No : <span>1</span></p>-->
+<!--												<p>Date : <span>12 Jan 2018</span> </p>-->
+<!--												<p>Description : <span>Good</span> </p>-->
+<!--												<p>Credit : <span>$150.00</span> </p>-->
+<!--												<p>Debit : <span></span></p>-->
+<!--											</div>-->
+<!--										</td>-->
+<!--									</tr>-->
+
+
+<!--									<tr colspan="7">-->
+<!--										<td><strong>2</strong></td>-->
+<!--										<td>-->
+<!--											Xcommerce-->
+<!--										</td>-->
+<!--										<td>Tuesday</td>-->
+<!--										<td><span class="badge light badge-success">Ongoing</span></td>-->
+<!--										<td>Malika</td>-->
+<!--										<td>-->
+<!--											<a class="btn btn-icon btn-info light sharp" href="profile.html">Go-></a>-->
+
+<!--										</td>-->
+<!--                                        <td>-->
+<!--                                            <div data-toggle="collapse" data-target="#demo2" class="accordion-toggle collapsible"> > </div>-->
+<!--                                        </td>-->
+<!--									</tr>-->
+<!--									<tr class="p">-->
+<!--										<td colspan="5" class="hiddenRow">-->
+<!--											<div class="accordian-body collapse p-3" id="demo2">-->
+<!--												<p>No : <span>1</span></p>-->
+<!--												<p>Date : <span>12 Jan 2018</span> </p>-->
+<!--												<p>Description : <span>Good</span> </p>-->
+<!--												<p>Credit : <span>$150.00</span> </p>-->
+<!--												<p>Debit : <span></span></p>-->
+<!--											</div>-->
+<!--										</td>-->
+<!--									</tr>-->
+                                    </tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+<!--                    View Profile-->
+                    <div id="profiledetails" style="height: 100%">
+                        <a href="javascript:void()" onclick="backbusiness()">
+                            <img src="./images/back1.png" style="max-width: 40px; margin-bottom: 10px"/>
+                        </a>
+                        <div id="loader">
+                            Loading
+                        </div>
+                        <div class="card" id="bcard" style="border-radius: 0px 0px 5px 5px; border: 1px solid black; padding: 0px; max-height: calc(100% - 0px)">
+                            <div class="card-header" style="border-radius: 5px 5px 0px 0px; display:flex;
+                                    display-direction: row; height: 20px; background-color: #f3f596">
+                                <h4 class="card-title" id="businessname">McDaniel</h4>
+                                <div id="manager" style="color: black" data-toggle="tooltip" data-html="true" title="Manager Details">
+                                    Manager Name
+                                </div>
+                            </div>
+                            <div class="card-body" style="display: flex; flex-direction: row; padding: 0px;">
+                                <div style="width: 35%; padding: 10px">
+                                    <div class="card" style="padding: 20px; color: white; background-color: #313004; height: 180px; width: 100%; margin-bottom: 0px">
+                                        <div style="text-align: center;"  class="col-xl-12" id="loading" hidden>
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="sr-only">Loading...</span>
+
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; flex-direction: row">
+                                            <div style="width: 90%">
+                                                Plan Details
+                                            </div>
+                                            <div id="price">$99</div>
+                                        </div>
+                                        <div><p>
+                                            <strong id="callType">Outbound Calls</strong><br>
+                                            <strong id="email">Emails</strong><br>
+                                            <strong id="message">Messages</strong><br>
+                                            <strong id="survey">Survey</strong>
+                                        </div>
+                                    </div>
+                                    <div style="color: #313004" data-toggle="tooltip" title="Bling Phone Number" id="blingnum"></div>
+
+                                    <div style="overflow: scroll; height: calc(100% - 20px)">
+                                        <strong><p style="font-size: 12px; margin-bottom: 0px">GREETING</p></strong>
+                                    <div style="border: 1px solid #d4d405"> </div>
+                                    <div style="color:  black;
+                                    padding: 4px; font-size: 12px;" id="greeting">
+                                        Hi this is wing from McDaniel's office. We will be right with you.</div>
+
+                                    <strong><p style="font-size: 12px; margin-bottom: 0px">VOICEMAIL</p></strong>
+                                    <div style="border: 1px solid #d4d405"> </div>
+                                    <div style="color:  black;
+                                    padding: 4px; font-size: 12px; display: flex; display-direction: row" id="voicemail">
+                                        Thank you for calling Mcdaniel's office.
+                                        This is Meghan. Please leave a message and I will get back to you soon.</div>
+                                    </div>
+                                </div>
+                                <div class="basic-list-group" style="width: calc(100% - 100px); margin-left: 10px; height: 100%">
+                                    <ul class="nav nav-pills" style="padding:5px">
+                                        <li class="pill-size" style="padding-right: 5px">
+                                            <a href="#list-message" class="nav-link light badge-info active" data-toggle="tab" aria-expanded="false">
+                                                <i class="flaticon-381-home-1"></i>
+                                                Messages</a>
+                                        </li>
+                                        <li class="nav-item pill-size" style="padding-right: 5px">
+                                            <a href="#list-inbound" class="nav-link light badge-info" data-toggle="tab" aria-expanded="false">
+                                                <i class="flaticon-381-incoming-call"></i>
+                                                Inbound Calls</a>
+                                        </li>
+                                        <li class="nav-item pill-size" style="padding-right: 10px">
+                                            <a href="#list-outbound" class="nav-link light badge-info" data-toggle="tab" aria-expanded="true">
+                                                <i class="flaticon-381-phone-call"></i>
+                                                Outbound Calls</a>
+                                        </li>
+                                        <li class="nav-item pill-size" style="padding-right: 10px">
+                                            <a href="#list-script" class="nav-link light badge-info" data-toggle="tab" aria-expanded="true">
+                                                <i class="flaticon-381-newspaper"></i>
+                                                Script</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="nav-tabContent" style="height: 85%;">
+                                            <div class="tab-pane fade show active" id="list-message" style="height: 100%;">
+                                                <div style="overflow: scroll; background-color: white; height: 88%" id="mlist">
+                                                </div>
+                                                <input type="textarea" style="height: 12%; width: 100%;padding: 20px; color: black" placeholder="Send Message">
+                                                <img src="./images/send.png" style="padding: 10px; height: 10px; width: 10px"/></input>
+
+                                            </div>
+
+                                            <div class="tab-pane fade" id="list-inbound">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Search Here">
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped " class="table header-border table-responsive-sm" >
+                                                        <thead>
+                                                        <th>S.No</th>
+                                                        <th>Phone number</th>
+                                                        <th>Inbound call recording </th>
+                                                        <th>Date</th>
+                                                        </thead>
+
+                                                        <tbody id="incall">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="list-outbound">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="filterTermOutbound">
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped" class="table header-border table-responsive-sm" >
+                                                        <thead>
+                                                        <th>S.No</th>
+                                                        <th>Phone number</th>
+                                                        <!-- <th>Call Status</th> -->
+                                                        <th>Outbound call recording</th>
+                                                        <th>Date</th>
+                                                        </thead>
+
+                                                        <tbody id="outcall">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="list-script">
+                                                <p id="script"></p>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="footer" style="position: absolute; bottom: 0px; right:0px; font-size: 12px">
+            <div class="copyright">
+                <p>Designed &amp; Developed by <a href="https://www.bling.cloud/" target="_blank">Bling</a> in California 2020</p>
+            </div>
+        </div>
+
+    <script src="./vendor/global/global.min.js"></script>
+    <script src="./js/custom.min.js"></script>
+	<script src="./js/deznav-init.js"></script>
+</body>
+</html>
