@@ -1,3 +1,6 @@
+UI_URL= "http://localhost:8080/business/"
+//UI_URL = "https://www.bling-center.com/business/"
+
 $('.accordion-toggle').click(function(){
 	$('.hiddenRow').hide();
 	$(this).next('tr').find('.hiddenRow').show();
@@ -8,7 +11,7 @@ function buttonclick(id) {
     $('#profiledetails').show();
     $.ajax({
             type: 'get',
-            url: 'http://localhost:8080/business/profile/' + id,
+            url: UI_URL + 'profile/' + id,
             success: function (data) {
              console.log(data)
              $('#loader').hide()
@@ -32,12 +35,159 @@ $('#bcard').hide();
 
     $.ajax({
         type: 'get',
-        url: 'http://localhost:8080/business/list/wing',
+        url: UI_URL + 'list/wing',
         success: function (data) {
          displaylist(data.data)
         }
       });
 })
+
+
+function editmanagerdetails() {
+       var modal = document.getElementById("mymodel");
+       var btn1 = document.getElementById("editmanager");
+       var btn2 = document.getElementById("greetbutton");
+       var btn3 = document.getElementById("voicebutton");
+
+       $('#vdiv').hide()
+       $('#mdiv').hide()
+       $('#gdiv').hide()
+
+       // Get the <span> element that closes the modal
+       var span = document.getElementsByClassName("close")[0];
+
+       // When the user clicks the button, open the modal
+       btn1.onclick = function() {
+         modal.style.display = "block";
+         $('#mdiv').show()
+         detail = document.getElementById("managerhiddendetail").innerHTML.split(";")
+         document.getElementById('modalheader').innerHTML = "Manager Details"
+         document.getElementById('formmanagername').value = detail[0]
+         document.getElementById('formmanagernum').value = detail[1]
+         document.getElementById('formmanageremail').value = detail[2]
+       }
+
+       btn2.onclick = function() {
+        modal.style.display = "block";
+        $('#gdiv').show()
+        document.getElementById('modalheader').innerHTML = "Greeting"
+        document.getElementById('greetmsg').value = document.getElementById("greeting").innerHTML
+      }
+
+       btn3.onclick = function() {
+          modal.style.display = "block";
+          $('#vdiv').show()
+          document.getElementById('modalheader').innerHTML = "Voicemail"
+          document.getElementById('voicemsg').value = document.getElementById("voicemail").innerHTML
+       }
+
+       // When the user clicks on <span> (x), close the modal
+       span.onclick = function() {
+         modal.style.display = "none";
+         $('#vdiv').hide()
+        $('#mdiv').hide()
+        $('#gdiv').hide()
+       }
+
+       // When the user clicks anywhere outside of the modal, close it
+       window.onclick = function(event) {
+         if (event.target == modal) {
+           modal.style.display = "none";
+           $('#vdiv').hide()
+                  $('#mdiv').hide()
+                  $('#gdiv').hide()
+         }
+       }
+}
+
+function updateManagerDetails() {
+    document.getElementById("updating").innerHTML = "Updating";
+    $.ajax({
+            type: 'post',
+            url: UI_URL + 'managerupdate',
+            data: {name: $('#formmanagername')[0].value, phone: $('#formmanagernum')[0].value, email: $('#formmanageremail')[0].value, id: $('#businessid')[0].innerHTML},
+            success: function (data) {
+                document.getElementById("updating").innerHTML = "";
+                document.getElementById("mymodel").style.display = "none";
+                $('#vdiv').hide()
+                  $('#mdiv').hide()
+                  $('#gdiv').hide()
+                mdetail = $('#formmanagername')[0].value
+                if (mdetail == null) {
+                    mdetail = ""
+                }
+                document.getElementById("manager").innerHTML = mdetail+ "<button id='editmanager'><img src='./images/pen.png' style='max-width: 20px;'/></button>"
+                html_val = '<em>Email</em> : <b>'+ $('#formmanageremail')[0].value+'</b><br>'
+                html_val += '<em>Phone Number</em> : <b>'+$('#formmanagernum')[0].value+'</b>'
+                $('#manager').attr('data-original-title', html_val)
+            },
+            error: function(err) {
+                document.getElementById("updating").innerHTML = "Error Updating. Please try later";
+            }
+          });
+}
+
+function updateGreeting() {
+    document.getElementById("updating").innerHTML = "Updating";
+    $.ajax({
+            type: 'post',
+            url: UI_URL + 'greeting',
+            data: {greeting: $('#greetmsg')[0].value, id: $('#businessid')[0].innerHTML},
+            success: function (data) {
+                document.getElementById("updating").innerHTML = "";
+                document.getElementById("mymodel").style.display = "none";
+                $('#vdiv').hide()
+                  $('#mdiv').hide()
+                  $('#gdiv').hide()
+                document.getElementById("greeting").innerHTML = $('#greetmsg')[0].value
+
+            },
+            error: function(err) {
+                document.getElementById("updating").innerHTML = "Error Updating. Please try later";
+            }
+          });
+}
+
+function updateVoicemail() {
+    document.getElementById("updating").innerHTML = "Updating";
+    $.ajax({
+            type: 'post',
+            url: UI_URL + 'managerupdate',
+            data: {name: $('#voicemsg')[0].value, id: $('#businessid')[0].innerHTML},
+            success: function (data) {
+                document.getElementById("updating").innerHTML = "";
+                document.getElementById("mymodel").style.display = "none";
+                $('#vdiv').hide()
+                                  $('#mdiv').hide()
+                                  $('#gdiv').hide()
+                document.getElementById("voicemail").innerHTML = $('#voicemsg')[0].value
+            },
+            error: function(err) {
+                document.getElementById("updating").innerHTML = "Error Updating. Please try later";
+            }
+          });
+}
+
+function addMessage() {
+    $.ajax({
+                type: 'post',
+                url: UI_URL + 'message',
+                data: {content: $('#newmessage')[0].value, id: $('#businessid')[0].innerHTML, from: "wing"},
+                success: function (data) {
+                    para = document.createElement("div")
+                    para.style = "padding: 5px; font-size: 10px"
+                    color = "<span class='dot' style='color: white'>"
+                    mhtml = color +new Date().toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</span><br>"
+                    mhtml += "<div style='font-size: 13px'>" + $('#newmessage')[0].value + "</div>"
+                    para.innerHTML = mhtml
+                    document.getElementById("mlist").appendChild(para)
+                    $('#newmessage')[0].value = ""
+                },
+                error: function(err) {
+                    $('#newmessage')[0].value = "Error Sending Message. Please try later";
+                }
+              });
+}
 
 function displaylist(data) {
     count = 1
@@ -93,7 +243,11 @@ function displayprofile(data) {
     script = data.businessScript
 
     document.getElementById("businessname").innerHTML = detail.businessname
-    document.getElementById("manager").innerHTML = detail.managerName
+    mdetail = detail.managerName
+    if (mdetail == null) {
+        mdetail = ""
+    }
+    document.getElementById("manager").innerHTML = mdetail+ "<button id='editmanager'><img src='./images/pen.png' style='max-width: 20px;'/></button>"
     html_val = '<em>Email</em> : <b>'+ detail.managerEmail+'</b><br>'
     html_val += '<em>Phone Number</em> : <b>'+detail.managerPhonenumber+'</b>'
     $('#manager').attr('data-original-title', html_val)
@@ -109,20 +263,62 @@ function displayprofile(data) {
     document.getElementById("greeting").innerHTML = detail.welcomemessage
     document.getElementById("voicemail").innerHTML = detail.closedbizmessage
 
+    para = document.createElement("p")
+    para.innerHTML = detail.managerName + ";" + detail.managerPhonenumber + ";" + detail.managerEmail
+    para.style.display = "none"
+    para.id = "managerhiddendetail"
+    document.body.appendChild(para)
 
-    mhtml = "<div style='padding: 5px; font-size: 13px' ><span class='dot' style='color: white'> Jan 2</span><br>"
-    mhtml += "Hello my name is</div>"
+    para = document.createElement("p")
+    para.innerHTML = detail.businessId
+    para.style.display = "none"
+    para.id = "businessid"
+    document.body.appendChild(para)
+
+    mhtml = ""
+    for (i in messages) {
+        msg = messages[i]
+        dt = new Date(msg.createdDate)
+        color = "<span class='dotbling' style='color: black'>"
+        if (msg.messageFrom == "wing") {
+            color = "<span class='dot' style='color: white'>"
+        }
+        mhtml += "<div style='padding: 5px; font-size: 10px' >"+ color +
+                        dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</span><br>"
+        mhtml += "<div style='font-size: 13px'>" + msg.messagecontent + "</div></div>"
+    }
+
+//    for (i=0; i<20; i++) {
+//            mhtml += "<div style='padding: 5px; font-size: 10px' ><span class='dotbling' style='color: black'> Jan 2+</span><br>"
+//            mhtml += "<div style='font-size: 13px'>Hello</div></div>"
+//        }
     document.getElementById("mlist").innerHTML = mhtml
 
+    inhtml = ""
+    count = 0
+    for (i in inbound) {
+        call = inbound[i]
+        dt = new Date(call.createdDate)
+        inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px'>"
+        inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
+        count += 1
+    }
 
-    inhtml = "<tr><td>1</td><td>11234567890</td><td> <audio controls style='width: 150px'>"
-    inhtml += "<source src={{inbound.recordUrl}}></audio> </td><td>Jan 2</td></tr>"
     document.getElementById("incall").innerHTML = inhtml
 
-    outhtml = "<tr><td>1</td><td>11234567890</td><td> <audio controls style='width: 150px'>"
-    outhtml += "<source src={{inbound.recordUrl}}></audio> </td><td>Jan 2</td></tr>"
+
+    outhtml = ""
+    count = 0
+    for (i in outbound) {
+        call = outbound[i]
+        dt = new Date(call.createdDate)
+        inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px'>"
+        inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
+        count += 1
+    }
     document.getElementById("outcall").innerHTML = outhtml
 
-    document.getElementById("script").innerHTML = "scripting....."
+    document.getElementById("script").innerHTML = script
+    editmanagerdetails()
 
 }
