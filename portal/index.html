@@ -11,33 +11,111 @@
     <link href="./css/style.css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="./js/signin.js"></script>
+    <style>
+
+    html,
+  body {
+    height: 100%;
+    background: #f6f7fd;
+    font-size: 16px;
+    overflow: auto;
+  }
+
+.dot-spin {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: transparent;
+  box-shadow: 0 -18px 0 0 black, 12.72984px -12.72984px 0 0 black, 18px 0 0 0 black, 12.72984px 12.72984px 0 0 black, 0 18px 0 0 black, -12.72984px 12.72984px 0 0 black, -18px 0 0 0 black, -12.72984px -12.72984px 0 0 black;
+  animation: dotSpin 1.5s infinite linear;
+}
+
+@keyframes dotSpin {
+  0%,
+  100% {
+    box-shadow: 0 -18px 0 0 black, 12.72984px -12.72984px 0 0 black, 18px 0 0 0 black, 12.72984px 12.72984px 0 -5px black, 0 18px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -18px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
+  }
+      12.5% {
+        box-shadow: 0 -18px 0 -5px black, 12.72984px -12.72984px 0 0 black, 18px 0 0 0 black, 12.72984px 12.72984px 0 0 black, 0 18px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -18px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
+      }
+  25% {
+    box-shadow: 0 -18px 0 -5px black, 12.72984px -12.72984px 0 -5px black, 18px 0 0 0 black, 12.72984px 12.72984px 0 0 black, 0 18px 0 0 black, -12.72984px 12.72984px 0 -5px black, -18px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
+  }
+  37.5% {
+    box-shadow: 0 -18px 0 -5px black, 12.72984px -12.72984px 0 -5px black, 18px 0 0 -5px black, 12.72984px 12.72984px 0 0 black, 0 18px 0 0 black, -12.72984px 12.72984px 0 0 black, -18px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
+  }
+  50% {
+    box-shadow: 0 -18px 0 -5px black, 12.72984px -12.72984px 0 -5px black, 18px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 18px 0 0 black, -12.72984px 12.72984px 0 0 black, -18px 0 0 0 black, -12.72984px -12.72984px 0 -5px black;
+  }
+  62.5% {
+    box-shadow: 0 -18px 0 -5px black, 12.72984px -12.72984px 0 -5px black, 18px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 18px 0 -5px black, -12.72984px 12.72984px 0 0 black, -18px 0 0 0 black, -12.72984px -12.72984px 0 0 black;
+  }
+  75% {
+    box-shadow: 0 -18px 0 0 black, 12.72984px -12.72984px 0 -5px black, 18px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 18px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -18px 0 0 0 black, -12.72984px -12.72984px 0 0 black;
+  }
+  87.5% {
+    box-shadow: 0 -18px 0 0 black, 12.72984px -12.72984px 0 0 black, 18px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 18px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -18px 0 0 -5px black, -12.72984px -12.72984px 0 0 black;
+  }
+}
+  .stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 2rem 0;
+    margin: 0 -5%;
+    overflow: hidden;
+  }
+
+  .filter-contrast {
+    filter: contrast(5);
+    background-color: white;
+  }
+
+    </style>
 
 </head>
 
-<body class="h-100" style="background-image: url(./images/background3.jpg)">
+<body class="h-100" style="background-image: url(./images/backgr.gif)">
     <div class="row justify-content-center h-100 align-items-center">
         <div class="col-md-6">
             <div class="authincation-content">
                     <div class="col-xl-12">
                         <div class="auth-form">
                             <h4 class="text-center mb-4">Sign in your account</h4>
-                            <form id="myForm" action="businesslist.html">
-                                <div class="form-group">
-                                    <label class="mb-1"><strong>Email</strong></label>
-                                    <input type="textarea" class="form-control" placeholder="hello" id="username">
+                            <center><p id="unauth" style="color: red">Incorrect username or Password. Please try again.</p></center>
+                            <center><div class="col-3" id="loader">
+                                <div class="snippet" data-title=".dot-spin">
+                                    <div class="stage">
+                                        <div class="dot-spin"></div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="mb-1"><strong>Password</strong></label>
-                                    <input type="password" class="form-control" placeholder="Password" id="password">
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
-                                </div>
-                                <div id="load">Loading</div>
-                            </form>
+                            </div></center>
+                            <div class="form-group">
+                                <label class="mb-1"><strong>Email *</strong></label>
+                                <input type="textarea" class="form-control" placeholder="Username" id="username">
+                                <p id="emailmissing" style="color: red">username is required</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1"><strong>Password *</strong></label>
+                                <input type="password" class="form-control" placeholder="Password" id="password">
+                                <p id="passwordmissing" style="color: red">password is required</p>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary btn-block" onclick="auth()">Sign Me In</button>
+                            </div>
+
                         </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="footer" style="position: absolute; bottom: 0px; right:0px; font-size: 12px; background-color: transparent; color:white">
+        <div class="copyright">
+            <p>Designed &amp; Developed by <a href="https://www.bling.cloud/" target="_blank" style="color: yellow">Bling</a> in California 2020</p>
         </div>
     </div>
 
