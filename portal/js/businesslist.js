@@ -1,5 +1,5 @@
-UI_URL= "http://localhost:8080/business/"
-//UI_URL = "https://www.bling-center.com/business/"
+//UI_URL= "http://localhost:8080/business/"
+UI_URL = "https://www.bling-center.com/business/"
 
 $('.accordion-toggle').click(function(){
 	$('.hiddenRow').hide();
@@ -12,6 +12,10 @@ function buttonclick(id) {
     $('#loaderleft').show();
     $('#loadermid').show();
     $('#loaderright').show();
+    $('#backoutlist').hide();
+    $('#searcholist').hide();
+    $('#loaderout').hide();
+    $('#outerror').hide()
 
     $.ajax({
         type: 'get',
@@ -45,6 +49,23 @@ function buttonclick(id) {
          $('#cardmanager').show();
         }
       });
+
+    $.ajax({
+            type: 'get',
+            url: UI_URL + 'inbound/' + id,
+            success: function (data) {
+             console.log(data)
+             inbounddata(data)
+            }
+          });
+
+    $.ajax({
+            type: 'get',
+            url: UI_URL + 'outbound/' + id,
+            success: function (data) {
+             outbounddata(data)
+            }
+          });
 }
 
 function backbusiness() {
@@ -331,32 +352,6 @@ function displayprofile(data) {
     para.id = "businessid"
     document.body.appendChild(para)
 
-
-//    inhtml = ""
-//    count = 0
-//    for (i in inbound) {
-//        call = inbound[i]
-//        dt = new Date(call.createdDate)
-//        inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px'>"
-//        inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
-//        count += 1
-//    }
-//
-//    document.getElementById("incall").innerHTML = inhtml
-//
-//
-//    outhtml = ""
-//    count = 0
-//    for (i in outbound) {
-//        call = outbound[i]
-//        dt = new Date(call.createdDate)
-//        inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px'>"
-//        inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
-//        count += 1
-//    }
-//    document.getElementById("outcall").innerHTML = outhtml
-//
-//    document.getElementById("script").innerHTML = script
     editmanagerdetails()
 
 }
@@ -414,4 +409,79 @@ function cancel() {
         element = document.getElementById('script')
         element.style.backgroundColor = "#DCDCDC"
         element.readOnly = true
+}
+
+function inbounddata(data) {
+        inhtml = ""
+        count = 1
+        for (i in data) {
+            call = data[i]
+            dt = new Date(call.createdDate)
+            inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px;'>"
+            inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
+            count += 1
+        }
+
+        document.getElementById("incall").innerHTML = inhtml
+}
+
+function outbounddata(data) {
+
+        console.log(data)
+        outhtml = ""
+        count = 1
+        for (i in data) {
+            call = data[i]
+            dt = new Date(call.createdDate)
+            outhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px;'>"
+            outhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
+            count += 1
+        }
+        document.getElementById("outcall").innerHTML = outhtml
+}
+
+function searchPanel() {
+    $('#callolist').hide()
+    $('#searcholist').show()
+    $('#searchoutnum').show()
+}
+
+function searchoutbound() {
+    $('#searchoutnum').hide()
+    $('#loaderout').show()
+    $('#outerror').hide()
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'outbound/search/' + $('#searchoutnum')[0].value,
+        success: function (data) {
+            $('#loaderout').hide()
+            $('#backoutlist').show()
+            cancelout()
+            outbounddata(data)
+        },
+        error: function(err) {
+            $('#loaderout').hide()
+            $('#searchoutnum').show()
+            $('#outerror').show()
+        }
+      });
+}
+
+function cancelout() {
+    $('#searcholist').hide()
+    $('#callolist').show()
+    $('#outerror').hide()
+}
+
+function backoutbound() {
+    $('#loaderout').show()
+    $('#backoutlist').hide()
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'outbound/' + $('#businessid')[0].innerHTML,
+        success: function (data) {
+        $('#loaderout').hide()
+         outbounddata(data)
+        }
+      });
 }

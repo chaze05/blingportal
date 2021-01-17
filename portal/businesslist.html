@@ -216,15 +216,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="cardmanager" style="height: 100%">
+                            <div id="cardmanager" style="height: 100%; width: 100%">
                                 <div class="card-header" style="border-radius: 5px 5px 0px 0px; display:flex;
                                         display-direction: row; height: 5%; background-color: #f3f596">
                                     <div id="manager" style="color: black" data-toggle="tooltip" data-html="true" title="Manager Details">
 
                                     </div>
                                 </div>
-                                <div class="card-body" style="display: flex; flex-direction: row; padding: 0px; height: 95%">
-                                    <div class="basic-list-group" style="margin-left: 10px; height: calc(100% - 35px)">
+                                <div class="card-body" style="display: flex; flex-direction: row; padding: 0px; height: 95%; width: 100%">
+                                    <div class="basic-list-group" style="margin-left: 10px; height: calc(100% - 35px); width: 100%">
                                         <ul class="nav nav-pills" style="padding:5px">
                                             <li class="nav-item pill-size" style="padding-right: 10px">
                                                 <a href="#list-script" class="nav-link light badge-info active" data-toggle="tab" aria-expanded="true">
@@ -242,9 +242,9 @@
                                                     Outbound Calls</a>
                                             </li>
                                         </ul>
-                                        <div class="tab-content" id="nav-tabContent" style="height: 85%; overflow: scroll">
+                                        <div class="tab-content" id="nav-tabContent" style="height: 90%; overflow: scroll">
 
-                                            <div class="tab-pane fade" id="list-inbound">
+                                            <div class="tab-pane fade" id="list-inbound" style="height: 100%; width: 100%">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" placeholder="Search Here">
                                                 </div>
@@ -263,25 +263,43 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="list-outbound">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="filterTermOutbound">
-                                                </div>
+                                            <div class="tab-pane fade" id="list-outbound" style="height: 100%; width: 100%">
+                                                <div id="callolist">
+                                                    <div class="form-group" id="newsearchout">
+                                                        <button class="btn btn-success" onclick="searchPanel()">Search Customer Calls</button>
+                                                    </div>
+                                                    <div id="backoutlist">
+                                                        <button class="btn btn-success" onclick="backoutbound()">Back to Outbound Call List</button>
+                                                    </div>
 
-                                                <div class="table-responsive" style="overflow: scroll">
-                                                    <table class="table table-striped" class="table header-border table-responsive-sm" >
-                                                        <thead>
-                                                        <th>S.No</th>
-                                                        <th>Phone number</th>
-                                                        <!-- <th>Call Status</th> -->
-                                                        <th>Outbound call recording</th>
-                                                        <th>Date</th>
-                                                        </thead>
+                                                    <div class="table-responsive" style="overflow: scroll">
+                                                        <table class="table table-striped" class="table header-border table-responsive-sm" >
+                                                            <thead>
+                                                            <th>S.No</th>
+                                                            <th>Phone number</th>
+                                                            <!-- <th>Call Status</th> -->
+                                                            <th>Outbound call recording</th>
+                                                            <th>Date</th>
+                                                            </thead>
 
-                                                        <tbody id="outcall">
-                                                        </tbody>
-                                                    </table>
+                                                            <tbody id="outcall">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
+                                                <div id="loaderout">
+                                                    <div data-title=".dot-spin">
+                                                        <div class="stage">
+                                                            <div class="dot-spin"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="searcholist">
+                                                    <center><input type="textarea" id="searchoutnum" style="font-size:15px; width: 40%; border-radius: 12px; padding: 5px; margin: 10px" placeholder="Enter Customer Number"><br>
+                                                    <p id="outerror">An error occured. Please search again.</p></center>
+
+                                                    <center><button class="btn btn-primary" onclick="searchoutbound()">Search</button>
+                                                        <button class="btn btn-danger" onclick="cancelout()">Cancel</button></center></div>
                                             </div>
 
                                             <div class="tab-pane fade show active" id="list-script" style="background-color: white; height: 100%">

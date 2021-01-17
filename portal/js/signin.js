@@ -1,3 +1,7 @@
+//UI_URL= "http://localhost:8080/business/"
+UI_URL = "https://www.bling-center.com/business/"
+
+
 $(document).ready(function() {
 $("#loader").hide()
 $("#unauth").hide()
@@ -27,7 +31,7 @@ function auth() {
         $("#emailmissing").hide()
           $.ajax({
             type: 'post',
-            url: 'http://localhost:8080/business/login',
+            url: UI_URL + 'business/login',
             data: {username: $('#username')[0].value, password: $('#password')[0].value},
             success: function (data) {
              console.log(data)

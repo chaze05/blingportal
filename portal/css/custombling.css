@@ -176,3 +176,7 @@ button {
     background-color: yellow; /* Green */
     color: white;
   }
+
+  audio::-webkit-media-controls-panel {
+                  background-color: #ffcc66;
+  }
