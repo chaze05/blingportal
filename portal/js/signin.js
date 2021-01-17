@@ -31,7 +31,7 @@ function auth() {
         $("#emailmissing").hide()
           $.ajax({
             type: 'post',
-            url: UI_URL + 'business/login',
+            url: UI_URL + 'login',
             data: {username: $('#username')[0].value, password: $('#password')[0].value},
             success: function (data) {
              console.log(data)
