@@ -1,5 +1,5 @@
-//UI_URL= "http://localhost:8080/business/"
-UI_URL = "https://www.bling-center.com/business/"
+UI_URL= "http://localhost:8080/business/"
+//UI_URL = "https://www.bling-center.com/business/"
 
 $('.accordion-toggle').click(function(){
 	$('.hiddenRow').hide();
@@ -9,35 +9,83 @@ $('.accordion-toggle').click(function(){
 function buttonclick(id) {
     $('#businesslist').hide();
     $('#profiledetails').show();
+    $('#loaderleft').show();
+    $('#loadermid').show();
+    $('#loaderright').show();
+
     $.ajax({
-            type: 'get',
-            url: UI_URL + 'profile/' + id,
-            success: function (data) {
-             console.log(data)
-             $('#loader').hide()
-             $('#bcard').show()
-             displayprofile(data.data)
-            }
-          });
+        type: 'get',
+        url: UI_URL + 'profile/' + id,
+        success: function (data) {
+         console.log(data)
+         $('#loaderleft').hide()
+         displayprofile(data.data)
+         $('#detailscard').show();
+        }
+      });
+
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'message/' + id,
+        success: function (data) {
+         console.log(data)
+         $('#loadermid').hide()
+         displaymessage(data.data)
+         $('#cardmessage').show();
+        }
+      });
+
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'script/' + id,
+        success: function (data) {
+         console.log(data)
+         $('#loaderright').hide()
+         displaydetails(data)
+         $('#cardmanager').show();
+        }
+      });
 }
 
 function backbusiness() {
     $('#businesslist').show();
     $('#profiledetails').hide();
     $('#loader').show()
-    $('#bcard').hide()
+    $('#detailscard').hide();
+    $('#cardmanager').hide();
+    $('#cardmessage').hide();
+    $('#updateScript').hide();
+    cleanup()
 }
 
 $(document).ready(function() {
     $('#profiledetails').hide();
+    $('#detailscard').hide();
+    $('#loaderleft').hide();
+
+    $('#loadermid').hide();
+    $('#cardmessage').hide();
+
+    $('#loaderright').hide();
+    $('#cardmanager').hide();
+    $('#updateScript').hide()
+    $('#blistcard').hide()
+
 $('[data-toggle="tooltip"]').tooltip();
-$('#bcard').hide();
+//$('#bcard').hide();
 
     $.ajax({
         type: 'get',
         url: UI_URL + 'list/wing',
         success: function (data) {
+         $('#blistload').hide()
+         $('#blistcard').show()
+         $('#berror').hide()
          displaylist(data.data)
+        },
+        error: function(err) {
+            $('#blistload').hide()
+            $('#blistcard').show()
         }
       });
 })
@@ -169,16 +217,14 @@ function updateVoicemail() {
 }
 
 function addMessage() {
-    $.ajax({
+    if ($('#newmessage')[0].value != '') {
+        $.ajax({
                 type: 'post',
                 url: UI_URL + 'message',
                 data: {content: $('#newmessage')[0].value, id: $('#businessid')[0].innerHTML, from: "wing"},
                 success: function (data) {
                     para = document.createElement("div")
-                    para.style = "padding: 5px; font-size: 10px"
-                    color = "<span class='dot' style='color: white'>"
-                    mhtml = color +new Date().toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</span><br>"
-                    mhtml += "<div style='font-size: 13px'>" + $('#newmessage')[0].value + "</div>"
+                    mhtml = "<div class='senderWing'>" + $('#newmessage')[0].value + "<br><small>" + dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) +" " +dt.toLocaleTimeString('en-US') + "</small></div><br>";
                     para.innerHTML = mhtml
                     document.getElementById("mlist").appendChild(para)
                     $('#newmessage')[0].value = ""
@@ -187,6 +233,7 @@ function addMessage() {
                     $('#newmessage')[0].value = "Error Sending Message. Please try later";
                 }
               });
+     }
 }
 
 function displaylist(data) {
@@ -224,7 +271,15 @@ function displaylist(data) {
         rowexpand = document.createElement("tr")
         rowexpand.class = "p"
         int12 = "<td colspan='7' class='hiddenRow'>"
-        int12 += "<div class='accordian-body collapse p-3' id='"+expandid+"'>Mallika.......</div></td>"
+        int12 += "<div class='accordian-body collapse p-3' id='"+expandid+"'>"
+        int12 += "<div class='card' style='width: 40%'>"
+        int12 += "<div class='card-body light badge-secondary' style='border-radius: 12px'>"
+        int12 += "<strong>"+detail.businessName+"</strong>"
+        int12 += "<div style='border: 1px solid black'></div><br>"
+        int12 += "<div style='margin-top: 3px'>Bling phone Number: "+ detail.blingPhoneNumber+"</div>"
+        int12 += "<div>Plan Price: $"+detail.pricePlan+"</div"
+        int12 += "</div>"
+        int12 += "</div></div></td>"
 
         rowexpand.innerHTML = int12
 
@@ -237,10 +292,6 @@ function displaylist(data) {
 
 function displayprofile(data) {
     detail = data.business
-    messages = data.businessMessageList
-    inbound = data.inboundCalls
-    outbound = data.outboundCalls
-    script = data.businessScript
 
     document.getElementById("businessname").innerHTML = detail.businessname
     mdetail = detail.managerName
@@ -253,10 +304,11 @@ function displayprofile(data) {
     $('#manager').attr('data-original-title', html_val)
 
     document.getElementById("price").innerHTML = "$" + detail.price
-    document.getElementById("callType").innerHTML = "MallikaManager"
-    document.getElementById("email").innerHTML = "Emails  "
-    document.getElementById("message").innerHTML = "Messages  "
-    document.getElementById("survey").innerHTML = "Surveys  "
+    document.getElementById("outbound").innerHTML = detail.outboundcall
+    document.getElementById("inbound").innerHTML = detail.inboundcall
+    document.getElementById("email").innerHTML = detail.email
+    document.getElementById("message").innerHTML = detail.message
+    document.getElementById("survey").innerHTML =detail.survey
 
     phtml = "<img src='./images/blingnumber.jpg' style='max-width: 40px; margin-bottom: 10px'/>" + detail.blingphonenumber
     document.getElementById("blingnum").innerHTML = phtml
@@ -275,50 +327,87 @@ function displayprofile(data) {
     para.id = "businessid"
     document.body.appendChild(para)
 
-    mhtml = ""
-    for (i in messages) {
-        msg = messages[i]
-        dt = new Date(msg.createdDate)
-        color = "<span class='dotbling' style='color: black'>"
-        if (msg.messageFrom == "wing") {
-            color = "<span class='dot' style='color: white'>"
-        }
-        mhtml += "<div style='padding: 5px; font-size: 10px' >"+ color +
-                        dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</span><br>"
-        mhtml += "<div style='font-size: 13px'>" + msg.messagecontent + "</div></div>"
-    }
 
-//    for (i=0; i<20; i++) {
-//            mhtml += "<div style='padding: 5px; font-size: 10px' ><span class='dotbling' style='color: black'> Jan 2+</span><br>"
-//            mhtml += "<div style='font-size: 13px'>Hello</div></div>"
-//        }
-    document.getElementById("mlist").innerHTML = mhtml
-
-    inhtml = ""
-    count = 0
-    for (i in inbound) {
-        call = inbound[i]
-        dt = new Date(call.createdDate)
-        inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px'>"
-        inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
-        count += 1
-    }
-
-    document.getElementById("incall").innerHTML = inhtml
-
-
-    outhtml = ""
-    count = 0
-    for (i in outbound) {
-        call = outbound[i]
-        dt = new Date(call.createdDate)
-        inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px'>"
-        inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
-        count += 1
-    }
-    document.getElementById("outcall").innerHTML = outhtml
-
-    document.getElementById("script").innerHTML = script
+//    inhtml = ""
+//    count = 0
+//    for (i in inbound) {
+//        call = inbound[i]
+//        dt = new Date(call.createdDate)
+//        inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px'>"
+//        inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
+//        count += 1
+//    }
+//
+//    document.getElementById("incall").innerHTML = inhtml
+//
+//
+//    outhtml = ""
+//    count = 0
+//    for (i in outbound) {
+//        call = outbound[i]
+//        dt = new Date(call.createdDate)
+//        inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px'>"
+//        inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
+//        count += 1
+//    }
+//    document.getElementById("outcall").innerHTML = outhtml
+//
+//    document.getElementById("script").innerHTML = script
     editmanagerdetails()
 
+}
+
+function cleanup() {
+    document.getElementById("businessname").innerHTML = ""
+    document.getElementById("manager").innerHTML = ""
+}
+
+function displaymessage(data) {
+    mhtml = ""
+    for (i in data) {
+        msg = data[i]
+
+        dt = new Date(msg.createdDate)
+
+        if (msg.messageFrom == "wing") {
+            mhtml += "<div class='senderWing'>" + msg.messagecontent + "<br><small>" + dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + " " +dt.toLocaleTimeString('en-US') + "</small></div><br>";
+        } else {
+            mhtml += "<div class='senderBling'>" + msg.messagecontent + "<br><small>" + dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + " " + dt.toLocaleTimeString('en-US') + "</small></div><br>";
+        }
+    }
+
+    document.getElementById("mlist").innerHTML = mhtml
+}
+
+function displaydetails(data) {
+    document.getElementById("script").innerHTML = data.script
+}
+
+function edit() {
+    $('#editscript').hide()
+    $('#updateScript').show()
+    document.getElementById('script').style.backgroundColor = "white"
+    document.getElementById('script').readOnly = false
+}
+
+function savescript() {
+    $.ajax({
+        type: 'post',
+        url: UI_URL + 'script',
+        data: {content: $('#script')[0].value, id: $('#businessid')[0].innerHTML},
+        success: function (data) {
+            cancel()
+        },
+        error: function(err) {
+            document.getElementById("updating").innerHTML = "Error Updating. Please try later";
+        }
+      });
+}
+
+function cancel() {
+    $('#editscript').show()
+        $('#updateScript').hide()
+        element = document.getElementById('script')
+        element.style.backgroundColor = "#DCDCDC"
+        element.readOnly = true
 }
