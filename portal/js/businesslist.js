@@ -91,6 +91,7 @@ $('[data-toggle="tooltip"]').tooltip();
 })
 
 
+
 function editmanagerdetails() {
        var modal = document.getElementById("mymodel");
        var btn1 = document.getElementById("editmanager");
@@ -164,10 +165,13 @@ function updateManagerDetails() {
                 if (mdetail == null) {
                     mdetail = ""
                 }
-                document.getElementById("manager").innerHTML = mdetail+ "<button id='editmanager'><img src='./images/pen.png' style='max-width: 20px;'/></button>"
+                document.getElementById("mname").innerHTML = mdetail
                 html_val = '<em>Email</em> : <b>'+ $('#formmanageremail')[0].value+'</b><br>'
                 html_val += '<em>Phone Number</em> : <b>'+$('#formmanagernum')[0].value+'</b>'
                 $('#manager').attr('data-original-title', html_val)
+
+                document.getElementById('managerhiddendetail').innerHTML =
+                $('#formmanagername')[0].value + ";" + $('#formmanagernum')[0].value + ";" + $('#formmanageremail')[0].value
             },
             error: function(err) {
                 document.getElementById("updating").innerHTML = "Error Updating. Please try later";
@@ -298,7 +302,7 @@ function displayprofile(data) {
     if (mdetail == null) {
         mdetail = ""
     }
-    document.getElementById("manager").innerHTML = mdetail+ "<button id='editmanager'><img src='./images/pen.png' style='max-width: 20px;'/></button>"
+    document.getElementById("manager").innerHTML = '<div style="display: flex; display-direction: row"><div id="mname">' +mdetail+ "</div><button id='editmanager'><img src='./images/pen.png' style='max-width: 20px;'/></button><div>"
     html_val = '<em>Email</em> : <b>'+ detail.managerEmail+'</b><br>'
     html_val += '<em>Phone Number</em> : <b>'+detail.managerPhonenumber+'</b>'
     $('#manager').attr('data-original-title', html_val)

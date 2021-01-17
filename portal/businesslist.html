@@ -311,22 +311,22 @@
             <span class="close">&times;</span>
             <h4 class="text-center mb-4" id="modalheader">Voicemail Message</h4>
             <div id="updating"></div>
-            <form id="voiceform" action="#">
+            <div id="voiceform">
                 <div id="vdiv">
                 <div class="form-group">
-                    <input type="textarea" class="form-control" id="voicemsg">
+                    <textarea class="form-control" id="voicemsg"></textarea>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-block" id="updatevoicemail" onclick="updateVoicemail()">Update</button>
+                    <button class="btn btn-primary btn-block" id="updatevoicemail" onclick="updateVoicemail()">Update</button>
                 </div>
                 </div>
 
                     <div id="gdiv">
                     <div class="form-group">
-                        <input type="textarea" class="form-control" id="greetmsg">
+                        <textarea class="form-control" id="greetmsg"></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-block" id="updategreet" onclick="updateGreeting()">Update</button>
+                        <button class="btn btn-primary btn-block" id="updategreet" onclick="updateGreeting()">Update</button>
                     </div>
                     </div>
 
@@ -344,12 +344,12 @@
                     <input type="textarea" class="form-control" value="Password" id="formmanageremail">
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-block" id="updatemanager" onclick="updateManagerDetails()">Update</button>
+                    <button class="btn btn-primary btn-block" id="updatemanager" onclick="updateManagerDetails()">Update</button>
                 </div>
                 </div>
 
 
-            </form>
+            </div>
         </div>
 
     </div>
