@@ -433,7 +433,7 @@ function outbounddata(data) {
         for (i in data) {
             call = data[i]
             dt = new Date(call.createdDate)
-            outhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px;'>"
+            outhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 200px;'>"
             outhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
             count += 1
         }
