@@ -45,8 +45,7 @@ function buttonclick(id) {
         success: function (data) {
          console.log(data)
          $('#loaderright').hide()
-         displaydetails(data)
-         $('#cardmanager').show();
+//         displaydetails(data)
         }
       });
 
@@ -55,7 +54,7 @@ function buttonclick(id) {
             url: UI_URL + 'inbound/' + id,
             success: function (data) {
              console.log(data)
-             inbounddata(data)
+//             inbounddata(data)
             }
           });
 
@@ -63,6 +62,7 @@ function buttonclick(id) {
             type: 'get',
             url: UI_URL + 'outbound/' + id,
             success: function (data) {
+            console.log("Outbound calls")
              outbounddata(data)
             }
           });
@@ -323,10 +323,9 @@ function displayprofile(data) {
     if (mdetail == null) {
         mdetail = ""
     }
-    document.getElementById("manager").innerHTML = '<div style="display: flex; display-direction: row"><div id="mname">' +mdetail+ "</div><button id='editmanager'><img src='./images/pen.png' style='max-width: 20px;'/></button><div>"
-    html_val = '<em>Email</em> : <b>'+ detail.managerEmail+'</b><br>'
-    html_val += '<em>Phone Number</em> : <b>'+detail.managerPhonenumber+'</b>'
-    $('#manager').attr('data-original-title', html_val)
+    document.getElementById("manager").innerHTML = mdetail+ "<br>" +detail.managerEmail+"<br>"+detail.managerPhonenumber+"<button id='editmanager'><img src='./images/pen.png' style='max-width: 20px;'/></button><div>"
+
+    document.getElementById("owner").innerHTML = detail.primaryphonenumber + "<br>" + detail.website + "<br>" + detail.owneremail
 
     document.getElementById("price").innerHTML = "$" + detail.price
     document.getElementById("outbound").innerHTML = detail.outboundcall
@@ -336,7 +335,7 @@ function displayprofile(data) {
     document.getElementById("survey").innerHTML =detail.survey
 
     phtml = "<img src='./images/blingnumber.jpg' style='max-width: 40px; margin-bottom: 10px'/>" + detail.blingphonenumber
-    document.getElementById("blingnum").innerHTML = phtml
+//    document.getElementById("blingnum").innerHTML = phtml
     document.getElementById("greeting").innerHTML = detail.welcomemessage
     document.getElementById("voicemail").innerHTML = detail.closedbizmessage
 
@@ -352,7 +351,7 @@ function displayprofile(data) {
     para.id = "businessid"
     document.body.appendChild(para)
 
-    editmanagerdetails()
+//    editmanagerdetails()
 
 }
 
@@ -369,10 +368,13 @@ function displaymessage(data) {
         dt = new Date(msg.createdDate)
 
         if (msg.messageFrom == "wing") {
-            mhtml += "<div class='senderWing'>" + msg.messagecontent + "<br><small>" + dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + " " +dt.toLocaleTimeString('en-US') + "</small></div><br>";
+            mhtml += "<div style='display: flex; display-direction: row; margin: 5px; margin-bottom: 10px; border-bottom: 1px solid black'><img src='./images/winglogo.jpeg' style='width: 20px; height: 20px'/><div class='senderWingNew'>" + msg.messagecontent + "<br><small>" + dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + " " +dt.toLocaleTimeString('en-US') + "</small></div></div>";
         } else {
-            mhtml += "<div class='senderBling'>" + msg.messagecontent + "<br><small>" + dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + " " + dt.toLocaleTimeString('en-US') + "</small></div><br>";
+            mhtml += "<div style='display: flex; display-direction: row; margin: 5px; margin-bottom: 10px; border-bottom: 1px solid black'><img src='./images/bling_logo.png' style='max-width: 40px; height: 20px'/><div class='senderBlingNew'>" + msg.messagecontent + "<br><small>" + dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + " " + dt.toLocaleTimeString('en-US') + "</small></div></div>";
         }
+    }
+    if (mhtml == ""){
+        mhtml = "<p style='padding:20px'><center><strong>No Messages Exchanged. <br><br>Send a message to start conversation.</strong></center></p>"
     }
 
     document.getElementById("mlist").innerHTML = mhtml
@@ -427,15 +429,26 @@ function inbounddata(data) {
 
 function outbounddata(data) {
 
+        console.log("Mallika outbound call")
         console.log(data)
         outhtml = ""
-        count = 1
         for (i in data) {
             call = data[i]
             dt = new Date(call.createdDate)
-            outhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 200px;'>"
-            outhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
-            count += 1
+            outhtml += "<div style='display: flex; display-direction: row; padding:5px;'>"
+            if (call.callstatus == 'Inbound Call') {
+             outhtml += "<div><img src='./images/inboundcalls.png' width=40px /></div>"
+            } else {
+                outhtml += "<div><img src='./images/outbound.png' width=40px /></div>"
+            }
+            outhtml += "<div style='margin-left:5px;'><normal style='font-family: cambria'>"+call.customerPhoneNumber+"</normal><br>"
+            if (call.callstatus == 'Inbound Call') {
+             outhtml += "<h5 style='font-family: cambria; margin: 5px'>"+call.callNote +"</h5>"
+            }
+            outhtml += "<small>" +dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</small></div>"
+            outhtml +="</div>"
+            outhtml += "<div><audio controls style='height: 30px; margin-left: 40px; margin-bottom: 10px'><source src='"+call.recordUrl+"'></audio></div>"
+
         }
         document.getElementById("outcall").innerHTML = outhtml
 }

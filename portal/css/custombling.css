@@ -150,8 +150,16 @@ button {
     background-color: white;
   }
 
+  .smartphone {
+    position: relative;
+    border: 9px #EEE8AA solid;
+    border-top-width: 45px;
+    border-bottom-width: 45px;
+    border-radius: 25px;
+  }
+
   .senderWing{
-  width: 60%;
+  width: 80%;
   padding: 5px;
   float: right;
   color: white;
@@ -161,16 +169,37 @@ button {
   font-size: 14px;
   }
 
+  .senderWingNew{
+    width: 80%;
+    padding: 5px;
+    color: black;
+    margin: 7px;
+    border-radius: 10px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    }
+
   .senderBling{
     width: 60%;
     padding: 5px;
     float: left;
     color: black;
-    background-color: #ffcc66;
     margin: 3px;
     border-radius: 5px;
     font-size: 14px;
   }
+
+  .senderBlingNew{
+      width: 80%;
+      padding: 5px;
+      color: black;
+      margin: 7px;
+      border-radius: 10px;
+      font-size: 14px;
+      align-items: center;
+      justify-content: center;
+    }
 
   a::after {
     background-color: yellow; /* Green */
