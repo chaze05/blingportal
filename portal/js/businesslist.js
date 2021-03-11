@@ -284,7 +284,11 @@ function displaylist(data) {
         innerhtml += "<td>"+detail.businessName+"</td>"
         innerhtml += "<td>" + startdate.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + "</td>"
         innerhtml += "<td><span class='badge light "+ statusclass +"'>"+detail.status+"</span></td>"
-        innerhtml += "<td>"+ detail.managerName+"</td>"
+        if (detail.managerName != null) {
+            innerhtml += "<td>"+ detail.managerName+"</td>"
+        } else {
+            innerhtml += "<td>Not Available</td>"
+        }
         innerhtml += "<td><button id='"+detail.businessId+"' onclick='buttonclick(this.id)' style='border: 0px;'>"
         innerhtml += "<img src='./images/profile2.jpg' style='max-width: 40px;' /></button></td>"
         expandid = "demo" + i
@@ -417,7 +421,7 @@ function inbounddata(data) {
         for (i in data) {
             call = data[i]
             dt = new Date(call.createdDate)
-            inhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 150px;'>"
+            inhtml += "<tr><td>" + count +"</td><td>" +call.customerNumber+"</td><td> <audio controls style='width: 150px;'>"
             inhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
             count += 1
         }
@@ -433,7 +437,7 @@ function outbounddata(data) {
         for (i in data) {
             call = data[i]
             dt = new Date(call.createdDate)
-            outhtml += "<tr><td>" + count +"</td><td>" +call.customerPhoneNumber+"</td><td> <audio controls style='width: 200px;'>"
+            outhtml += "<tr><td>" + count +"</td><td>" +call.customerNumber+"</td><td> <audio controls style='width: 200px;'>"
             outhtml += "<source src='"+call.recordUrl+"'></audio> </td><td>"+ dt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })+"</td></tr>"
             count += 1
         }
