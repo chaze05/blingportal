@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow: hidden;" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Bling Dasboard</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/logo.png">
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/glass-effect.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="./js/businesslist_v2.js"></script>
+
+</head>
+<body style="background-color: black;">
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+
+<!--    Nav Header-->
+	<div class="nav-header" style="background-color: black; width: 180px; height: 60px;">
+		<a href="index.html" class="brand-logo" style="padding-left: 0px; padding-right: 0px; justify-content: center">
+			<img src="./images/yellow_logo.png" alt="" style="max-width: 120px">
+		</a>
+	</div>
+	<div class="header" style="height: 60px; margin-left: 180px; padding-left: 40px; background-color: black">
+		<div style="margin-top: 20px">
+			<nav class="navbar navbar-expand">
+				<div class="justify-content-between" style="display: flex; display-direction: row; width: calc(100% - 250px)">
+					<div class="header-left">
+						<div class="dashboard_bar" style="font-weight: normal; font-size:22px; margin-top: -8px; margin-top:-12px">
+							<font color="gray">Dashboard <i><small>for</small></i></font>   <font color="#36a4fd"> &nbsp;Wing</font>
+						</div>
+					</div>
+
+					<div>
+                        <a href="index.html">
+                            <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" style="color: yellow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                            <span class="ml-2" style="color: yellow">Logout </span>
+                        </a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+
+    <div id="blist" style="height: 90vh; width: 95%; margin: 20px; padding: 10px; margin-top: 70px; overflow: scroll; ">
+    </div>
+
+    <div class="footer" style="position: fixed; bottom: 0px; right:0px; font-size: 12px; background-color: transparent; color:white">
+        <div class="copyright" style="padding: 0px">
+            <p>Designed &amp; Developed by <a href="https://www.bling.cloud/" target="_blank" style="color: yellow">Bling</a> in California 2020</p>
+        </div>
+    </div>
+
+    <script src="./vendor/global/global.min.js"></script>
+    <script src="./js/custom.min.js"></script>
+	<script src="./js/deznav-init.js"></script>
+</body>
+</html>
