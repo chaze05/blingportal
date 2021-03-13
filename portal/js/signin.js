@@ -38,7 +38,7 @@ function auth() {
              console.log("Hello Mallika");
              $("#loader").hide()
              $("#unauth").hide()
-             window.location = "businesslist.html";
+             window.location = "businesslist_v2.html";
             },
             error: function(err) {
                 console.log(err)

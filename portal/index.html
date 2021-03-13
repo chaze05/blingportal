@@ -78,13 +78,15 @@
 
 </head>
 
-<body class="h-100" style="background-image: url(./images/backgr.gif)">
+<body class="h-100" style="background: url(./images/opaque.png) fixed; background-size: cover; overflow: hidden;height: 100%;">
+    <img src="./images/bling_logo.png" alt="" style="max-width: 110px; position: fixed; top: 10px; left:10px"/>
+<!--    <img src="./images/globe.gif" alt="" style="position: fixed; top: 0px; right:0px"/>-->
     <div class="row justify-content-center h-100 align-items-center">
         <div class="col-md-6">
-            <div class="authincation-content">
+<!--            <div class="authincation-content">-->
                     <div class="col-xl-12">
                         <div class="auth-form">
-                            <h4 class="text-center mb-4">Sign in your account</h4>
+                            <h4 class="text-center mb-4" style="color: white; background-color: black; border-radius: 20px; padding:10px">Sign in your account</h4>
                             <center><p id="unauth" style="color: red">Incorrect username or Password. Please try again.</p></center>
                             <center><div class="col-3" id="loader">
                                 <div class="snippet" data-title=".dot-spin">
@@ -94,28 +96,28 @@
                                 </div>
                             </div></center>
                             <div class="form-group">
-                                <label class="mb-1"><strong>Email *</strong></label>
-                                <input type="textarea" class="form-control" placeholder="Username" id="username">
+<!--                                <label class="mb-1" style="color: black"><strong>Email *</strong></label>-->
+                                <input type="textarea" class="form-control" placeholder="Email" id="username" style="border: 2px solid black">
                                 <p id="emailmissing" style="color: red">username is required</p>
                             </div>
                             <div class="form-group">
-                                <label class="mb-1"><strong>Password *</strong></label>
-                                <input type="password" class="form-control" placeholder="Password" id="password">
+<!--                                <label class="mb-1"><strong>Password *</strong></label>-->
+                                <input type="password" class="form-control" placeholder="Password" id="password" style="border: 2px solid black">
                                 <p id="passwordmissing" style="color: red">password is required</p>
                             </div>
                             <div class="text-center">
                                 <button class="btn btn-primary btn-block" onclick="auth()">Sign Me In</button>
                             </div>
 
-                        </div>
+<!--                        </div>-->
                 </div>
             </div>
         </div>
     </div>
 
     <div class="footer" style="position: absolute; bottom: 0px; right:0px; font-size: 12px; background-color: transparent; color:white">
-        <div class="copyright">
-            <p>Designed &amp; Developed by <a href="https://www.bling.cloud/" target="_blank" style="color: yellow">Bling</a> in California 2020</p>
+        <div class="copyright" style="color: black">
+            <p>Designed &amp; Developed by <a href="https://www.bling.cloud/" target="_blank" style="color: black"><strong>Bling</strong></a> in California 2020</p>
         </div>
     </div>
 
