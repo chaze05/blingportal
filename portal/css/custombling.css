@@ -104,35 +104,35 @@ button {
   border-radius: 50%;
   background-color: transparent;
   color: transparent;
-  box-shadow: 0 -25px 0 0 black, 12.72984px -12.72984px 0 0 black, 25px 0 0 0 black, 12.72984px 12.72984px 0 0 black, 0 25px 0 0 black, -12.72984px 12.72984px 0 0 black, -25px 0 0 0 black, -12.72984px -12.72984px 0 0 black;
+  box-shadow: 0 -25px 0 0 yellow, 12.72984px -12.72984px 0 0 yellow, 25px 0 0 0 yellow, 12.72984px 12.72984px 0 0 yellow, 0 25px 0 0 yellow, -12.72984px 12.72984px 0 0 yellow, -25px 0 0 0 yellow, -12.72984px -12.72984px 0 0 yellow;
   animation: dotSpin 1.5s infinite linear;
 }
 
 @keyframes dotSpin {
   0%,
   100% {
-    box-shadow: 0 -27px 0 0 black, 12.72984px -12.72984px 0 0 black, 27px 0 0 0 black, 12.72984px 12.72984px 0 -5px black, 0 27px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -27px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
+    box-shadow: 0 -27px 0 0 yellow, 12.72984px -12.72984px 0 0 yellow, 27px 0 0 0 yellow, 12.72984px 12.72984px 0 -5px black, 0 27px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -27px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
   }
       12.5% {
-        box-shadow: 0 -27px 0 -5px black, 12.72984px -12.72984px 0 0 black, 27px 0 0 0 black, 12.72984px 12.72984px 0 0 black, 0 27px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -27px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
+        box-shadow: 0 -27px 0 -5px yellow, 12.72984px -12.72984px 0 0 yellow, 27px 0 0 0 yellow, 12.72984px 12.72984px 0 0 yellow, 0 27px 0 -5px yellow, -12.72984px 12.72984px 0 -5px black, -27px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
       }
   25% {
-    box-shadow: 0 -27px 0 -5px black, 12.72984px -12.72984px 0 -5px black, 27px 0 0 0 black, 12.72984px 12.72984px 0 0 black, 0 27px 0 0 black, -12.72984px 12.72984px 0 -5px black, -27px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
+    box-shadow: 0 -27px 0 -5px yellow, 12.72984px -12.72984px 0 -5px black, 27px 0 0 0 yellow, 12.72984px 12.72984px 0 0 yellow, 0 27px 0 0 yellow, -12.72984px 12.72984px 0 -5px black, -27px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
   }
   37.5% {
-    box-shadow: 0 -27px 0 -5px black, 12.72984px -12.72984px 0 -5px black, 27px 0 0 -5px black, 12.72984px 12.72984px 0 0 black, 0 27px 0 0 black, -12.72984px 12.72984px 0 0 black, -27px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
+    box-shadow: 0 -27px 0 -5px yellow, 12.72984px -12.72984px 0 -5px black, 27px 0 0 -5px black, 12.72984px 12.72984px 0 0 yellow, 0 27px 0 0 yellow, -12.72984px 12.72984px 0 0 yellow, -27px 0 0 -5px black, -12.72984px -12.72984px 0 -5px black;
   }
   50% {
-    box-shadow: 0 -27px 0 -5px black, 12.72984px -12.72984px 0 -5px black, 27px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 27px 0 0 black, -12.72984px 12.72984px 0 0 black, -27px 0 0 0 black, -12.72984px -12.72984px 0 -5px black;
+    box-shadow: 0 -27px 0 -5px yellow, 12.72984px -12.72984px 0 -5px black, 27px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 27px 0 0 yellow, -12.72984px 12.72984px 0 0 yellow, -27px 0 0 0 yellow, -12.72984px -12.72984px 0 -5px black;
   }
   62.5% {
-    box-shadow: 0 -27px 0 -5px black, 12.72984px -12.72984px 0 -5px black, 27px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 27px 0 -5px black, -12.72984px 12.72984px 0 0 black, -27px 0 0 0 black, -12.72984px -12.72984px 0 0 black;
+    box-shadow: 0 -27px 0 -5px yellow, 12.72984px -12.72984px 0 -5px black, 27px 0 0 -5px black, 12.72984px 12.72984px 0 -5px yellow, 0 27px 0 -5px yellow, -12.72984px 12.72984px 0 0 yellow, -27px 0 0 0 yellow, -12.72984px -12.72984px 0 0 yellow;
   }
   75% {
-    box-shadow: 0 -27px 0 0 black, 12.72984px -12.72984px 0 -5px black, 27px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 27px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -27px 0 0 0 black, -12.72984px -12.72984px 0 0 black;
+    box-shadow: 0 -27px 0 0 yellow, 12.72984px -12.72984px 0 -5px black, 27px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 27px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -27px 0 0 0 yellow, -12.72984px -12.72984px 0 0 yellow;
   }
   87.5% {
-    box-shadow: 0 -27px 0 0 black, 12.72984px -12.72984px 0 0 black, 27px 0 0 -5px black, 12.72984px 12.72984px 0 -5px black, 0 27px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -27px 0 0 -5px black, -12.72984px -12.72984px 0 0 black;
+    box-shadow: 0 -27px 0 0 yellow, 12.72984px -12.72984px 0 0 yellow, 27px 0 0 -5px black, 12.72984px 12.72984px 0 -5px yellow, 0 27px 0 -5px black, -12.72984px 12.72984px 0 -5px black, -27px 0 0 -5px black, -12.72984px -12.72984px 0 0 yellow;
   }
 }
   .stage {
@@ -159,14 +159,14 @@ button {
   }
 
   .senderWing{
-  width: 80%;
+  max-width: 80%;
   padding: 5px;
   float: right;
   color: white;
-  background-color: blue;
+  background-color: #2A5298;
   margin: 3px;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 12px;
   }
 
   .senderWingNew{
@@ -181,13 +181,14 @@ button {
     }
 
   .senderBling{
-    width: 60%;
+    max-width: 80%;
     padding: 5px;
     float: left;
     color: black;
     margin: 3px;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 12px;
+    background-color: #FFD700;
   }
 
   .senderBlingNew{
