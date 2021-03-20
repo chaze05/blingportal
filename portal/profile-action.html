@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>BusinesslistAction</title>
+		<link rel="stylesheet" href="./css/profile-action.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+	</head>
+	<body>
+   <div class='glass'>
+
+    <div style='margin: 30px 0px -40px 1100px'>
+      <a  style='text-decoration: none;'href="index.html">
+          <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" style="color: yellow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span class="ml-2" style="color: yellow;">Log Out</span>
+      </a>
+    </div>
+    
+		<div id="profiledetails" style="display: flex; display: row;height: 100%;margin: 20px 20px 0px 40px ;">
+      <div class="card" id="bcard" style="width: 25%;background-color: rgba(2555,255,255,0.1); height: 100%;border-radius: 0px 0px 5px 5px; border: 1px solid black; padding: 0px; ">
+          <div id="loaderleft">
+              <center><div data-title=".dot-spin">
+                  <div>
+                      <div></div>
+                  </div>
+              </div></center>
+          </div>
+          <div class='card-bling' id="detailscard" style="height: 100%;">
+            <span><img style='width: 95px;height: auto;margin:10px 0px -10px 100px;' src='./images/yellow_logo.png'/></span>
+            <div>
+  </div>
+
+              <div style="border-radius: 0px; display:flex; display: row; height: 5%;">
+            
+                  <a href="javascript:void()" onclick="backbusiness()" style='background-color: #333;
+                  color: white; text-decoration: none;
+                      padding: 10px; margin-left: 15px; border-radius: 60%;font-weight: bold;background: rgba(255,255,255,0.1);'>
+                      &#8249;
+                  </a>
+                  <p style="font-weight: 600; color: white; margin-left: 35px; margin-top: 15px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Dashboard for <span style='color:yellow'>Wing</span></p>
+              </div>
+              <h4 style="color:yellow; font-weight: 600; background-color:rgba(2555,255,255,0);font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding-left:15px;margin-bottom:10px;">My plan</h4>
+              <div style="display: flex; flex-direction: row; padding: 0px; height: 100%;background-color:rgba(2555,255,255,0)">
+                  <div style="padding: 10px">
+                      <div style="padding: 12px;margin-left: 15px; color:#000; background-color:#ECF3FC;height:auto; width: 80%; margin-bottom: 0px;font-size: 16px; border-radius: 20px;">
+                          <div style="display: flex; flex-direction: row">
+                              <div style="width: 90%">
+                                  <strong>Status</strong>
+                              </div>
+                              <div id="price">$99</div>
+                              
+                          </div>
+                          <hr style='border:2px solid yellow;border-radius: 5px; margin: 5px;'/>
+                          <table>
+                              <tr>
+                                  <td>Outbound Calls</td>
+                                  <td id="outbound"></td>
+                              </tr>
+                              <tr>
+                                  <td>Inbound Calls</td>
+                                  <td id="inbound"></td>
+                              </tr>
+                              <tr>
+                                  <td>Emails</td>
+                                  <td id="email"></td>
+                              </tr>
+                              <tr>
+                                  <td>Messages</td>
+                                  <td id="message"></td>
+                              </tr>
+                              <tr>
+                                  <td>Surveys</td>
+                                  <td id="survey"></td>
+                              </tr>
+                          </table>
+                      </div>
+                      <div style="color: #313004" data-toggle="tooltip" title="Bling Phone Number" id="blingnum"></div>
+
+                      <div style="height: calc(100% - 20px); padding: 10px;margin-left: 15px; color:#000; background-color: #ECF3FC; height: auto; width: 80%;margin-top: 10px; margin-bottom: 0px; border-radius: 20px;">
+                          <strong><p style="font-size: 16px; margin-bottom: 0px;color: black;">Greeting
+
+                              <span id="greetbutton" style='margin-left:120px ;'>
+                               <button style='border:none;cursor:pointer'><img src='./images/84380.png' style='width: 16px;'/></span></button> </span></p></strong>
+                      
+                      <div style="color:  black;
+                      padding: 4px; font-size: 14px;" id="greeting">
+                          Hi this is wing from <br/> McDaniel's office. We will be right with you.</div><br>
+
+                      <strong><p style="font-size: 16px; color: black; margin-bottom: 0px">Voicemail<span id="voicebutton"  style='margin-left:110px ;'>
+                        <button style='border:none;cursor:pointer'><img src='./images/84380.png' style='width: 16px;'/></span></button></p></strong>
+                      
+                      <div style="color:  black;
+                      padding: 4px; font-size: 14px; display: flex; display: row" id="voicemail">
+                          Thank you for calling Mcdaniel's office.
+                          This is Meghan. Please leave a message and I will get back to you soon.</div>
+                          
+                      </div>
+                      <div style='background-color:#ECF3FC;height:160px; width: 65%; padding:10px; margin-left: 35px; font-size: 16px;margin-top:25px; border-radius: 20px;'>
+                        <img style='width:60px; height: auto; margin-left: 65px;' src='./images/call2.png'/>
+                        <p style='color:black;text-align: center; margin-bottom: 4px; margin-left:6px;'>Any Problem?</p>
+                        <button style='background-color: yellow; padding: 10px;margin-bottom: 150px; border-radius: 5px;font-size: 15px; margin-left: 35px;border: none;'>Let us help you</button>
+                      </div> 
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+      
+      <div  style="display: list-item;position: absolute;margin-top: 25px; margin-left: 350px;font-size: 22px; font-weight: bold; color: yellow; list-style: none; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ">
+        <span>McDaniel<span style="font-size: 18px; margin-left: 25px; font-weight: 600;"><span style='height: 8px;
+            width: 8px;
+            background-color:yellow;
+            border-radius: 50%;
+            display: inline-block;margin-right: 10px;margin-bottom:2px;'></span>Outboud calls</span></span>
+      </div>
+      <div id="rightcard" style="width: 30%; height:450px;border-radius: 15px;  padding: 0px;margin: 45px 25px 0px 45px; position: relative; ">
+        <div class="glass2">
+        <div class='center-dot'></div>
+        </div>
+        <div class='center-dot2'></div>
+          <div id="loadermid">
+              <center><div data-title=".dot-spin">
+                  <div class="stage">
+                      <div class="dot-spin"></div>
+                  </div>
+              </div></center>
+          </div>
+          
+          <div id="cardmessage"  style="height: 90%;">
+              <div class="card-header" style="border-radius: 5px; display:flex;
+                      display: row; height: 5%;">
+              </div>
+             
+              <div class="card-body" style="display: flex; flex-direction: row; padding: 0px; height: 100%;">
+                <!-- Make sure to remove overflow:hidden before deploying to production -->
+                  <div id="list-message" style="height: 100%; width: 100%;">
+                      <div style="overflow:hidden;scrollbar-width:1px #FFD700 ; overflow-x: hidden;border-radius: 20px; background-color:rgba(255,255,255,0.1); height: 90%;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size: 14px;" id="mlist">
+                        <div style='margin: 15px; margin-left:150px ; display: block; ' > <span style='color: white; background: linear-gradient(#98a0a0,#9da1a1); padding: 3px; border-radius: 5px;'>Hello from wing team bling </span>
+                        <div>
+                          <small style="color: white; margin-left: 120px;">Jan 6,2021</small>
+                        </div>
+                        </div>
+                      
+                        <div style='margin:10px; float: left; display: block;' > <span style='color:black; background:yellow; padding: 5px; border-radius: 5px;font-size: 14px;'>Hello  from Wing </span>
+                          <div>
+                            <small style="color: white; margin-left: 60px;">Jan 6,2021</small>
+                          </div>
+                          </div>
+                      </div>
+                      <div style="display: flex; display: row;margin-top:10px;padding:5px 5px 5px 10px;border-radius: 20px; height: 10%;background: rgba(255,255,255,0.1);">
+                          <input type="textarea" style="width: 62%; margin:5px;padding:15px;border: none; border-bottom: 1.5px solid #fff; color: #fff;background: rgba(255,255,255,0);" placeholder="Your message" id="newmessage">
+                          <button onclick="addMessage()" style="display:flex;background: rgba(255,255,255,0.1); border-radius: 25px;border: none;color: #fff;"><span style='margin-top: 10px;margin-left: 10px;font-size: 16px;'>Send</span> <img src="./images/send.png" style="padding: 10px;max-width:25px;margin-top: -5px; "/></button>
+                        </input>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div style="font-size: 22px;margin-top: 25px; font-weight: bold; color: yellow; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position: absolute;margin-left: 760px;">
+        <span>Karim</span>
+      </div>
+      <div id="scriptcard" style="width: 35%; height: 450px; border:none; padding: 0px;margin-top: 45px; margin-left: 20px;position: relative; ">
+          <div id="loaderright">
+              <div data-title=".dot-spin">
+                  <div class="stage">
+                      <div class="dot-spin"></div>
+                  </div>
+              </div>
+          </div>
+          <div id="cardmanager" style="height: 100%; width: 100% ;">
+              <div style="border-radius: 5px 5px 0px 0px; display:flex;
+                      display: row; height: 5%;">
+                  <div id="manager" style="color: black" data-toggle="tooltip" data-html="true" title="Manager Details">
+
+                  </div>
+              </div>
+              <div class="card-body" style="display: flex;border-radius: 20px;background: rgba(255,255,255,0.1);flex-direction: row; padding: 0px; height: 95%; width: 100%;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 16px;">
+                  <div class="basic-list-group" style="margin-left: 10px; height: calc(100% - 35px); width: 100%;">
+                      <ul class="nav nav-pills" style="padding:5px;display: flex; justify-content: space-around; list-style: none; text-decoration: none;">
+                          <li class="nav-item pill-size" style="padding-right: 10px;">
+                              <a href="#list-script" class="nav-link light badge-info active" data-toggle="tab" aria-expanded="true" style='text-decoration: none;color:black;background:yellow; padding: 4px 8px ; border-radius: 5px;'>
+                                  <i class="flaticon-381-newspaper"></i>
+                                  Script</a>
+                          </li>
+                          <li class="nav-item pill-size" style="padding-right: 5px">
+                              <a href="#list-inbound" class="nav-link light badge-info" data-toggle="tab" aria-expanded="false" style='text-decoration: none; color: yellow;'>
+                                  <i class="flaticon-381-incoming-call"></i>
+                                  Inbound Calls</a>
+                          </li>
+                          <li class="nav-item pill-size" style="padding-right: 10px">
+                              <a href="#list-outbound" class="nav-link light badge-info" data-toggle="tab" aria-expanded="true" style='text-decoration: none; color: yellow;'>
+                                  <i class="flaticon-381-phone-call"></i>
+                                  Outbound Calls</a>
+                          </li>
+                      </ul>
+                      <!-- Remove overflow hidden before deploying to production -->
+                      <div class="tab-content" id="nav-tabContent" style="height: 90%; overflow:hidden; overflow-x:hidden ;">
+
+                          <div id="list-inbound" style="height: 100%; width: 100% ;">
+                              <div>
+                                  <input style='border-radius: 7px; padding: 6px;border: none;' type="text" class="form-control" placeholder="Search Calls">
+                              </div>
+
+                              <div style="color:yellow">
+                                  <table>
+                                      <thead>
+                                        <div>
+                                          <th style='font-weight: 500;'>No.</th>
+                                          <th style="padding: 20px; font-weight: 500; ">Phone number</th>
+                                          <th style='padding: 15px;font-weight: 500;'>Call recording </th>
+                                          <th style='padding: 10px;font-weight: 500;'>Date</th>
+                                        </div>
+                                      </thead>
+
+                                      <tbody id="incall">
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                         
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+  </div>
+
+
+
+  <script type='text/javascript' src='./js/profile-action.js'></script>
+	</body>
+</html>
