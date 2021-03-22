@@ -61,46 +61,8 @@ function displaylist(data) {
 
         link.innerHTML = html;
 
-//        row = document.createElement("tr")
-//        row.colspan = "7"
-//        row.style = "height: 40px"
-//
-
-
-//        innerhtml = "<td><strong>"+count+"</strong></td>"
-//        innerhtml += "<td>"+detail.businessName+"</td>"
-//        innerhtml += "<td>" + startdate.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + "</td>"
-//        innerhtml += "<td><span class='badge light "+ statusclass +"'>"+detail.status+"</span></td>"
-//        if (detail.managerName != null) {
-//            innerhtml += "<td>"+ detail.managerName+"</td>"
-//        } else {
-//            innerhtml += "<td>Not Available</td>"
-//        }
-//        innerhtml += "<td><button id='"+detail.businessId+"' onclick='buttonclick(this.id)' style='border: 0px;'>"
-//        innerhtml += "<img src='./images/profile2.jpg' style='max-width: 40px;' /></button></td>"
-//        expandid = "demo" + i
-//        innerhtml += "<td><h2 data-toggle='collapse' data-target='#"+ expandid+"' class='accordion-toggle collapsible' style='padding:5px'>"
-//        innerhtml += "<center>+</center></h2></td>"
-//
-//        row.innerHTML = innerhtml
-//
-//        rowexpand = document.createElement("tr")
-//        rowexpand.class = "p"
-//        int12 = "<td colspan='7' class='hiddenRow'>"
-//        int12 += "<div class='accordian-body collapse p-3' id='"+expandid+"'>"
-//        int12 += "<div class='card' style='width: 40%'>"
-//        int12 += "<div class='card-body light badge-secondary' style='border-radius: 12px'>"
-//        int12 += "<strong>"+detail.businessName+"</strong>"
-//        int12 += "<div style='border: 1px solid black'></div><br>"
-//        int12 += "<div style='margin-top: 3px'>Bling phone Number: "+ detail.blingPhoneNumber+"</div>"
-//        int12 += "<div>Plan Price: $"+detail.pricePlan+"</div"
-//        int12 += "</div>"
-//        int12 += "</div></div></td>"
-//
-//        rowexpand.innerHTML = int12
-
         page = document.getElementById("blist")
-        page.appendChild(link)
+//        page.appendChild(link)
         count += 1
     }
 }
