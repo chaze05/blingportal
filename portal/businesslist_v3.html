@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow: hidden;" xmlns="http://www.w3.org/1999/html">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" sizes="16x16" href="./images/logo.png">
+		<title>BusinesslistAction</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <link rel="stylesheet" href="./css/profile-action.css" />
+    </head>
+	<body style="width: 100vh; height: 100vh; overflow: hidden; background-color: red; margin: 0px">
+        <div style="width: 100%; height: 100%; position: absolute; background-color: black">
+            <div style="display: flex;">
+                <div style="width: 100%; height: 15%; display: flex">
+                    <div style="margin: 10px">
+                        <a href="index.html">
+                            <img src="./images/yellow_logo.png" style="max-width: 120px">
+                        </a>
+                    </div>
+                    <div style="margin-top: 30px; margin-left: 20px; font-size:22px;">
+                        <font color="gray">Dashboard <i><small>for</small></i></font>   <font color="#36a4fd"> &nbsp;Wing</font>
+                    </div>
+                </div>
+                <a href="index.html" style="display: flex; justify-content: flex-end; margin: 30px">
+                    <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" style="color: yellow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <span style="color: yellow">Logout </span>
+                </a>
+            </div>
+            <div style="width: 100%; height: 85%; margin-left: 40px;">
+                <span style="color: rgba(168,168,168,0.87); font-family: Poppins;font-size: 20px; font-weight: 600; line-height: 70px;">Business List</span>
+                <br>
+                <hr style='border: 1px solid #FFE600; width: 93%;border-radius: 5px; margin: 0px; margin-bottom: 20px'/>
+                <textarea placeholder="search business name" style="padding: 5px; font-size: 12px; background:#161616; color:rgba(100,100,100,0.5); height: 30px; width: 300px; border-radius: 5px; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);"></textarea>
+                <img src="./images/search.png" style="min-width: 15px; margin-bottom: 20px" />
+                <table class="table" style="color: white; width: 93%;border-collapse: separate; border-spacing: 0 10px;">
+                    <tr style="background-color: #FFE600;">
+                        <th>Business Name</th>
+                        <th>Start Date</th>
+                        <th>Status</th>
+                        <th>Manager</th>
+                        <th>Profile</th>
+                        <th></th>
+                    </tr>
+                    <tr style="background-color: rgba(100,100,100,0.5)">
+                        <td>Business Name</td>
+                        <td>Start Date</td>
+                        <td>Status</td>
+                        <td>Manager</td>
+                        <td>Profile</td>
+                        <td>...</td>
+                    </tr>
+                    <tr style="background-color: rgba(100,100,100,0.5);">
+                    <td>Business Name</td>
+                    <td>Start Date</td>
+                    <td>Status</td>
+                    <td>Manager</td>
+                    <td>Profile</td>
+                    <td>...</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+	</body>
+</html>
