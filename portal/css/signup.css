@@ -1,0 +1,267 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.signup-page {
+	display: flex;
+}
+
+.signup {
+	width: 50%;
+	height: 100vh;
+	background: #000;
+	font-family: 'Poppins', sans-serif;
+}
+
+.signup > img {
+	width: 12%;
+	margin: 20px;
+}
+.signup > h1 {
+	position: absolute;
+	width: 345px;
+	margin: -10px 0px 0px 25px;
+	font-weight: 600;
+	font-size: 25px;
+	color: rgba(168, 168, 168, 0.6);
+}
+
+.signup > p {
+	margin: 25px;
+	width: 55%;
+	color: rgba(120, 120, 120, 0.6);
+}
+.form-data {
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	flex-flow: row;
+	flex-wrap: wrap;
+	margin: 25px;
+	line-height: 30px;
+	justify-content: space-between;
+}
+
+.form-data > div > input {
+	width: 140%;
+	height: 34px;
+	border: 1.5px solid rgba(83, 83, 83, 0.3);
+	box-sizing: border-box;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	background: #000;
+}
+
+.form-data > div > label {
+	display: block;
+	font-size: 12px;
+	font-weight: 600;
+	color: rgba(168, 168, 168, 0.6);
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.plan {
+	position: absolute;
+	width: 15%;
+	left: 2%;
+	top: 380px;
+	font-size: 14px;
+	color: rgba(168, 168, 168, 0.87);
+}
+.plan > h2 {
+	font-size: 14.5px;
+	font-weight: 600;
+}
+
+.plan > .basicplan {
+	width: 115%;
+	height: 30px;
+	background: #ffe600;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+	border-radius: 5px;
+	margin: 5px 0px 5px 0px;
+	text-align: left;
+	padding: 5px 5px 5px 15px;
+	font-weight: 600;
+	border: none;
+	cursor: pointer;
+}
+
+.plan > .plusplan {
+	width: 115%;
+	height: 30px;
+	border-radius: 5px;
+	margin: 0px;
+	text-align: left;
+	padding: 5px 5px 5px 15px;
+	font-weight: 600;
+	border: none;
+	cursor: pointer;
+}
+
+.plan > .proplan {
+	width: 115%;
+	height: 30px;
+	border-radius: 5px;
+	margin: 5px 0px 0px 0px;
+	text-align: left;
+	padding: 5px 5px 5px 15px;
+	font-weight: 600;
+	border: none;
+	cursor: pointer;
+}
+
+.btn-signup > button {
+	position: absolute;
+	width: 40.5%;
+	height: 6%;
+	left: 2%;
+	top: 89%;
+	font-size: 16px;
+	font-weight: 600;
+	background: #ffe600;
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+}
+.already-acc {
+	position: absolute;
+	width: 40%;
+	left: 14%;
+	top: 96%;
+	font-size: 13px;
+	color: rgba(168, 168, 168, 0.6);
+}
+.already-acc > p > button {
+	border: none;
+	padding: 0;
+	background: none;
+	color: #fff;
+	padding-left: 5px;
+	outline: none;
+	cursor: pointer;
+}
+
+.signup-background {
+	width: 50%;
+	height: 100vh;
+	background: #111;
+	font-family: 'Poppins', sans-serif;
+	float: right;
+	z-index: 2;
+}
+
+.main-img {
+	text-align: center;
+}
+
+.main-img > img {
+	width: 55%;
+	margin-top: 22%;
+	margin-left: -15%;
+	margin-right: auto;
+	z-index: 1;
+}
+.mainimg-dot1 > img {
+	position: absolute;
+	width: 6%;
+	left: 58%;
+	top: 8%;
+	z-index: -1;
+}
+.mainimg-dot2 > img {
+	position: absolute;
+	width: 11%;
+	left: 75%;
+	top: 25%;
+	z-index: -1;
+}
+
+.signup-background > h2 {
+	font-weight: 600;
+	font-size: 34px;
+	line-height: 54px;
+	margin-left: 80px;
+	color: #f9f9f9;
+}
+.signup-background > p {
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 21px;
+	margin-left: 80px;
+	color: #f9f9f9;
+}
+.mainimg-dot3 > img {
+	position: absolute;
+	width: 6%;
+	left: 54%;
+	top: 65%;
+	z-index: -1;
+}
+
+.mainimg-dot4 > img {
+	position: absolute;
+	width: 8%;
+	left: 90%;
+	top: 75%;
+	z-index: -1;
+}
+.arrowline1 > img {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	top: 0%;
+}
+.arrowline2 > img {
+	position: absolute;
+	width: 20%;
+	height: 40%;
+	left: 80%;
+	top: 0%;
+}
+
+@media screen and (max-width: 800px) {
+	.plan {
+		width: 30%;
+		margin: 150px 0px 0px;
+	}
+	.btn-signup > button {
+		width: 40%;
+		margin: -80px 0px 0px;
+	}
+	.already-acc {
+		width: 50%;
+		margin: -60px 0px 0px -35px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.signup {
+		width: 100%;
+	}
+	.signup-background {
+		display: none;
+	}
+	.plan {
+		display: inline-block;
+		width: 50%;
+		margin: 120px 0px 0px 20px;
+	}
+	.btn-signup > button {
+		margin: -30px 0px 0px 20px;
+	}
+	.already-acc {
+		width: 50%;
+		margin: -20px 0px 0px -25px;
+	}
+	.already-acc > p > button {
+		margin: -10px 0px 0px -4px;
+	}
+}
