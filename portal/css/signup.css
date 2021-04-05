@@ -44,13 +44,22 @@
 }
 
 .form-data > div > input {
-	width: 140%;
+	width: 150%;
 	height: 34px;
 	border: 1.5px solid rgba(83, 83, 83, 0.3);
 	box-sizing: border-box;
 	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	background: #000;
+	color: #f9f9f9;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+	cursor: pointer;
+	border-radius: 4px;
+	margin-right: 2px;
+	opacity: 0.6;
+	filter: invert(0.9);
 }
 
 .form-data > div > label {
@@ -156,6 +165,36 @@ input[type='number']::-webkit-outer-spin-button {
 	font-family: 'Poppins', sans-serif;
 	float: right;
 	z-index: 2;
+}
+#spinner:not([hidden]) {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#spinner::after {
+	content: '';
+	width: 80px;
+	height: 80px;
+	border: 2px solid #f3f3f3;
+	border-top: 3px solid #f25a41;
+	border-radius: 100%;
+	will-change: transform;
+	animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .main-img {
