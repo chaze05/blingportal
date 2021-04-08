@@ -6,7 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="./css/signup.css" />
 		<link rel="stylesheet" href="./css/style.css" />
-		<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script
+			type="text/javascript"
+			src="https://code.jquery.com/jquery-1.7.1.min.js"
+		></script>
 		<script src="./js/signup.js"></script>
 		<title>Signup</title>
 	</head>
@@ -17,9 +20,10 @@
 					<img src="./images/signup/36894_bling_logo_D_01 (3).png" alt="" />
 					<h1>Create an account</h1>
 					<p>These details will be used to setup up your new account</p>
+					<div id="error_message"></div>
 					<div class="row" style="padding-left: 20px; margin-bottom: 10px">
 						<div class="col-12 col-md-6">
-							<label for="name">Full Name</label><br>
+							<label for="name">Full Name</label><br />
 							<input
 								id="username"
 								type="text"
@@ -29,7 +33,7 @@
 							/>
 						</div>
 						<div class="col-12 col-md-6">
-							<label for="email">Work email</label><br>
+							<label for="email">Work email</label><br />
 							<input
 								id="email"
 								type="email"
@@ -42,7 +46,7 @@
 
 					<div class="row" style="padding-left: 20px; margin-bottom: 10px">
 						<div class="col-12 col-md-6">
-							<label id="phoneno" for="number">Phone number</label><br>
+							<label id="phoneno" for="number">Phone number</label><br />
 							<input id="phonenumber" type="number" id="number" />
 						</div>
 						<div class="col-12 col-md-6">
@@ -53,7 +57,7 @@
 
 					<div class="row" style="padding-left: 20px; margin-bottom: 10px">
 						<div class="col-12 col-md-6">
-							<label for="">Start date</label><br>
+							<label for="">Start date</label><br />
 							<input type="date" />
 						</div>
 					</div>
@@ -63,35 +67,37 @@
 						<button id="basicplan" class="basicplan">
 							Basic
 							<span style="float: right; font-size: 14px; padding-right: 10px"
-							>$499
+								>$499
 								<span style="font-size: 10px; font-weight: 500">/months</span>
 							</span>
 						</button>
 						<button id="plusplan" class="plusplan">
 							Plus
 							<span style="float: right; font-size: 14px; padding-right: 10px"
-							>$599
+								>$599
 								<span style="font-size: 10px; font-weight: 500">/months</span>
 							</span>
 						</button>
 						<button id="proplan" class="proplan">
 							Pro
 							<span style="float: right; font-size: 14px; padding-right: 10px"
-							>$799
+								>$799
 								<span style="font-size: 10px; font-weight: 500">/months</span>
 							</span>
 						</button>
 					</div>
 
-					<div class="btn-signup" style="padding-left: 20px; margin-bottom: 10px">
-						<button onclick="" type="">Sign up</button>
+					<div
+						class="btn-signup"
+						style="padding-left: 20px; margin-bottom: 10px"
+					>
+						<button onclick="signUp()">Sign up</button>
 						<div id="spinner" hidden></div>
 					</div>
 
-
-<!--					<div class="already-acc">-->
-<!--						<p>Already have an account?<button>Log in</button></p>-->
-<!--					</div>-->
+					<!--					<div class="already-acc">-->
+					<!--						<p>Already have an account?<button>Log in</button></p>-->
+					<!--					</div>-->
 				</div>
 			</div>
 
