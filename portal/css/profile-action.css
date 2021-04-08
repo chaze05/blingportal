@@ -35,3 +35,21 @@ card-header {
   font-weight: 500;
   line-height: 21px;
 }
+
+audio::-webkit-media-controls-panel {
+  background-color: black;
+  border-radius: 0px;
+  color: white;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-overlay-play-button,
+audio::-webkit-media-controls-current-time-display{
+    color: white;
+}
+
+audio {
+    width: 150px;
+    height: 30px;
+}

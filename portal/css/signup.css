@@ -8,11 +8,11 @@
 }
 
 .signup {
-	width: 50%;
 	height: 100vh;
 	background: #000;
 	font-family: 'Poppins', sans-serif;
 }
+
 
 .signup > img {
 	width: 12%;
@@ -43,8 +43,8 @@
 	justify-content: space-between;
 }
 
-.form-data > div > input {
-	width: 150%;
+input {
+	width: 95%;
 	height: 34px;
 	border: 1.5px solid rgba(83, 83, 83, 0.3);
 	box-sizing: border-box;
@@ -62,8 +62,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 	filter: invert(0.9);
 }
 
-.form-data > div > label {
-	display: block;
+label {
 	font-size: 12px;
 	font-weight: 600;
 	color: rgba(168, 168, 168, 0.6);
@@ -75,20 +74,17 @@ input[type='number']::-webkit-outer-spin-button {
 	margin: 0;
 }
 
-.plan {
-	position: absolute;
-	width: 15%;
-	left: 2%;
-	top: 380px;
+.plan1 {
+	width: 50%;
 	font-size: 14px;
 	color: rgba(168, 168, 168, 0.87);
 }
-.plan > h2 {
+.plan1 > h2 {
 	font-size: 14.5px;
 	font-weight: 600;
 }
 
-.plan > .basicplan {
+.plan1 > .basicplan {
 	width: 115%;
 	height: 30px;
 	background: #ffe600;
@@ -102,7 +98,7 @@ input[type='number']::-webkit-outer-spin-button {
 	cursor: pointer;
 }
 
-.plan > .plusplan {
+.plan1 > .plusplan {
 	width: 115%;
 	height: 30px;
 	border-radius: 5px;
@@ -114,7 +110,7 @@ input[type='number']::-webkit-outer-spin-button {
 	cursor: pointer;
 }
 
-.plan > .proplan {
+.plan1 > .proplan {
 	width: 115%;
 	height: 30px;
 	border-radius: 5px;
@@ -127,11 +123,8 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .btn-signup > button {
-	position: absolute;
 	width: 40.5%;
-	height: 6%;
-	left: 2%;
-	top: 89%;
+	height: 40px;
 	font-size: 16px;
 	font-weight: 600;
 	background: #ffe600;
@@ -159,11 +152,9 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .signup-background {
-	width: 50%;
 	height: 100vh;
 	background: #111;
 	font-family: 'Poppins', sans-serif;
-	float: right;
 	z-index: 2;
 }
 #spinner:not([hidden]) {
