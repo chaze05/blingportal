@@ -8,7 +8,6 @@
 }
 
 .signup {
-	height: 100vh;
 	background: #000;
 	font-family: 'Poppins', sans-serif;
 }
@@ -204,14 +203,14 @@ input[type='number']::-webkit-outer-spin-button {
 	width: 6%;
 	left: 58%;
 	top: 8%;
-	z-index: -1;
+	z-index: 10;
 }
 .mainimg-dot2 > img {
 	position: absolute;
 	width: 11%;
 	left: 75%;
 	top: 25%;
-	z-index: -1;
+	z-index: 10;
 }
 
 .signup-background > h2 {
@@ -233,7 +232,7 @@ input[type='number']::-webkit-outer-spin-button {
 	width: 6%;
 	left: 54%;
 	top: 65%;
-	z-index: -1;
+	z-index: 10;
 }
 
 .mainimg-dot4 > img {
@@ -241,13 +240,14 @@ input[type='number']::-webkit-outer-spin-button {
 	width: 8%;
 	left: 90%;
 	top: 75%;
-	z-index: -1;
+	z-index: 10;
 }
 .arrowline1 > img {
 	position: absolute;
 	width: 50%;
 	height: 100%;
 	top: 0%;
+	z-index: 10;
 }
 .arrowline2 > img {
 	position: absolute;
@@ -255,6 +255,7 @@ input[type='number']::-webkit-outer-spin-button {
 	height: 40%;
 	left: 80%;
 	top: 0%;
+	z-index: 10;
 }
 
 @media screen and (max-width: 800px) {
