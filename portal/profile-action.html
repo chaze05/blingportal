@@ -6,232 +6,276 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>BusinesslistAction</title>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="./css/profile-action.css" />
         <link href="./css/custombling.css" rel="stylesheet">
+        <link href="./css/glass-effect.css" rel="stylesheet">
         <script type='text/javascript' src='./js/profile-action.js'></script>
 	</head>
-	<body class="gradient" style="width: 100vh; height: 100vh; overflow: hidden">
-        <div class="glass" style="width: 96%; height: 95%; background-color: rgba(0,0,0,0.5); position: absolute; top: 20px; left: 20px; display: flex">
+	<body class="gradient" style="width: 100%; height: 100%; overflow: hidden">
+            <div class="glass" style="width: 96%; height: 95%; position: absolute; top: 20px; left: 20px; display: flex">
 
-            <div id="profiledetails" style="width: 20%; background-color: rgba(34,34,34,0.7);">
-                <center><img style='width: 95px;height: auto; margin-top:10px' src='./images/yellow_logo.png'/></center>
-                <div id="blistload">
-                    <div data-title=".dot-spin">
-                        <div class="stage">
-                            <div class="dot-spin"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="border-radius: 0px; display:flex; height: 5%;">
-                    <button href="javascript:void()" onclick="backbusiness()" style='background-color: #333; color: white; text-decoration: none;
-                  padding: 10px; margin-left: 15px; border-radius: 50%;font-weight: bold;background: rgba(255,255,255,0.1);'>
-                        <
-                    </button>
-                    <p style="color: white; margin-left: 10px; margin-top: 5px;font-family: Roboto;">
-                        <font color="gray">Dashboard <i><small>for</small></i></font>   <font color="#36a4fd"> &nbsp;Client</font>
-                    </p>
-                </div>
-
-                <div style="height: 83%; overflow: scroll">
-                <p style="color:yellow; font-family:Roboto; padding-left:15px;margin-bottom:10px;">My plan</p>
-                <div style="padding: 12px;margin-left: 10px; background-color: #A4A4A4; width: 80%; font-family: Roboto; border-radius: 20px;">
-                    <div style="display: flex; font-size: 12px">
-                        <div style="width: 90%">
-                            <strong>Status</strong>
-                        </div>
-                        <div id="price">$599</div>
-                    </div>
-                    <hr style='border:2px solid yellow;border-radius: 5px; margin: 5px;'/>
-                    <table style="width: 100%; font-size: 12px">
-                        <tr>
-                            <td style="width: 90%">Outbound Calls</td>
-                            <td id="outbound" style="color: yellow">$</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 90%">Inbound Calls</td>
-                            <td id="inbound" style="color: yellow">$</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 90%">Emails</td>
-                            <td id="email" style="color: yellow">$</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 90%">Messages</td>
-                            <td id="message" style="color: yellow">$</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 90%">Surveys</td>
-                            <td id="survey" style="color: yellow">$</td>
-                        </tr>
-                    </table>
-                </div><br>
-
-                <div style="padding: 12px;margin-left: 10px; background-color: #A4A4A4; width: 80%; font-family: Roboto; border-radius: 20px;">
-                    <div style="display: flex; font-size: 12px">
-                        <div style="width: 90%">
-                            <strong>Greeting</strong>
-                        </div>
-                        <div><button style='border:none;cursor:pointer'><img src='./images/84380.png' style='width: 16px;'/></button></div>
-                    </div>
-                    <div style="color:  black; padding: 4px; font-size: 12px;" id="greeting">
-                     Hi this is bling from <br/> ABC's office. We will be right with you.
-                    </div><br>
-
-                    <div style="display: flex; font-size: 12px">
-                        <div style="width: 90%">
-                            <strong>Voicemail</strong>
-                        </div>
-                        <div><button style='border:none;cursor:pointer'><img src='./images/84380.png' style='width: 16px;'/></button></div>
-                    </div>
-                    <div style="color:  black; padding: 4px; font-size: 12px;" id="voicemail">
-                        Thank you for calling ABC's office.
-                        This is Meghan. Please leave a message and I will get back to you soon.
-                    </div>
-                </div>
-                <br>
-
-                <center><div style="padding: 12px; background-color: #A7A6CB; width: 60%; font-family: Roboto; border-radius: 20px;">
-                    <img style='width:60px; height: auto;' src='./images/call2.png'/>
-                    <p style='color:black;'>Any Problems?</p>
-                    <button style='background-color: yellow; padding: 10px;border-radius: 5px;font-size: 15px; '>Let us help you</button>
-                </div></center>
-                </div>
-
-            </div>
-
-            <div style="width: 80%; padding: 20px">
-                <div style="height: 5%">
-<!--                    Logout Div-->
-                        <a  style='text-decoration: none; display: flex; justify-content: flex-end;' href="index.html">
-                            <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" style="color: #FFD700" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                            <span class="ml-2" style="color: #FFD700; font-family: Roboto">Log Out</span>
-                        </a>
-                </div>
-
-                <div style="height: 95%; width: 100%; display: flex">
-                    <div style="font-size: 12px; color: #FFD700; font-family: Roboto; width: 45%;">
-                        <div style="display: flex">
-                            <span style="font-size: 20px;">Bling Client</span>
-                            <span style='height: 8px; width: 2%; background-color:#FFD700; border-radius: 50%;
-                            margin-left: 20px;margin-right: 20px;margin-top:7px;'></span>
-                            <span style="font-size: 14px; margin-top: 3px; "> Inbound calls</span>
-                        </div>
-                    <!--        Message div-->
-                        <div id="rightcard" style="width: 100%; height:90%;">
-                            <div id="loadermid">
-                                <center><div data-title=".dot-spin">
-                                    <div class="stage">
-                                        <div class="dot-spin"></div>
-                                    </div>
-                                </div></center>
+                <div id="profiledetails" style="width: 20%; background-color: rgba(34,34,34,0.7);">
+                    <center><img style='width: 95px;height: auto; margin-top:10px' src='./images/yellow_logo.png'/></center>
+                    <div id="loader">
+                        <div data-title=".dot-spin">
+                            <div class="stage">
+                                <div class="dot-spin"></div>
                             </div>
+                        </div>
+                    </div>
 
-                            <div id="cardmessage" style="height: 100%; overflow: hidden; margin-top: 10px">
-                                <div style="height: 80%; border-radius: 10px; background-color:rgba(66,66,66, 0.8); font-family: Roboto;font-size: 12px; padding: 10px" id="mlist">
-                                    <div style="margin: 10px">
-                                        <span class="senderWing">Hello from your client. how are you doing today.
-                                        </span><br>
-                                        <div>
-                                            <small style="color: white; margin: 2px;">Jan 6,2021</small>
-                                        </div><br>
-                                    </div>
+                    <div id="profile-detail" style="height: 100%">
+                        <div style="border-radius: 0px; display:flex; height: 6%;">
+                            <button href="javascript:void()" onclick="backbusiness()" style='background-color: #333; color: white; text-decoration: none;
+                          padding: 10px; margin-left: 15px; border-radius: 50%;font-weight: bold;background: rgba(255,255,255,0.1);'>
+                                <
+                            </button>
+                            <p style="color: white; margin-left: 10px; margin-top: 5px;font-family: Roboto;">
+                                <font color="gray">Dashboard <i><small>for</small></i></font>   <font color="#36a4fd"> &nbsp;Wing</font>
+                            </p>
+                        </div>
 
-                                    <div style="margin: 5px">
-                                        <span class="senderBling">Hello from Bling </span><br>
-                                        <div>
-                                            <small style="color: white; margin: 2px">Jan 6,2021</small>
+                        <div style="height: 83%; overflow: scroll">
+                        <p style="color:yellow; font-family:Roboto; padding-left:15px;margin-bottom:10px;">My plan</p>
+                        <div style="padding: 12px;margin-left: 10px; background-color: #A4A4A4; width: 80%; font-family: Roboto; border-radius: 20px;">
+                            <div style="display: flex; font-size: 12px">
+                                <div style="width: 90%">
+                                    <strong>Status</strong>
+                                </div>
+                                <div id="price">$599</div>
+                            </div>
+                            <hr style='border:2px solid yellow;border-radius: 5px; margin: 5px;'/>
+                            <table style="width: 100%; font-size: 12px">
+                                <tr>
+                                    <td style="width: 90%">Outbound Calls</td>
+                                    <td id="outbound" style="color: yellow">$</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 90%">Inbound Calls</td>
+                                    <td id="inbound" style="color: yellow">$</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 90%">Emails</td>
+                                    <td id="email" style="color: yellow">$</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 90%">Messages</td>
+                                    <td id="message" style="color: yellow">$</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 90%">Surveys</td>
+                                    <td id="survey" style="color: yellow">$</td>
+                                </tr>
+                            </table>
+                        </div><br>
+
+                        <div style="padding: 12px;margin-left: 10px; background-color: #A4A4A4; width: 80%; font-family: Roboto; border-radius: 20px;">
+                            <div style="display: flex; font-size: 12px">
+                                <div style="width: 90%">
+                                    <strong>Greeting</strong>
+                                </div>
+                                <div><button style='border:none;cursor:pointer; background: Transparent; outline:none' onclick="updategreeting()">
+                                    <img src='./images/84380.png' style='width: 16px;'/></button></div>
+                            </div>
+                            <div style="color:  black; padding: 4px; font-size: 12px;" id="greeting">
+                            </div><br>
+
+                            <div style="display: flex; font-size: 12px">
+                                <div style="width: 90%">
+                                    <strong>Voicemail</strong>
+                                </div>
+                                <div><button style='border:none;cursor:pointer; background: Transparent; outline:none' onclick="updatevoicemail()">
+                                    <img src='./images/84380.png' style='width: 16px;'/></button></div>
+                            </div>
+                            <div style="color:  black; padding: 4px; font-size: 12px;" id="voicemail">
+                            </div>
+                        </div>
+                        <br>
+
+                        <center><div style="padding: 12px; background-color: #A7A6CB; width: 60%; font-family: Roboto; border-radius: 20px;">
+                            <img style='width:60px; height: auto;' src='./images/call2.png'/>
+                            <p style='color:black;'>Any Problems?</p>
+                            <button style='background-color: yellow; padding: 10px;border-radius: 5px;font-size: 15px; '>Drop us a message</button>
+                        </div></center>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="width: 80%; padding: 20px">
+                    <div style="height: 5%">
+    <!--                    Logout Div-->
+                            <a  style='text-decoration: none; display: flex; justify-content: flex-end;' href="index.html">
+                                <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" style="color: #FFD700" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                                <span class="ml-2" style="color: #FFD700; font-family: Roboto">Log Out</span>
+                            </a>
+                    </div>
+
+                    <div style="height: 95%; width: 100%; display: flex">
+                        <div style="font-size: 12px; color: #FFD700; font-family: Roboto; width: 45%;">
+                            <div style="display: flex">
+                                <span style="font-size: 20px;" id="businessname">Bling Client</span>
+                                <span style='height: 8px; width: 2%; background-color:#FFD700; border-radius: 50%;
+                                margin-left: 20px;margin-right: 20px;margin-top:7px;'></span>
+                                <span style="font-size: 14px; margin-top: 3px; " id="callType"> Inbound calls</span>
+                            </div>
+                        <!--        Message div-->
+                            <div id="rightcard" style="width: 100%; height:90%;">
+                                <div id="cardmessage" style="height: 100%; overflow: hidden; margin-top: 10px">
+                                    <div style="height: 80%; border-radius: 10px; background-color:rgba(66,66,66, 0.8); font-family: Roboto;font-size: 12px; padding: 10px; overflow:scroll" id="mlist">
+                                        <div id="loadermid">
+                                            <center><div data-title=".dot-spin">
+                                                <div class="stage">
+                                                    <div class="dot-spin"></div>
+                                                </div>
+                                            </div></center>
                                         </div>
                                     </div>
-                                </div>
-                                <div style="display: flex; margin-top:20px; padding:5px; border-radius: 20px; height: 8%;">
-                                    <input type="textarea" style="width: 75%; padding:10px; border: none; color: #fff;background: rgba(66,66,66, 0.8); border-radius: 25px;" placeholder="Your message" id="newmessage" />
-                                    <div style="width: 2%"></div>
-                                    <button onclick="addMessage()" style="width:23%; display:flex;background: rgba(66,66,66, 0.8); border-radius: 25px;border: none;color: #fff;">
-                                        <span style='margin: 10px; margin-left: 5px; font-size: 16px;'>Send</span>
-                                        <img src="./images/send.png" style="padding: 0px; max-width:25px; margin-top: 7px; margin-left: -5px"/></button>
+                                    <div style="display: flex; margin-top:20px; padding:5px; border-radius: 20px; height: 8%;">
+                                        <input type="textarea" style="width: 75%; padding:10px; border: none; color: #fff;background: rgba(66,66,66, 0.8); border-radius: 25px; outline: none" placeholder="Your message" id="newmessage" />
+                                        <div style="width: 2%"></div>
+                                        <button onclick="addMessage()" style="width:23%; display:flex;background: rgba(66,66,66, 0.8); border-radius: 25px;border: none;color: #fff; outline: none">
+                                            <span style='margin: 10px; margin-left: 5px; font-size: 16px;'>Send</span>
+                                            <img src="./images/send.png" style="padding: 0px; max-width:25px; margin-top: 7px; margin-left: -5px"/></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div style="width: 55%; margin-left: 30px">
-                        <div style="font-size: 20px; font-weight: bold; color: #FFD700; font-family: Roboto;">
-                            <span>Meghan</span>
-                        </div>
+                        <div style="width: 55%; margin-left: 30px">
+                            <div style="font-size: 20px; font-weight: bold; color: #FFD700; font-family: Roboto;">
+                                <span id="managername">Meghan</span>
+                            </div>
 
-                        <!--        inbound/outbound calls-->
-                        <div id="scriptcard" style="width: 100%; height: 95%; border:none; padding: 0px;">
-                              <div id="loaderright">
-                                  <div data-title=".dot-spin">
-                                      <div class="stage">
-                                          <div class="dot-spin"></div>
+                            <!--        inbound/outbound calls-->
+                            <div id="scriptcard" style="width: 100%; height: 95%; border:none; padding: 0px;">
+                                  <div id="loaderright">
+                                      <div data-title=".dot-spin">
+                                          <div class="stage">
+                                              <div class="dot-spin"></div>
+                                          </div>
                                       </div>
                                   </div>
-                              </div>
-                              <div id="cardmanager" style="height: 95%; width: 100%; margin-top: 10px; border-radius: 20px;background: rgba(66,66,66,0.8); font-family: roboto; font-size: 12px;">
-                                      <div class="basic-list-group" style="margin-left: 10px; padding: 5px;">
+                                  <div id="cardmanager" style="height: 95%; width: 100%; margin-top: 10px; border-radius: 20px;background: rgba(66,66,66,0.8); font-family: roboto; font-size: 12px;">
+                                      <div class="basic-list-group" style="margin-left: 10px; padding: 5px; height: 100%">
                                           <ul class="nav nav-pills" style="padding:5px; display: flex; justify-content: space-around; list-style: none; text-decoration: none; ">
                                               <li class="nav-item pill-size" style="padding-right: 10px;">
-                                                  <a href="#list-script" class="nav-link light badge-info active" data-toggle="tab" aria-expanded="true" style='text-decoration: none; color:black; background:#FFD700; padding: 4px 8px ; border-radius: 5px;'>
-                                                      <i class="flaticon-381-newspaper">Script</i></a>
+                                                  <a href="#list-calls" class="nav-link light badge-info active" data-toggle="tab" style='text-decoration: none;'>
+                                                      <i class="flaticon-381-newspaper">Call Record</i></a>
                                               </li>
                                               <li class="nav-item pill-size" style="padding-right: 5px">
-                                                  <a href="#list-inbound" class="nav-link light badge-info" data-toggle="tab" aria-expanded="false" style='text-decoration: none; color: #FFD700;'>
+                                                  <a href="#list-parameters" class="nav-link light badge-info" data-toggle="tab" style='text-decoration: none;'>
                                                       <i class="flaticon-381-incoming-call"></i>
-                                                      Call Record</a>
-                                              </li>
-                                              <li class="nav-item pill-size" style="padding-right: 10px">
-                                                  <a href="#list-outbound" class="nav-link light badge-info" data-toggle="tab" aria-expanded="true" style='text-decoration: none; color: #FFD700;'>
-                                                      <i class="flaticon-381-phone-call"></i>
                                                       Service Parameters</a>
                                               </li>
                                           </ul>
-                                          <!-- Remove overflow hidden before deploying to production -->
-                                          <div class="tab-content" id="nav-tabContent" style="height: 90%; overflow:hidden; overflow-x:hidden ;">
+                                          <div class="tab-content" id="nav-tabContent" style="height: 75%;">
 
-                                              <div id="list-inbound" style="height: 100%; width: 100% ;">
+                                              <div class="tab-pane fade active" id="list-calls" style="height: 100%; width: 100%">
                                                   <div>
-                                                      <input style='border-radius: 7px; padding: 6px;border: none;' type="text" class="form-control" placeholder="Search Calls">
+                                                      <input style='border-radius: 7px; padding: 6px;border: none; margin-bottom: 15px' type="text" class="form-control" placeholder="Search Calls" id="searchnum" >
+                                                      <button style="background: Transparent; outline: none; border: none" onclick="getrecords()"><img src="./images/search.png" /></button><br>
+                                                      <div id="phoneerror" style="color: red; font-size: 14px">Please enter a valid phone number. Example: 1(number with no brackets and spaces)</div>
+                                                      <button style="background: yellow; padding: 6px; border-radius: 10px; border: none; outline: none; margin: 5px; margin-bottom: 30px" id="clist" onclick="allRecords()">List Call Records</button>
                                                   </div>
 
-                                                  <div style="color:#FFD700">
-                                                      <table>
-                                                          <thead>
-                                                            <div>
-                                                              <th style='font-weight: 500;'>No.</th>
-                                                              <th style="padding: 20px; font-weight: 500; ">Phone number</th>
-                                                              <th style='padding: 15px;font-weight: 500;'>Call recording </th>
-                                                              <th style='padding: 10px;font-weight: 500;'>Date</th>
-                                                            </div>
-                                                          </thead>
-
-                                                          <tbody id="incall">
-                                                          <tr>
-                                                              <td>1</td>
-                                                              <td>1231231234</td>
-                                                              <td><audio controls><source src="" style="background-color: black"></audio></td>
-                                                              <td>Jan 6, 2021</td>
-                                                          </tr>
-                                                          <tr>
-                                                              <td>2</td>
-                                                              <td>1231231235</td>
-                                                              <td><audio controls style='width: 150px; color: white'><source src=""></audio></td>
-                                                              <td>Jan 8, 2021</td>
-                                                          </tr>
-                                                          </tbody>
-                                                      </table>
+                                                  <div style="color:#FFD700; height: 100%; overflow:scroll">
+                                                      <div id="incall">
+                                                      </div>
+                                                      <div id="loadercall">
+                                                          <div data-title=".dot-spin">
+                                                              <div class="stage">
+                                                                  <div class="dot-spin"></div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
                                                   </div>
                                               </div>
 
+                                              <div class="tab-pane fade" id="list-parameters" style="height: 100%; width: 100%">
+                                                  <div id="loaderparam">
+                                                      <div data-title=".dot-spin">
+                                                          <div class="stage">
+                                                              <div class="dot-spin"></div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div id="callolist" style="margin-top: 50px">
+                                                      <div style="background-color: black; margin: 10px; padding:10px 40px 10px 40px; border-radius: 10px; font-size: 16px; display: flex; justify-content: space-between">
+                                                          <p style="color: yellow">Call Count for the Day</p>
+                                                          <h2 style="color: yellow" id="callcount"></h2>
+                                                      </div>
+                                                      <div style="background-color: black; margin: 10px; padding:10px 40px 10px 40px; border-radius: 10px; font-size: 16px;">
+                                                          <div style="display: flex; justify-content: space-between" >
+                                                              <p style="color: yellow">Service Status</p>
+                                                              <label class="switch">
+                                                                  <input type="checkbox" id="togBtnservice" onchange="updateservice()">
+                                                                  <div class="slider round">
+                                                                      <!--ADDED HTML -->
+                                                                      <span class="on">ON</span>
+                                                                      <span class="off">OFF</span>
+                                                                      <!--END-->
+                                                                  </div>
+                                                              </label>
+                                                          </div>
+                                                          <p style="color: red" id="serviceerror">Failed to Change the status. Please Try again Later.</p>
+                                                      </div>
+                                                      <div style="background-color: black; margin: 10px; padding:10px 40px 10px 40px; border-radius: 10px; font-size: 16px;">
+                                                          <div style="display: flex; justify-content: space-between" >
+                                                              <p style="color: yellow">Overage Call Status</p>
+                                                              <label class="switch">
+                                                                  <input type="checkbox" id="togBtnoverage" onchange="updateoverage()">
+                                                                  <div class="slider round">
+                                                                      <!--ADDED HTML -->
+                                                                      <span class="on">ON</span>
+                                                                      <span class="off">OFF</span>
+                                                                      <!--END-->
+                                                                  </div>
+                                                              </label>
+                                                          </div>
+                                                          <p style="color: red" id="overageerror">Failed to Change the status. Please Try again Later.</p>
+                                                      </div>
+                                                  </div>
+                                              </div>
                                           </div>
                                       </div>
                                   </div>
                               </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
+
+            <div id="mymodel" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content" style="background-color: #ffd700">
+                    <span class="close" style="color: black">&times;</span>
+                    <h4 class="text-center mb-4" id="modalheader" style="font-family: poppins; color: black">Voicemail Message</h4>
+                    <h4 class="text-center" id="updating"></h4>
+                    <div id="voiceform">
+                        <div id="vdiv">
+                            <div class="form-group">
+                                <textarea style="border-radius: 10px; border: 1px solid #f3f3f3; width: 100%;" rows="4" id="voicemsg"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button id="updatevoicemail" onclick="updateVoicemail()" style="outline: none; border: none; background-color: black; color: white;width: 100%; border-radius: 10px; padding: 15px">Update</button>
+                            </div>
+                        </div>
+
+                        <div id="gdiv">
+                            <div class="form-group">
+                                <textarea style="border-radius: 10px; border: 1px solid #f3f3f3; width: 100%;" rows="4" id="greetmsg"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button style="outline: none; border: none; background-color: black; color: white;width: 100%; border-radius: 10px; padding: 15px" id="updategreet" onclick="updateGreeting()">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <script src="./vendor/global/global.min.js"></script>
 	</body>
 </html>

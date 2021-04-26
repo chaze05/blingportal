@@ -1,5 +1,21 @@
 //  JS validation
 
+var selectedPlan = '';
+
+$(document).ready(function () {
+    var todaysDate = new Date();
+    var year = todaysDate.getFullYear();
+    var month = ("0" + (todaysDate.getMonth() + 1)).slice(-2);
+    var day = ("0" + todaysDate.getDate()).slice(-2);
+    var minDate = (year +"-"+ month +"-"+ day);
+    document.getElementById("startdate").min = minDate;
+    document.getElementById("startdate").value = minDate;
+//    $('#startdate').data("DateTimePicker").minDate(minDate)
+    $('#loader').hide();
+    $('#signup-success').hide();
+    $('#signup-error').hide();
+});
+
 function validate() {
 	const name = document.getElementById('name').value;
 	const phone = document.getElementById('phone').value;
@@ -10,7 +26,7 @@ function validate() {
 	error_message.style.padding = '10px';
 
 	var text;
-	if (name.length < 4) {
+	if (name.length < 2) {
 		text = 'Please Enter valid Name';
 		error_message.innerHTML = text;
 		return false;
@@ -32,51 +48,51 @@ function validate() {
 		error_message.innerHTML = text;
 		return false;
 	}
-	alert('Form Submitted Successfully!');
+
+	if (selectedPlan == '') {
+        text = 'Please Select a Plan';
+        error_message.innerHTML = text;
+        return false;
+    }
 	return true;
 }
 
-function singUp() {
+function signUp() {
+    $('#signup-error').hide();
 	const valid = validate();
 	if (valid) {
-		const url = 'https://www.bling-center.com/business/new/customer';
+	    $('#loader').show();
+	    $('#signup-form').hide();
 
-		let name = document.querySelector('#username');
-		let phoneNumber = document.querySelector('#phonenumber');
-		let email = document.querySelector('#email');
-		let address = document.querySelector('#address');
-		let basicplan = document.querySelector('#basicplan');
-		let plusplan = document.querySelector('#plusplan');
-		let proplan = document.querySelector('#proplan');
-
-		var details = {
-			name: name.value,
-			phoneNumber: phoneNumber.value,
-			email: email.value,
-			address: address.value,
-			plan: basicplan,
-		};
-		var formBody = [];
-		for (var property in details) {
-			var encodedKey = encodeURIComponent(property);
-			var encodedValue = encodeURIComponent(details[property]);
-			formBody.push(encodedKey + '=' + encodedValue);
-		}
-		formBody = formBody.join('&');
-		fetch(url, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-			},
-			body: formBody,
-		})
-			.then((res) => {
-				console.log(res);
-				res.json();
-				window.location.href = 'businesslist_v2.html';
-			})
-			.catch((error) => console.log(error));
-	} else {
-		console.log('error');
+		 $.ajax({
+            type: 'post',
+            url: 'https://www.bling-center.com/business/new/customer',
+            data: {name: $('#name')[0].value,
+                   phoneNumber: $('#phone')[0].value,
+                   email: $('#email')[0].value,
+                   address: $('#address')[0].value,
+                   plan: "Inbound " + selectedPlan
+              },
+            success: function (data) {
+                $('#loader').hide();
+                $('#signup-success').show();
+            },
+            error: function(err) {
+                $('#signup-error').show();
+                $('#signup-form').show();
+            }
+          });
 	}
+}
+
+function selectplan(id) {
+        $('#'+selectedPlan).removeClass("click");
+        $('#'+ selectedPlan).addClass('plan hover')
+        selectedPlan = id
+        $('#'+ id).addClass('click')
+        $('#'+ id).removeClass('plan hover')
+}
+
+function back() {
+    window.location.href='businesslist_v3.html'
 }

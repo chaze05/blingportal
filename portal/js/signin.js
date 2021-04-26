@@ -8,8 +8,10 @@ $(document).ready(function () {
 	$('#passwordmissing').hide();
 });
 
-function auth() {
-	console.log('Hello Malika');
+function login() {
+    $('#emailmissing').hide();
+    $('#passwordmissing').hide();
+
 	missflag = false;
 	if ($('#username')[0].value == '') {
 		missflag = true;
@@ -41,7 +43,7 @@ function auth() {
 			$('#loader').hide();
 			$('#unauth').hide();
 			// window.location = 'businesslist_v2.html';
-			window.location = 'businessdata_lists.html';
+			window.location = 'businesslist_v3.html';
 		},
 		error: function (err) {
 			console.log(err);

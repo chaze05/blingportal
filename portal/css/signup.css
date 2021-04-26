@@ -34,13 +34,13 @@
 	margin: -10px 0px 0px 25px;
 	font-weight: 600;
 	font-size: 25px;
-	color: rgba(168, 168, 168, 0.6);
+	color: rgba(168, 168, 168, 1);
 }
 
 .signup > p {
 	margin: 25px;
 	width: 55%;
-	color: rgba(120, 120, 120, 0.6);
+	color: rgba(120, 120, 120, 1);
 }
 .form-data {
 	width: 70%;
@@ -56,12 +56,14 @@
 input {
 	width: 95%;
 	height: 34px;
-	border: 1.5px solid rgba(83, 83, 83, 0.3);
+	border: 1.5px solid rgba(83, 83, 83, 0.6);
 	box-sizing: border-box;
 	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	background: #000;
 	color: #f9f9f9;
+	padding: 5px;
+	font-size: 10px;
 }
 
 input[type='date']::-webkit-calendar-picker-indicator {
@@ -70,12 +72,25 @@ input[type='date']::-webkit-calendar-picker-indicator {
 	margin-right: 2px;
 	opacity: 0.6;
 	filter: invert(0.9);
+	font-size: 14px;
+}
+
+input[type='text'] {
+	font-size: 14px
+}
+
+input[type='email'] {
+	font-size: 14px
+}
+
+input[type='number'] {
+	font-size: 14px
 }
 
 label {
 	font-size: 12px;
 	font-weight: 600;
-	color: rgba(168, 168, 168, 0.6);
+	color: rgba(168, 168, 168, 1);
 }
 
 input[type='number']::-webkit-inner-spin-button,
@@ -92,12 +107,13 @@ input[type='number']::-webkit-outer-spin-button {
 .plan1 > h2 {
 	font-size: 14.5px;
 	font-weight: 600;
+	color: rgba(168, 168, 168, 1)
 }
 
-.plan1 > .basicplan {
+.plan {
 	width: 115%;
 	height: 30px;
-	background: #ffe600;
+	background: #fffdd0;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
 	border-radius: 5px;
 	margin: 5px 0px 5px 0px;
@@ -108,28 +124,22 @@ input[type='number']::-webkit-outer-spin-button {
 	cursor: pointer;
 }
 
-.plan1 > .plusplan {
-	width: 115%;
-	height: 30px;
-	border-radius: 5px;
-	margin: 0px;
-	text-align: left;
-	padding: 5px 5px 5px 15px;
-	font-weight: 600;
-	border: none;
-	cursor: pointer;
+.click {
+    width: 115%;
+    	height: 30px;
+    	background: red;
+    	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    	border-radius: 5px;
+    	margin: 5px 0px 5px 0px;
+    	text-align: left;
+    	padding: 5px 5px 5px 15px;
+    	font-weight: 600;
+    	border: none;
+    	cursor: pointer;
 }
 
-.plan1 > .proplan {
-	width: 115%;
-	height: 30px;
-	border-radius: 5px;
-	margin: 5px 0px 0px 0px;
-	text-align: left;
-	padding: 5px 5px 5px 15px;
-	font-weight: 600;
-	border: none;
-	cursor: pointer;
+.plan:hover {
+    background: #ffe600;
 }
 
 .btn-signup > button {
@@ -267,43 +277,4 @@ input[type='number']::-webkit-outer-spin-button {
 	left: 80%;
 	top: 0%;
 	z-index: 10;
-}
-
-@media screen and (max-width: 800px) {
-	.plan {
-		width: 30%;
-		margin: 150px 0px 0px;
-	}
-	.btn-signup > button {
-		width: 40%;
-		margin: -80px 0px 0px;
-	}
-	.already-acc {
-		width: 50%;
-		margin: -60px 0px 0px -35px;
-	}
-}
-
-@media screen and (max-width: 500px) {
-	.signup {
-		width: 100%;
-	}
-	.signup-background {
-		display: none;
-	}
-	.plan {
-		display: inline-block;
-		width: 50%;
-		margin: 120px 0px 0px 20px;
-	}
-	.btn-signup > button {
-		margin: -30px 0px 0px 20px;
-	}
-	.already-acc {
-		width: 50%;
-		margin: -20px 0px 0px -25px;
-	}
-	.already-acc > p > button {
-		margin: -10px 0px 0px -4px;
-	}
 }

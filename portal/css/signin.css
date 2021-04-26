@@ -5,145 +5,121 @@
 }
 
 section .background {
+	position: fixed;
 	width: 100%;
 	height: 100vh;
-	background: #000;
+	background: rgba(255, 230, 0, 0.7);
 	display: flex;
 	overflow: hidden;
 }
 
 section .backshadow1 > img {
-	position: absolute;
-	left: 0.27%;
-	top: 48%;
-	width: 8%;
+	position: relative;
+	left: 0%;
+	margin-top: 300px;
 }
 .backshadow2 > img {
 	position: absolute;
-	left: 1%;
-	top: 30.81%;
-	width: 15%;
+	top: 30%;
+	left: 4%;
+	height: 70%;
 }
 
 .backshadow3 > img {
 	position: absolute;
-	left: 7%;
-	top: 25.81%;
-	width: 18%;
-	transform: rotate(10deg);
+	top: 13%;
+	left: 9%;
+	height: 87%;
+}
+.backshadow4 > img {
+	position: absolute;
+	top: 0%;
+	left: 20%;
+	height: 100%;
 }
 
 .form-box {
-	position: absolute;
-	width: 25%;
-	height: 60%;
-	left: 40%;
-	top: 20%;
-	background: #f9f9f9;
+	background: #000;
 	box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.1);
 	border-radius: 15px;
 }
 
 .form-box > img {
 	position: absolute;
-	width: 30%;
+	width: 25%;
 	left: 32%;
 	top: 5%;
 }
 .form-box > h2 {
 	position: absolute;
 	width: 25%;
-	left: 10%;
-	top: 20%;
+	left: 17%;
+	top: 23%;
 	font-weight: bold;
 	font-size: 18px;
+	color: #ffe600;
 }
 .form-box > p {
 	position: absolute;
 	width: 10%;
-	left: 10%;
-	top: 27%;
+	left: 17%;
+	top: 30%;
 	font-size: 12px;
-	color: #929292;
+	color: #ffe600;
 }
-.G-btn {
+
+.container {
 	position: absolute;
-	width: 82%;
-	height: 9%;
-	left: 10%;
-	top: 36%;
-	background: #f1694b;
+	width: 23%;
+	top: 15%;
+	right: 20%;
 	border-radius: 20px;
-	border: none;
+	font-size: 12px;
+	padding: 20px;
+	background: #000;
 	color: #fff;
-	text-align: center;
+	border: 1px solid #ababab;
 }
-.G-btn > span > img {
-	position: absolute;
-	left: 18%;
-}
-.hr-line > img {
-	position: absolute;
-	left: 42.5%;
-	top: 50%;
-}
-.hr-line > span {
-	position: absolute;
-	top: 48.5%;
-	left: 52%;
-	color: #e5e5e5;
-}
-.hr-line > .line-10 {
-	position: absolute;
-	left: 54%;
-	top: 50%;
-}
-.container > [type='text'] {
-	position: absolute;
-	width: 19%;
-	top: 53%;
-	left: 42.7%;
+
+input {
+    width: 70%;
 	border-radius: 5px;
 	font-size: 12px;
 	padding: 5px;
+	margin: 10px;
+	color: #fff;
+	background: #000;
 	border: 1px solid #ababab;
-}
-.container > [type='password'] {
-	position: absolute;
-	width: 19%;
-	top: 59%;
-	left: 42.7%;
-	border-radius: 5px;
-	font-size: 12px;
-	padding: 5px;
-	border: 1px solid #ababab;
-}
-.container > p {
-	position: absolute;
-	top: 66%;
-	left: 48%;
-	font-size: 13px;
 }
 
 .login-btn {
-	position: absolute;
-	width: 20%;
-	top: 70%;
-	left: 42.7%;
-	border-radius: 5px;
+	width: 50%;
+	border-radius: 10px;
 	font-size: 13px;
 	padding: 5px;
 	border: 1px solid #ababab;
 	background: #ffc203;
-	color: #fff;
+	color: #000;
+	cursor: pointer;
+	outline-style: none;
+	margin: 10px;
+	margin-top: 30px;
 }
 
 .sign-up {
 	position: absolute;
 	width: 20%;
-	top: 83%;
-	left: 45%;
+	top: 95%;
+	left: 80%;
 	border-radius: 5px;
 	font-size: 13px;
 	color: #827b7b;
+}
+
+.sign-up > p > button {
+	border: none;
+	cursor: pointer;
+	background: none;
+	outline-style: none;
+	margin-left: 5px;
 }
