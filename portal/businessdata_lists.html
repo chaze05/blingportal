@@ -6,37 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Bling Dasboard</title>
-    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/logo.png">
     <link rel="stylesheet" href="./css/bling.css" />
     <link href="./css/style.css" rel="stylesheet">
     <link href="./css/custombling.css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="./js/businesslist-new.js"></script>
-    
+
 </head>
 <body style="background-color: #10041c;">
-    
-
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
-
 <!--    Nav Header-->
-	<div class="nav-header" style="background-color: #10041c; width: 180px; height: 60px;">
+	<div class="nav-header" style="background-color: #000; width: 180px; height: 60px;">
 		<a href="index.html" class="brand-logo" style="padding-left: 0px; padding-right: 0px; justify-content: center">
 			<img src="./images/yellow_logo.png" alt="" style="max-width: 120px">
 		</a>
 	</div>
 
 <!--    dashboard header-->
-	<div class="header" style="height: 60px; margin-left: 180px; padding-left: 40px; background-color: #10041c">
+	<div class="header" style="height: 60px; margin-left: 180px; padding-left: 40px; background-color: #000">
 		<div style="margin-top: 20px">
 			<nav class="navbar navbar-expand">
-				<div class="justify-content-between" style="display: flex; display-direction: row; width: calc(100% - 250px)">
-					<div class="header-left">
-						<div class="dashboard_bar" style="font-weight: normal; font-size:22px; margin-top: -8px; margin-top:-12px">
+				<div class="justify-content-between" style="display: flex; display: row; width: calc(100% - 250px)">
+					<div class="header-left" style='background-color: #000;'>
+						<div class="dashboard_bar" style="font-weight: normal; font-size:22px; margin-top:-10px; ">
 							<font color="gray">Dashboard <i><small>for</small></i></font>   <font color="#36a4fd"> &nbsp;Wing</font>
 						</div>
 					</div>
@@ -45,7 +37,13 @@
                         <a href="index.html">
                             <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" style="color: yellow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                             <span class="ml-2" style="color: yellow">Logout </span>
+                            
                         </a>
+                        <div style='position:absolute; margin:-26px 0px 0px -90px; border:1px solid rgba(168, 168, 168, 0.87); padding: 5px;border-radius: 5px;'>
+                          <a href='signup.html'>
+                            <button style='color:#ffe600'>Sign up</button>
+                            </a>
+                        </div>
 					</div>
 				</div>
 			</nav>
@@ -54,16 +52,17 @@
 
 <!--    Page content-->
 
-	<div class="content-body" style="margin-right: 0rem; margin-left: 0px; margin-top:0px; padding-top:4rem; overflow: hidden; background-color: #10041c">
+	<div class="content-body" style="margin-right: 0rem; margin-left: 0px; margin-top:0px; padding-top:4rem; overflow: hidden; background-color: #000">
 
         <div class="container-fluid" style="padding-top: 0px">
 			<div class="row">
 
-                <!--        Business List-->
+<!--        Business List-->
 				<div class="col-lg-12" style="height: 87vh; width: 80vh; padding-left: 0px">
-					<div class="card"  id="businesslist" style="border-radius: 0px 0px 5px 5px; height: 100%; border: 1px solid black">
-						<div class="card-header" style="border-radius: 0px 0px 0px 0px; height: 20px; background-color: #f3f596">
-							<h4 class="card-title">Business List</h4>
+					<div class="card"  id="businesslist" style="border-radius: 0px 0px 5px 5px; height: 100%; border: 1px solid black;background-color: #000;">
+						<div class="card-header" style="border-radius: 0px 0px 0px 0px; height: 20px; background-color: #000;">
+							<h4 class="card-title" style='color:rgba(168, 168, 168, 0.87);margin-left: -30px;'>Business List</h4>
+              
 						</div>
                         <div id="blistload">
                             <div data-title=".dot-spin">
@@ -72,13 +71,22 @@
                                 </div>
                             </div>
                         </div>
-
-						<div class="card-body" style="height: 100%" id="blistcard">
-							<div class="table-responsive" style="overflow: scroll-y; max-height: calc(100% - 50px)">
-								<table class="table table-responsive-md">
-									<thead>
+                        <hr style='margin-top:-2px; border: 1px solid yellow; z-index: 10;'/>
+                  <div style='background-color: #000; margin-top: -20px;margin-bottom: 10px;'>
+                    <textarea rows="1" id="" placeholder="serach" style='background-color: #000;
+                    margin-top: 10px; color: yellow; padding-left: 5px;margin-bottom: -10px; width: 20%; border-radius: 5px;'></textarea>
+                    <span>
+                      <img src="./images/search.png" alt="">
+                    </span>
+                  </div>      
+                
+                                              
+						<div class="card-body" style="height: 95%; background-color: #000; font-weight: 500;padding: 10px;" id="blistcard">
+							<div class="table-responsive" style="overflow: scroll-y; max-height: calc(100% - 50px);">
+								<table class="table table-responsive-md" style='color: #fff; background-color:rgba(100, 100, 100, 0.5);padding:10px;'>
+									<thead style='background-color:#ffe600;'>
 									<tr>
-										<th style="width:80px;"><strong>#</strong></th>
+										<th><strong>#</strong></th>
 										<th><strong>BUSINESS NAME</strong></th>
 										<th><strong>START DATE</strong></th>
 										<th><strong>STATUS</strong></th>
@@ -92,7 +100,7 @@
                                     <tr>
                                         <td colspan="6" style="color:red;" id="berror"><center>Error Loading Data. Please refresh the page</center></td>
                                     </tr>
-                                    </tbody>
+                  </tbody>
 								</table>
 							</div>
 						</div>
@@ -100,7 +108,7 @@
 
 <!--                    View Profile-->
 
-                    <div id="profiledetails" style="display: flex; display-direction: row; width: 100%;height: 100%; ">
+                    <div id="profiledetails" style="display: flex; display: row; width: 100%;height: 100%; ">
                         <div id="bcard" style="width: 25%; height: 100%;background-color: black;">
                             <div id="loaderleft">
                                 <center><div data-title=".dot-spin">
@@ -113,7 +121,7 @@
                                     <div id="list-message" style="height: 100%; width: 100%">
                                         <div style="overflow: scroll; background-color: white; height: 92%" id="mlist">
                                         </div>
-                                        <div style="display: flex; display-direction: row;height: 8%">
+                                        <div style="display: flex; display: row;height: 8%">
                                             <input type="textarea" style="width: 90%;padding: 10px; color: black" placeholder="Send Message" id="newmessage">
                                             <button onclick="addMessage()"><img src="./images/send.png" style="max-width: 35px"/></button></input>
                                         </div>
@@ -142,7 +150,7 @@
                                                  class="tab-content"
                                                  role="tabpanel"
                                                  aria-labelledby="mcdaniel"
-                                                 aria-hidden="false" style="display: flex; display-direction: row">
+                                                 aria-hidden="false" style="display: flex; display: row">
                                                 <h2 id="price" style="color: black"></h2>
                                                 <div style="width: 30px"></div>
                                                 <table class="table" style="color:black;">
@@ -176,7 +184,7 @@
                                                  role="tabpanel"
                                                  aria-labelledby="wingpoc"
                                                  aria-hidden="true">
-                                                <div style="display: flex; display-direction: row">
+                                                <div style="display: flex; display: row">
                                                     <img src="./images/winglogo.jpeg" style="width: 60px; height: 60px"/>
                                                     <div style="width: 20px"></div>
                                                     <p id="manager"></p>
@@ -231,7 +239,7 @@
                                                  role="tabpanel"
                                                  aria-labelledby="serviceparameters"
                                                  aria-hidden="true">
-                                                <div style="display: flex; display-direction: row">
+                                                <div style="display: flex; display: row">
                                                     <div style="width: 30%">
                                                         Service Hours
                                                     </div>

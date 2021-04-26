@@ -1,0 +1,98 @@
+//  JS validation
+
+var selectedPlan = '';
+
+$(document).ready(function () {
+    var todaysDate = new Date();
+    var year = todaysDate.getFullYear();
+    var month = ("0" + (todaysDate.getMonth() + 1)).slice(-2);
+    var day = ("0" + todaysDate.getDate()).slice(-2);
+    var minDate = (year +"-"+ month +"-"+ day);
+    document.getElementById("startdate").min = minDate;
+    document.getElementById("startdate").value = minDate;
+//    $('#startdate').data("DateTimePicker").minDate(minDate)
+    $('#loader').hide();
+    $('#signup-success').hide();
+    $('#signup-error').hide();
+});
+
+function validate() {
+	const name = document.getElementById('name').value;
+	const phone = document.getElementById('phone').value;
+	const email = document.getElementById('email').value;
+	const address = document.getElementById('address').value;
+	const error_message = document.getElementById('error_message');
+
+	error_message.style.padding = '10px';
+
+	var text;
+	if (name.length < 2) {
+		text = 'Please Enter valid Name';
+		error_message.innerHTML = text;
+		return false;
+	}
+
+	if (email.indexOf('@') == -1 || email.length < 6) {
+		text = 'Please Enter valid Email';
+		error_message.innerHTML = text;
+		return false;
+	}
+	if (isNaN(phone) || phone.length != 10) {
+		text = 'Please Enter valid Phone Number';
+		error_message.innerHTML = text;
+		return false;
+	}
+
+	if (address.length <= 4) {
+		text = 'Please Enter Your Address';
+		error_message.innerHTML = text;
+		return false;
+	}
+
+	if (selectedPlan == '') {
+        text = 'Please Select a Plan';
+        error_message.innerHTML = text;
+        return false;
+    }
+	return true;
+}
+
+function signUp() {
+    $('#signup-error').hide();
+	const valid = validate();
+	if (valid) {
+	    $('#loader').show();
+	    $('#signup-form').hide();
+
+		 $.ajax({
+            type: 'post',
+            url: 'https://www.bling-center.com/business/new/customer',
+            data: {name: $('#name')[0].value,
+                   phoneNumber: $('#phone')[0].value,
+                   email: $('#email')[0].value,
+                   address: $('#address')[0].value,
+                   plan: "Inbound " + selectedPlan
+              },
+            success: function (data) {
+                $('#loader').hide();
+                $('#signup-success').show();
+            },
+            error: function(err) {
+                $('#signup-error').show();
+                $('#signup-form').show();
+            }
+          });
+	}
+}
+
+function selectplan(id) {
+        $('#'+selectedPlan).removeClass("click");
+        $('#'+ selectedPlan).addClass('plan hover')
+        selectedPlan = id
+        $('#'+ id).addClass('click')
+        $('#'+ id).removeClass('plan hover')
+}
+
+function back() {
+    window.location.href='businesslist_v3.html'
+}

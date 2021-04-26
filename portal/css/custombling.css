@@ -8,8 +8,7 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* black w/ opacity */
+  background-color: rgba(0,0,0,0.5); /* black w/ opacity */
 }
 
 /* Modal Content */
@@ -55,10 +54,10 @@
 
 .hiddenRow {
     padding: 0 4px !important;
-    background-color: #fffef3;
+    background-color: rgba(100, 100, 100, 0.5);
     font-size: 13px;
 }
-.accordian-body span{
+.accordian-body {
 	color:#a2a2a2 !important;
 }
 
@@ -70,12 +69,26 @@ span.nav-text {
         font-size: 14px;
     }
 
-    .table td {
-  padding: 2px;
+.table th {
+  border: 0px;
+  padding: 12px;
+  font-family: Poppins;
+  color: black;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
 }
 
-.table th {
-  padding: 5px;
+.table td {
+  border: 0px;
+  padding: 8px;
+  font-family: Poppins;
+  color: rgba(168,168,168,0.87);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
 }
 
 .dot {
@@ -92,9 +105,17 @@ span.nav-text {
   padding: 3px;
 }
 
-button {
+.button-class {
     background-color: inherit;
     border: 0px;
+    outline: none;
+    color: grey;
+}
+
+.button-class:hover {
+  background-color: yellow; /* Green */
+  border-radius: 20%;
+  color: black;
 }
 
 .dot-spin {
@@ -207,4 +228,46 @@ button {
     color: white;
   }
 
+.modal-header {
+  padding: 1rem 1.875rem; }
+  .modal-header .close {
+    padding: 0.875rem 1.815rem;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    float: none;
+    top: 0;
+    font-size: 30px;
+    font-weight: 100; }
+
+.modal-body {
+  padding: 1.875rem; }
+
+.modal-footer {
+  padding: 1rem 1.875rem; }
+
+.modal-content {
+  border-radius: 1.75rem; }
+
+.modal-backdrop {
+  z-index: 10 !important; }
+
+.modal-content {
+  border-radius: 1.75rem; }
+
+.text-center {
+  text-align: center !important; }
+
+.mb-4{
+  margin-bottom: 1.5rem !important; }
+
+.form-group {
+  margin-bottom: 1rem; }
+
+.form-inline .form-control {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle; }
+    .form-inline .form-control-plaintext {
+      display: inline-block; }
 

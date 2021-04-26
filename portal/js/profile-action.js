@@ -1,234 +1,118 @@
-UI_URL= "http://localhost:8080/business/"
-//UI_URL = 'https://www.bling-center.com/business/';
+//UI_URL= "http://localhost:8080/business/"
+var id;
+var msg_count = 0;
+UI_URL = 'https://www.bling-center.com/business/';
 
 $('.accordion-toggle').click(function () {
 	$('.hiddenRow').hide();
 	$(this).next('tr').find('.hiddenRow').show();
 });
 
-function buttonclick(id) {
-	$('#businesslist').hide();
-	$('#profiledetails').show();
-	$('#loaderleft').show();
-	$('#loadermid').show();
-	$('#loaderright').show();
-	$('#backoutlist').hide();
-	$('#searcholist').hide();
-	$('#loaderout').hide();
-	$('#outerror').hide();
-
-	$.ajax({
-		type: 'get',
-		url: UI_URL + 'profile/' + id,
-		success: function (data) {
-			console.log(data);
-			$('#loaderleft').hide();
-			displayprofile(data.data);
-			$('#detailscard').show();
-		},
-	});
-
-	$.ajax({
-		type: 'get',
-		url: UI_URL + 'message/' + id,
-		success: function (data) {
-			console.log(data);
-			$('#loadermid').hide();
-			displaymessage(data.data);
-			$('#cardmessage').show();
-		},
-	});
-
-	$.ajax({
-		type: 'get',
-		url: UI_URL + 'script/' + id,
-		success: function (data) {
-			console.log(data);
-			$('#loaderright').hide();
-			displaydetails(data);
-			$('#cardmanager').show();
-		},
-	});
-
-	$.ajax({
-		type: 'get',
-		url: UI_URL + 'inbound/' + id,
-		success: function (data) {
-			console.log(data);
-			inbounddata(data);
-		},
-	});
-
-	$.ajax({
-		type: 'get',
-		url: UI_URL + 'outbound/' + id,
-		success: function (data) {
-			outbounddata(data);
-		},
-	});
-}
-
 function backbusiness() {
-	// $('#businesslist').show();
-	// $('#profiledetails').hide();
-	// $('#loader').show();
-	// $('#detailscard').hide();
-	// $('#cardmanager').hide();
-	// $('#cardmessage').hide();
-	// $('#updateScript').hide();
-	// cleanup();
+    window.location.href = 'businesslist_v3.html'
 }
 
 $(document).ready(function () {
-    $('#blistload').hide();
-    $('#loadermid').hide();
+    $('#loadermid').show();
     $('#loaderright').hide();
-	// $('#profiledetails').hide();
-	// $('#detailscard').hide();
-	// $('#loaderleft').hide();
-	// $('#loadermid').hide();
-	// $('#cardmessage').hide();
-	// $('#loaderright').hide();
-	// $('#cardmanager').hide();
-	// $('#updateScript').hide();
-	// $('#blistcard').hide();
-	// $('[data-toggle="tooltip"]').tooltip();
-	//$('#bcard').hide();
-	// $.ajax({
-	// 	type: 'get',
-	// 	// url: UI_URL + 'list/wing',
-	// 	success: function (data) {
-	// 		$('#blistload').hide();
-	// 		$('#blistcard').show();
-	// 		$('#berror').hide();
-	// 		displaylist(data.data);
-	// 	},
-	// 	error: function (err) {
-	// 		$('#blistload').hide();
-	// 		$('#blistcard').show();
-	// 	},
-	// });
+    $('#loadercall').show();
+    $('#incall').hide();
+    $('#loaderparam').hide();
+    $('#phoneerror').hide();
+    $('#clist').hide();
+    $('#overageerror').hide();
+    $('#serviceerror').hide();
+    id = window.location.href.split('id=').pop()
+
+    $('#profile-detail').hide();
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'profile/' + id,
+        success: function (data) {
+            console.log(data);
+            $('#loader').hide();
+            $('#profile-detail').show();
+            displayprofile(data.data);
+        },
+        error: function(err) {
+            $('#loader').hide()
+        }
+    });
+
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'message/' + id,
+        success: function (data) {
+            console.log(data);
+            $('#loadermid').hide();
+            displaymessage(data.data);
+            $('#cardmessage').show();
+        },
+        error: function(err) {
+            $('#loadermid').hide()
+            displaymessage([]);
+        }
+    });
+
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'callrecords/' + id,
+        success: function (data) {
+            console.log(data);
+            inbounddata(data);
+        },
+        error: function(err) {
+            inbounddata([]);
+        }
+    });
+
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'call/count/portal/' + id,
+        success: function (data) {
+            console.log(data.data);
+            detail = data.data
+            document.getElementById('callcount').innerHTML = detail.calls_accepted + "/" + detail.call_plan
+        },
+        error: function(err) {
+            document.getElementById('callcount').innerHTML = "Unavailable"
+        }
+    });
+
+   var span = document.getElementsByClassName("close")[0];
+   var modal = document.getElementById("mymodel");
+    // When the user clicks on <span> (x), close the modal
+   span.onclick = function() {
+     modal.style.display = "none";
+     $('#vdiv').hide()
+     $('#gdiv').hide()
+   }
+
+   // When the user clicks anywhere outside of the modal, close it
+   window.onclick = function(event) {
+     if (event.target == modal) {
+       modal.style.display = "none";
+       $('#vdiv').hide()
+       $('#gdiv').hide()
+     }
+   }
 });
-
-function editmanagerdetails() {
-	var modal = document.getElementById('mymodel');
-	var btn1 = document.getElementById('editmanager');
-	var btn2 = document.getElementById('greetbutton');
-	var btn3 = document.getElementById('voicebutton');
-
-	$('#vdiv').hide();
-	$('#mdiv').hide();
-	$('#gdiv').hide();
-
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName('close')[0];
-
-	// When the user clicks the button, open the modal
-	btn1.onclick = function () {
-		modal.style.display = 'block';
-		$('#mdiv').show();
-		detail = document
-			.getElementById('managerhiddendetail')
-			.innerHTML.split(';');
-		document.getElementById('modalheader').innerHTML = 'Manager Details';
-		document.getElementById('formmanagername').value = detail[0];
-		document.getElementById('formmanagernum').value = detail[1];
-		document.getElementById('formmanageremail').value = detail[2];
-	};
-
-	btn2.onclick = function () {
-		modal.style.display = 'block';
-		$('#gdiv').show();
-		document.getElementById('modalheader').innerHTML = 'Greeting';
-		document.getElementById('greetmsg').value = document.getElementById(
-			'greeting'
-		).innerHTML;
-	};
-
-	btn3.onclick = function () {
-		modal.style.display = 'block';
-		$('#vdiv').show();
-		document.getElementById('modalheader').innerHTML = 'Voicemail';
-		document.getElementById('voicemsg').value = document.getElementById(
-			'voicemail'
-		).innerHTML;
-	};
-
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function () {
-		modal.style.display = 'none';
-		$('#vdiv').hide();
-		$('#mdiv').hide();
-		$('#gdiv').hide();
-	};
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function (event) {
-		if (event.target == modal) {
-			modal.style.display = 'none';
-			$('#vdiv').hide();
-			$('#mdiv').hide();
-			$('#gdiv').hide();
-		}
-	};
-}
-
-function updateManagerDetails() {
-	document.getElementById('updating').innerHTML = 'Updating';
-	$.ajax({
-		type: 'post',
-		url: UI_URL + 'managerupdate',
-		data: {
-			name: $('#formmanagername')[0].value,
-			phone: $('#formmanagernum')[0].value,
-			email: $('#formmanageremail')[0].value,
-			id: $('#businessid')[0].innerHTML,
-		},
-		success: function (data) {
-			document.getElementById('updating').innerHTML = '';
-			document.getElementById('mymodel').style.display = 'none';
-			$('#vdiv').hide();
-			$('#mdiv').hide();
-			$('#gdiv').hide();
-			mdetail = $('#formmanagername')[0].value;
-			if (mdetail == null) {
-				mdetail = '';
-			}
-			document.getElementById('mname').innerHTML = mdetail;
-			html_val =
-				'<em>Email</em> : <b>' + $('#formmanageremail')[0].value + '</b><br>';
-			html_val +=
-				'<em>Phone Number</em> : <b>' + $('#formmanagernum')[0].value + '</b>';
-			$('#manager').attr('data-original-title', html_val);
-
-			document.getElementById('managerhiddendetail').innerHTML =
-				$('#formmanagername')[0].value +
-				';' +
-				$('#formmanagernum')[0].value +
-				';' +
-				$('#formmanageremail')[0].value;
-		},
-		error: function (err) {
-			document.getElementById('updating').innerHTML =
-				'Error Updating. Please try later';
-		},
-	});
-}
 
 function updateGreeting() {
 	document.getElementById('updating').innerHTML = 'Updating';
+	document.getElementById('updating').innerHTML = '';
 	$.ajax({
 		type: 'post',
 		url: UI_URL + 'greeting',
 		data: {
 			greeting: $('#greetmsg')[0].value,
-			id: $('#businessid')[0].innerHTML,
+			id: id,
 		},
+		headers: { 'Accept': 'application/json' },
 		success: function (data) {
 			document.getElementById('updating').innerHTML = '';
 			document.getElementById('mymodel').style.display = 'none';
 			$('#vdiv').hide();
-			$('#mdiv').hide();
 			$('#gdiv').hide();
 			document.getElementById('greeting').innerHTML = $('#greetmsg')[0].value;
 		},
@@ -241,15 +125,16 @@ function updateGreeting() {
 
 function updateVoicemail() {
 	document.getElementById('updating').innerHTML = 'Updating';
+	document.getElementById('updating').innerHTML = '';
 	$.ajax({
 		type: 'post',
-		url: UI_URL + 'managerupdate',
-		data: { name: $('#voicemsg')[0].value, id: $('#businessid')[0].innerHTML },
+		url: UI_URL + 'voicemail',
+		data: { voicemail: $('#voicemsg')[0].value, id:id },
+		headers: { 'Accept': 'application/json' },
 		success: function (data) {
 			document.getElementById('updating').innerHTML = '';
 			document.getElementById('mymodel').style.display = 'none';
 			$('#vdiv').hide();
-			$('#mdiv').hide();
 			$('#gdiv').hide();
 			document.getElementById('voicemail').innerHTML = $('#voicemsg')[0].value;
 		},
@@ -262,30 +147,23 @@ function updateVoicemail() {
 
 function addMessage() {
 	if ($('#newmessage')[0].value != '') {
+	    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+	    dt = new Date();
 		$.ajax({
 			type: 'post',
 			url: UI_URL + 'message',
 			data: {
 				content: $('#newmessage')[0].value,
-				id: $('#businessid')[0].innerHTML,
+				id: id,
 				from: 'wing',
 			},
+			headers: { 'Accept': 'application/json' },
 			success: function (data) {
-				para = document.createElement('div');
-				mhtml =
-					"<div class='senderWing'>" +
-					$('#newmessage')[0].value +
-					'<br><small>' +
-					dt.toLocaleDateString(undefined, {
-						year: 'numeric',
-						month: 'short',
-						day: 'numeric',
-					}) +
-					' ' +
-					dt.toLocaleTimeString('en-US') +
-					'</small></div><br>';
-				para.innerHTML = mhtml;
-				document.getElementById('mlist').appendChild(para);
+				if (msg_count == 0) {
+				    document.getElementById('mlist').innerHTML = ''
+				    msg_count = 1;
+				}
+				addWingMessage($('#newmessage')[0].value, dt.toLocaleTimeString('en-US', options))
 				$('#newmessage')[0].value = '';
 			},
 			error: function (err) {
@@ -295,131 +173,41 @@ function addMessage() {
 	}
 }
 
-function displaylist(data) {
-	count = 1;
-	for (i in data) {
-		console.log(data[i]);
-		detail = data[i];
-		row = document.createElement('tr');
-		row.colspan = '7';
-		row.style = 'height: 40px';
-
-		startdate = new Date(detail.businessStartDate);
-		status = detail.status;
-		statusclass = 'badge-success';
-		if (status == 'Ended') {
-			statusclass = 'badge-danger';
-		} else if (status == 'Pending') {
-			statusclass = 'badge-secondary';
-		}
-
-		innerhtml = '<td><strong>' + count + '</strong></td>';
-		innerhtml += '<td>' + detail.businessName + '</td>';
-		innerhtml +=
-			'<td>' +
-			startdate.toLocaleDateString(undefined, {
-				year: 'numeric',
-				month: 'short',
-				day: 'numeric',
-			}) +
-			'</td>';
-		innerhtml +=
-			"<td><span class='badge light " +
-			statusclass +
-			"'>" +
-			detail.status +
-			'</span></td>';
-		innerhtml += '<td>' + detail.managerName + '</td>';
-		innerhtml +=
-			"<td><button id='" +
-			detail.businessId +
-			"' onclick='buttonclick(this.id)' style='border: 0px;'>";
-		innerhtml +=
-			"<img src='./images/profile2.jpg' style='max-width: 40px;' /></button></td>";
-		expandid = 'demo' + i;
-		innerhtml +=
-			"<td><h2 data-toggle='collapse' data-target='#" +
-			expandid +
-			"' class='accordion-toggle collapsible' style='padding:5px'>";
-		innerhtml += '<center>+</center></h2></td>';
-
-		row.innerHTML = innerhtml;
-
-		rowexpand = document.createElement('tr');
-		rowexpand.class = 'p';
-		int12 = "<td colspan='7' class='hiddenRow'>";
-		int12 += "<div class='accordian-body collapse p-3' id='" + expandid + "'>";
-		int12 += "<div class='card' style='width: 40%'>";
-		int12 +=
-			"<div class='card-body light badge-secondary' style='border-radius: 12px'>";
-		int12 += '<strong>' + detail.businessName + '</strong>';
-		int12 += "<div style='border: 1px solid black'></div><br>";
-		int12 +=
-			"<div style='margin-top: 3px'>Bling phone Number: " +
-			detail.blingPhoneNumber +
-			'</div>';
-		int12 += '<div>Plan Price: $' + detail.pricePlan + '</div';
-		int12 += '</div>';
-		int12 += '</div></div></td>';
-
-		rowexpand.innerHTML = int12;
-
-		page = document.getElementById('blist');
-		page.appendChild(row);
-		page.appendChild(rowexpand);
-		count += 1;
-	}
-}
-
 function displayprofile(data) {
 	detail = data.business;
 
 	document.getElementById('businessname').innerHTML = detail.businessname;
 	mdetail = detail.managerName;
-	if (mdetail == null) {
-		mdetail = '';
-	}
-	document.getElementById('manager').innerHTML =
-		'<div style="display: flex; display-direction: row"><div id="mname">' +
-		mdetail +
-		"</div><button id='editmanager'><img src='./images/pen.png' style='max-width: 20px;'/></button><div>";
-	html_val = '<em>Email</em> : <b>' + detail.managerEmail + '</b><br>';
-	html_val +=
-		'<em>Phone Number</em> : <b>' + detail.managerPhonenumber + '</b>';
-	$('#manager').attr('data-original-title', html_val);
 
 	document.getElementById('price').innerHTML = '$' + detail.price;
 	document.getElementById('outbound').innerHTML = detail.outboundcall;
 	document.getElementById('inbound').innerHTML = detail.inboundcall;
-	document.getElementById('email').innerHTML = detail.email;
-	document.getElementById('message').innerHTML = detail.message;
-	document.getElementById('survey').innerHTML = detail.survey;
+	$('#togBtnoverage')[0].checked = detail.overagecalls
+	$('#togBtnservice')[0].checked = false
+	if (detail.status.toLowerCase() == 'ongoing') {
+	    $('#togBtnservice')[0].checked = true
+	}
+	if (detail.email == true) {
+	    document.getElementById('email').innerHTML = '<img src="./images/tick.png" />';
+    }
 
-	phtml =
-		"<img src='./images/blingnumber.jpg' style='max-width: 40px; margin-bottom: 10px'/>" +
-		detail.blingphonenumber;
+    if (detail.message == true) {
+	    document.getElementById('message').innerHTML = '<img src="./images/tick.png" />';
+	}
+
+	if (detail.survey == true) {
+	    document.getElementById('survey').innerHTML = '<img src="./images/tick.png" />';
+	}
+
 	// document.getElementById("blingnum").innerHTML = phtml
 	document.getElementById('greeting').innerHTML = detail.welcomemessage;
 	document.getElementById('voicemail').innerHTML = detail.closedbizmessage;
-
-	para = document.createElement('p');
-	para.innerHTML =
-		detail.managerName +
-		';' +
-		detail.managerPhonenumber +
-		';' +
-		detail.managerEmail;
-	para.style.display = 'none';
-	para.id = 'managerhiddendetail';
-	document.body.appendChild(para);
-
-	para = document.createElement('p');
-	para.innerHTML = detail.businessId;
-	para.style.display = 'none';
-	para.id = 'businessid';
-	document.body.appendChild(para);
-
-	editmanagerdetails();
+	document.getElementById('managername').innerHTML = mdetail;
+	if (detail.callcountin > 0) {
+	    document.getElementById('callType').innerHTML = 'Inbound calls'
+	} else {
+	    document.getElementById('callType').innerHTML = 'Outbound calls'
+	}
 }
 
 function cleanup() {
@@ -429,67 +217,26 @@ function cleanup() {
 
 function displaymessage(data) {
 	mhtml = '';
+	if (data.length == 0) {
+	    html = '<center><div style="background-color: black; margin: 10px; padding:10px; border-radius: 10px; font-size: 16px">'
+	    html += 'Please Drop a message to reach out to us.</div></center>';
+	    document.getElementById('mlist').innerHTML = html;
+	    msg_count = 0;
+        return;
+	}
+	const options = { year: 'numeric', month: 'short', day: 'numeric' };
+	msg_count = 1;
 	for (i in data) {
 		msg = data[i];
 
 		dt = new Date(msg.createdDate);
 
 		if (msg.messageFrom == 'wing') {
-			mhtml +=
-				"<div class='senderWing'>" +
-				msg.messagecontent +
-				'<br><small>' +
-				dt.toLocaleDateString(undefined, {
-					year: 'numeric',
-					month: 'short',
-					day: 'numeric',
-				}) +
-				' ' +
-				dt.toLocaleTimeString('en-US') +
-				'</small></div><br>';
+		    addWingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
 		} else {
-			mhtml +=
-				"<div class='senderBling'>" +
-				msg.messagecontent +
-				'<br><small>' +
-				dt.toLocaleDateString(undefined, {
-					year: 'numeric',
-					month: 'short',
-					day: 'numeric',
-				}) +
-				' ' +
-				dt.toLocaleTimeString('en-US') +
-				'</small></div><br>';
+		    addBlingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
 		}
 	}
-
-	document.getElementById('mlist').innerHTML = mhtml;
-}
-
-function displaydetails(data) {
-	document.getElementById('script').innerHTML = data.script;
-}
-
-function edit() {
-	$('#editscript').hide();
-	$('#updateScript').show();
-	document.getElementById('script').style.backgroundColor = 'white';
-	document.getElementById('script').readOnly = false;
-}
-
-function savescript() {
-	$.ajax({
-		type: 'post',
-		url: UI_URL + 'script',
-		data: { content: $('#script')[0].value, id: $('#businessid')[0].innerHTML },
-		success: function (data) {
-			cancel();
-		},
-		error: function (err) {
-			document.getElementById('updating').innerHTML =
-				'Error Updating. Please try later';
-		},
-	});
 }
 
 function cancel() {
@@ -501,103 +248,227 @@ function cancel() {
 }
 
 function inbounddata(data) {
+    $('#loadercall').hide()
+    $('#incall').show()
 	inhtml = '';
 	count = 1;
+	document.getElementById('incall').innerHTML = ''
+	if (data.length == 0) {
+	    html = '<center><div style="background-color: black; margin: 10px; padding:10px; border-radius: 10px; font-size: 16px">'
+        	    html += 'No Data Found</div></center>';
+	    document.getElementById('incall').innerHTML = html;
+	    return;
+	}
+	width = '5%'
 	for (i in data) {
+	    div = document.createElement('div')
+	    div.style = "margin-bottom: 20px; background-color: #00001D; width: 93%; padding: 6px; border-radius: 5px"
 		call = data[i];
 		dt = new Date(call.createdDate);
-		inhtml +=
-			'<tr><td>' +
-			count +
-			'</td><td>' +
-			call.customerPhoneNumber +
-			"</td><td> <audio controls style='width: 150px;'>";
-		inhtml +=
-			"<source src='" +
-			call.recordUrl +
-			"'></audio> </td><td>" +
-			dt.toLocaleDateString(undefined, {
-				year: 'numeric',
-				month: 'short',
-				day: 'numeric',
-			}) +
-			'</td></tr>';
-		count += 1;
+		note = ''
+		badge =''
+		url = ''
+		if (call.callstatus == 'Needs CallBack') {
+            sign = '<img src="./images/incoming.png" width="'+width+'" height="'+width+'"/>'
+            url = call.recordUrl
+            note = call.callNote
+            badge = '<span class="badge-success">Needs CallBack</span>'
+        }else if (call.callstatus == 'CallBack') {
+             sign = '<img src="./images/outbound.png" width="'+width+'" height="5%" />'
+             url = call.recordUrl
+         } else if (call.callstatus == 'Spam Call/ Sale') {
+           sign = '<img src="./images/incoming.png" width="'+width+'" height="5%"/>'
+           url = call.recordUrl
+           note = call.callNote
+           badge = '<span class="badge-secondary">Spam/ Sales Call</span>'
+       } else if (call.callstatus == 'Voicemail') {
+             sign = '<img src="./images/incoming.png" width="'+width+'" height="5%"/>'
+             url = call.recordUrl
+             badge = '<span class="badge-danger">Voicemail</span>'
+         } else if (call.callstatus == 'Incoming Message') {
+           sign = '<img src="./images/msg_in.png" width="10%" height="5%"/>'
+           note = call.callNote
+       }else if (call.callstatus == 'Outgoing Message') {
+            sign = '<img src="./images/msg_in.png" width="10%" height="5%"/>'
+            note = call.callNote
+        } else if (call.callstatus == 'Outbound Call') {
+              sign = '<img src="./images/outbound.png" width="5%" height="5%" />'
+              url = call.recordUrl
+          } else {
+            sign = '<img src="./images/incoming.png" width="'+width+'" height="'+width+'"/>'
+            url = call.recordUrl
+            if (call.callNote != null) {
+            note = call.callNote
+            }
+         }
+
+         flag = 0;
+
+        inhtml = '<div style="display: flex;">'
+		inhtml += sign
+
+		inhtml += '<p style="padding-left: 20px">' + call.customerPhoneNumber + '</p>'
+		if (url != '') {
+		    inhtml += "<audio controls style='width: 250px;padding-left: 20px; outline: none'><source src='" + url + "'></audio>"
+		} else if (note != '' && note != null) {
+		    inhtml += '<p style="padding-left: 20px; font-size: 14px">' + note + "</p>"
+		    flag = 1
+		}
+		inhtml += '</div>'
+
+        if (flag == 0 && note != '' && note != null) {
+            inhtml += '<span style="margin: 20px; font-size: 14px">' + note + "</span>"
+        }
+        inhtml += '<span style="padding: 5px; color: white">' + dt.toLocaleDateString(undefined, {
+                                                                                  				year: 'numeric',
+                                                                                  				month: 'short',
+                                                                                  				day: 'numeric',
+                                                                                  			}) + "</span>"
+
+        inhtml += badge
+
+		div.innerHTML = inhtml;
+		document.getElementById('incall').appendChild(div);
 	}
-
-	document.getElementById('incall').innerHTML = inhtml;
 }
 
-function outbounddata(data) {
-	console.log(data);
-	outhtml = '';
-	count = 1;
-	for (i in data) {
-		call = data[i];
-		dt = new Date(call.createdDate);
-		outhtml +=
-			'<tr><td>' +
-			count +
-			'</td><td>' +
-			call.customerPhoneNumber +
-			"</td><td> <audio controls style='width: 200px;'>";
-		outhtml +=
-			"<source src='" +
-			call.recordUrl +
-			"'></audio> </td><td>" +
-			dt.toLocaleDateString(undefined, {
-				year: 'numeric',
-				month: 'short',
-				day: 'numeric',
-			}) +
-			'</td></tr>';
-		count += 1;
-	}
-	document.getElementById('outcall').innerHTML = outhtml;
+
+
+
+function addBlingMessage(message, date) {
+    div = document.createElement('div')
+    div.style = "margin: 5px"
+
+    html = '<div class="senderBling">'+message+'</div>'
+    html += '<div style="float: left; width: 100%; height: 2px"></div>'
+    html += '<div style="float: left">'
+    html += '<small style="color: white; margin: 5px;">'+date+'</small>'
+    html += '</div>'
+    html += '<div style="float: left; width: 100%; height: 20px"></div>'
+
+    div.innerHTML = html;
+    document.getElementById('mlist').appendChild(div)
 }
 
-function searchPanel() {
-	$('#callolist').hide();
-	$('#searcholist').show();
-	$('#searchoutnum').show();
+function addWingMessage(message, date) {
+    div = document.createElement('div')
+    div.style = "margin: 5px"
+
+    html = '<div class="senderWing">'+message+'</div>'
+    html += '<div style="float: right; width: 100%; height: 2px"></div>'
+    html += '<div style="float: right">'
+    html += '<small style="color: white; margin: 5px;">'+date+'</small>'
+    html += '</div>'
+    html += '<div style="float: right; width: 100%; height: 20px"></div>'
+
+    div.innerHTML = html;
+    document.getElementById('mlist').appendChild(div)
 }
 
-function searchoutbound() {
-	$('#searchoutnum').hide();
-	$('#loaderout').show();
-	$('#outerror').hide();
-	$.ajax({
-		type: 'get',
-		url: UI_URL + 'outbound/search/' + $('#searchoutnum')[0].value,
-		success: function (data) {
-			$('#loaderout').hide();
-			$('#backoutlist').show();
-			cancelout();
-			outbounddata(data);
-		},
-		error: function (err) {
-			$('#loaderout').hide();
-			$('#searchoutnum').show();
-			$('#outerror').show();
-		},
-	});
+function getrecords() {
+    var number = $('#searchnum')[0].value
+    $('#loadercall').show()
+    $('#incall').hide()
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'search/' + number + '_' + id,
+        success: function (data) {
+            console.log(data);
+            $('#clist').show();
+            if (data.length == 0) {
+                $('#phoneerror').show()
+            }
+            inbounddata(data);
+        },
+        error: function(err) {
+            $('#loadercall').hide()
+            $('#phoneerror').show()
+            inbounddata([]);
+        }
+    });
 }
 
-function cancelout() {
-	$('#searcholist').hide();
-	$('#callolist').show();
-	$('#outerror').hide();
+function allRecords() {
+    $('#loadercall').show()
+    $('#clist').hide();
+    $('#incall').hide()
+    $('#phoneerror').hide()
+    $.ajax({
+        type: 'get',
+        url: UI_URL + 'callrecords/' + id,
+        success: function (data) {
+            console.log(data);
+            inbounddata(data);
+        },
+        error: function(err) {
+            $('#loadercall').hide()
+            inbounddata([]);
+        }
+    });
 }
 
-function backoutbound() {
-	$('#loaderout').show();
-	$('#backoutlist').hide();
-	$.ajax({
-		type: 'get',
-		url: UI_URL + 'outbound/' + $('#businessid')[0].innerHTML,
-		success: function (data) {
-			$('#loaderout').hide();
-			outbounddata(data);
-		},
-	});
+function updateservice() {
+    $('#serviceerror').hide();
+    var status = $('#togBtnservice')[0].checked
+    $.ajax({
+        type: 'post',
+        url: UI_URL + 'disableService/portal',
+        data: {
+            businessId: id,
+            turnon: status,
+        },
+        success: function (data) {
+            console.log(status)
+        },
+        error: function (err) {
+            $('#serviceerror').show();
+            if (status == false) {
+                $('#togBtnservice')[0].checked = true
+            } else {
+                $('#togBtnservice')[0].checked = false
+            }
+        },
+    });
+}
+
+function updateoverage() {
+    $('#overageerror').hide();
+    var status = $('#togBtnoverage')[0].checked
+    $.ajax({
+    		type: 'post',
+    		url: UI_URL + 'overageCalls/portal',
+    		data: {
+    			businessId: id,
+    			turnon: status,
+    		},
+    		success: function (data) {
+    		    console.log(status)
+    		},
+    		error: function (err) {
+    		    $('#overageerror').show();
+    			if (status == false) {
+    			    $('#togBtnoverage')[0].checked = true
+    			} else {
+    			    $('#togBtnoverage')[0].checked = false
+    			}
+    		},
+    	});
+}
+
+function updategreeting() {
+    var modal = document.getElementById("mymodel");
+    $('#vdiv').hide()
+    modal.style.display = "block";
+            $('#gdiv').show()
+            document.getElementById('modalheader').innerHTML = "Greeting"
+            document.getElementById('greetmsg').value = document.getElementById("greeting").innerHTML
+}
+
+function updatevoicemail() {
+    var modal = document.getElementById("mymodel");
+    $('#gdiv').hide()
+    modal.style.display = "block";
+              $('#vdiv').show()
+              document.getElementById('modalheader').innerHTML = "Voicemail"
+              document.getElementById('voicemsg').value = document.getElementById("voicemail").innerHTML
 }

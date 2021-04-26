@@ -92,7 +92,7 @@ $(document).ready(function() {
     $('#updateScript').hide()
     $('#blistcard').hide()
 
-$('[data-toggle="tooltip"]').tooltip();
+//$('[data-toggle="tooltip"]').tooltip();
 //$('#bcard').hide();
 
     $.ajax({
