@@ -63,14 +63,22 @@ function displaylist(data) {
 
         rowexpand = document.createElement("tr")
         rowexpand.class = "p"
+        bpno = detail.blingPhoneNumber
+        bprice = detail.pricePlan
+        if (bpno == null) {
+            bpno = "Not Assigned till now"
+        }
+        if (bprice == null) {
+            bprice = "N/A"
+        }
         int12 = "<td colspan='7' class='hiddenRow'>"
         int12 += "<div class='accordian-body collapse p-3' id='"+expandid+"'>"
         int12 += "<div style='width: 40%;color: black'>"
         int12 += "<div style='border-radius: 12px;padding: 15px; background-color: #ffe600;'>"
         int12 += "<strong>"+detail.businessName+"</strong>"
         int12 += "<div style='border: 1px solid black'></div><br>"
-        int12 += "<div style='margin-top: 3px'>Bling phone Number: "+ detail.blingPhoneNumber+"</div>"
-        int12 += "<div>Plan Price: $"+detail.pricePlan+"</div>"
+        int12 += "<div style='margin-top: 3px'>Bling phone Number: "+ bpno+"</div>"
+        int12 += "<div>Plan Price: $"+bprice+"</div>"
         int12 += "</div>"
         int12 += "</div></div></td>"
 

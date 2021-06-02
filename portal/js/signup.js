@@ -1,4 +1,6 @@
 //  JS validation
+//UI_URL= "http://localhost:8080/business/"
+UI_URL = 'https://www.bling-center.com/business/';
 
 var selectedPlan = '';
 
@@ -20,7 +22,6 @@ function validate() {
 	const name = document.getElementById('name').value;
 	const phone = document.getElementById('phone').value;
 	const email = document.getElementById('email').value;
-	const address = document.getElementById('address').value;
 	const error_message = document.getElementById('error_message');
 
 	error_message.style.padding = '10px';
@@ -43,12 +44,6 @@ function validate() {
 		return false;
 	}
 
-	if (address.length <= 4) {
-		text = 'Please Enter Your Address';
-		error_message.innerHTML = text;
-		return false;
-	}
-
 	if (selectedPlan == '') {
         text = 'Please Select a Plan';
         error_message.innerHTML = text;
@@ -66,11 +61,10 @@ function signUp() {
 
 		 $.ajax({
             type: 'post',
-            url: 'https://www.bling-center.com/business/new/customer',
+            url: UI_URL + 'new/customer',
             data: {name: $('#name')[0].value,
                    phoneNumber: $('#phone')[0].value,
                    email: $('#email')[0].value,
-                   address: $('#address')[0].value,
                    plan: "Inbound " + selectedPlan
               },
             success: function (data) {

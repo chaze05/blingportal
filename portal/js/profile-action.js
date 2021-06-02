@@ -2,6 +2,7 @@
 var id;
 var msg_count = 0;
 UI_URL = 'https://www.bling-center.com/business/';
+var manageremail;
 
 $('.accordion-toggle').click(function () {
 	$('.hiddenRow').hide();
@@ -22,6 +23,7 @@ $(document).ready(function () {
     $('#clist').hide();
     $('#overageerror').hide();
     $('#serviceerror').hide();
+    $('#transfererror').hide();
     id = window.location.href.split('id=').pop()
 
     $('#profile-detail').hide();
@@ -84,23 +86,28 @@ $(document).ready(function () {
     // When the user clicks on <span> (x), close the modal
    span.onclick = function() {
      modal.style.display = "none";
+     document.getElementById('updating').innerHTML = '';
      $('#vdiv').hide()
      $('#gdiv').hide()
+     $('#bndiv').hide()
+     $('#mgdiv').hide()
    }
 
    // When the user clicks anywhere outside of the modal, close it
    window.onclick = function(event) {
      if (event.target == modal) {
        modal.style.display = "none";
+       document.getElementById('updating').innerHTML = '';
        $('#vdiv').hide()
        $('#gdiv').hide()
+       $('#bndiv').hide()
+       $('#mgdiv').hide()
      }
    }
 });
 
 function updateGreeting() {
 	document.getElementById('updating').innerHTML = 'Updating';
-	document.getElementById('updating').innerHTML = '';
 	$.ajax({
 		type: 'post',
 		url: UI_URL + 'greeting',
@@ -112,8 +119,7 @@ function updateGreeting() {
 		success: function (data) {
 			document.getElementById('updating').innerHTML = '';
 			document.getElementById('mymodel').style.display = 'none';
-			$('#vdiv').hide();
-			$('#gdiv').hide();
+			hideAll();
 			document.getElementById('greeting').innerHTML = $('#greetmsg')[0].value;
 		},
 		error: function (err) {
@@ -125,7 +131,6 @@ function updateGreeting() {
 
 function updateVoicemail() {
 	document.getElementById('updating').innerHTML = 'Updating';
-	document.getElementById('updating').innerHTML = '';
 	$.ajax({
 		type: 'post',
 		url: UI_URL + 'voicemail',
@@ -134,8 +139,7 @@ function updateVoicemail() {
 		success: function (data) {
 			document.getElementById('updating').innerHTML = '';
 			document.getElementById('mymodel').style.display = 'none';
-			$('#vdiv').hide();
-			$('#gdiv').hide();
+			hideAll();
 			document.getElementById('voicemail').innerHTML = $('#voicemsg')[0].value;
 		},
 		error: function (err) {
@@ -178,12 +182,14 @@ function displayprofile(data) {
 
 	document.getElementById('businessname').innerHTML = detail.businessname;
 	mdetail = detail.managerName;
+	manageremail = detail.managerEmail;
 
 	document.getElementById('price').innerHTML = '$' + detail.price;
 	document.getElementById('outbound').innerHTML = detail.outboundcall;
 	document.getElementById('inbound').innerHTML = detail.inboundcall;
 	$('#togBtnoverage')[0].checked = detail.overagecalls
 	$('#togBtnservice')[0].checked = false
+	$('#togBtntransfer')[0].checked = data.callForwardingEnabled;
 	if (detail.status.toLowerCase() == 'ongoing') {
 	    $('#togBtnservice')[0].checked = true
 	}
@@ -208,6 +214,7 @@ function displayprofile(data) {
 	} else {
 	    document.getElementById('callType').innerHTML = 'Outbound calls'
 	}
+	document.getElementById('callscriptlink').innerHTML = data.businessScript.script;
 }
 
 function cleanup() {
@@ -455,9 +462,41 @@ function updateoverage() {
     	});
 }
 
+function updateTransfer() {
+    $('#transfererror').hide();
+    var status = $('#togBtntransfer')[0].checked
+    $.ajax({
+            type: 'post',
+            url: UI_URL + 'disableTransfer/portal',
+            data: {
+                businessId: id,
+                permanentOn: status,
+            },
+            success: function (data) {
+                console.log(status)
+            },
+            error: function (err) {
+                $('#transfererror').show();
+                if (status == false) {
+                    $('#togBtntransfer')[0].checked = true
+                } else {
+                    $('#togBtntransfer')[0].checked = false
+                }
+            },
+        });
+}
+
+function hideAll() {
+    $('#bndiv').hide()
+    $('#mgdiv').hide()
+    $('#vdiv').hide()
+    $('#gdiv').hide()
+    document.getElementById('updating').innerHTML = '';
+}
+
 function updategreeting() {
     var modal = document.getElementById("mymodel");
-    $('#vdiv').hide()
+    hideAll()
     modal.style.display = "block";
             $('#gdiv').show()
             document.getElementById('modalheader').innerHTML = "Greeting"
@@ -466,9 +505,67 @@ function updategreeting() {
 
 function updatevoicemail() {
     var modal = document.getElementById("mymodel");
-    $('#gdiv').hide()
+    hideAll()
     modal.style.display = "block";
               $('#vdiv').show()
               document.getElementById('modalheader').innerHTML = "Voicemail"
               document.getElementById('voicemsg').value = document.getElementById("voicemail").innerHTML
+}
+
+function updatebname() {
+    var modal = document.getElementById("mymodel");
+    hideAll()
+    modal.style.display = "block";
+            $('#bndiv').show()
+            document.getElementById('modalheader').innerHTML = "Business Name"
+            document.getElementById('bnamechange').value = document.getElementById("businessname").innerHTML
+}
+
+function updatemanager() {
+    var modal = document.getElementById("mymodel");
+    hideAll()
+    modal.style.display = "block";
+              $('#mgdiv').show()
+              document.getElementById('modalheader').innerHTML = "Manager Details"
+              document.getElementById('mname').innerHTML = document.getElementById("managername").innerHTML
+              document.getElementById('memail').innerHTML = manageremail
+}
+
+function updateManager() {
+	document.getElementById('updating').innerHTML = 'Updating';
+	$.ajax({
+		type: 'post',
+		url: UI_URL + 'managerupdate',
+		data: { name: $('#mname')[0].value, email: $('#memail')[0].value, id:id },
+		headers: { 'Accept': 'application/json' },
+		success: function (data) {
+			document.getElementById('updating').innerHTML = '';
+			document.getElementById('mymodel').style.display = 'none';
+			hideAll();
+			document.getElementById('managername').innerHTML = $('#mname')[0].value;
+		},
+		error: function (err) {
+			document.getElementById('updating').innerHTML =
+				'Error Updating. Please try later';
+		},
+	});
+}
+
+function updateBname() {
+	document.getElementById('updating').innerHTML = 'Updating';
+	$.ajax({
+		type: 'post',
+		url: UI_URL + 'businessname',
+		data: { name: $('#bnamechange')[0].value, businessId:id },
+		success: function (data) {
+			document.getElementById('updating').innerHTML = '';
+			document.getElementById('mymodel').style.display = 'none';
+			hideAll();
+			document.getElementById('businessname').innerHTML = $('#bnamechange')[0].value;
+		},
+		error: function (err) {
+			document.getElementById('updating').innerHTML =
+				'Error Updating. Please try later';
+		},
+	});
 }
