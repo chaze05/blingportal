@@ -211,10 +211,13 @@ function displayprofile(data) {
 	document.getElementById('managername').innerHTML = mdetail;
 	if (detail.callcountin > 0) {
 	    document.getElementById('callType').innerHTML = 'Inbound calls'
+	    document.getElementById('callscriptlink').innerHTML = "No script for Inbound calls."
 	} else {
 	    document.getElementById('callType').innerHTML = 'Outbound calls'
 	}
-	document.getElementById('callscriptlink').innerHTML = "<a target=\"_blank\" rel=\"noopener noreferrer\" href='" + data.businessScript.script + "' style=\"color: white\">Click Here</a>";
+	if (data.businessScript.script != null) {
+	    document.getElementById('callscriptlink').innerHTML = "<a target=\"_blank\" rel=\"noopener noreferrer\" href='" + data.businessScript.script + "' style=\"color: white\">Click Here</a>";
+	}
 }
 
 function cleanup() {
