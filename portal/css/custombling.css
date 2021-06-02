@@ -11,6 +11,10 @@
   background-color: rgba(0,0,0,0.5); /* black w/ opacity */
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
