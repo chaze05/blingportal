@@ -429,7 +429,7 @@ function inbounddata(data) {
 
 function outbounddata(data) {
 
-        console.log("Mallika outbound call")
+//        console.log("Mallika outbound call")
         console.log(data)
         outhtml = ""
         for (i in data) {
