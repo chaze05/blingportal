@@ -280,7 +280,7 @@ function inbounddata(data) {
             url = call.recordUrl
             note = call.callNote
             badge = '<span class="badge-success">Needs CallBack</span>'
-        }else if (call.callstatus == 'CallBack') {
+        }else if (call.callstatus == 'CallBack' || call.callstatus == 'outgoing_call') {
              sign = '<img src="./images/outbound.png" width="'+width+'" height="5%" />'
              url = call.recordUrl
          } else if (call.callstatus == 'Spam Call/ Sale') {
@@ -292,10 +292,10 @@ function inbounddata(data) {
              sign = '<img src="./images/incoming.png" width="'+width+'" height="5%"/>'
              url = call.recordUrl
              badge = '<span class="badge-danger">Voicemail</span>'
-         } else if (call.callstatus == 'Incoming Message') {
+         } else if (call.callstatus == 'Incoming Message' || call.callstatus == 'incoming_message') {
            sign = '<img src="./images/msg_in.png" width="10%" height="5%"/>'
            note = call.callNote
-       }else if (call.callstatus == 'Outgoing Message') {
+       }else if (call.callstatus == 'Outgoing Message' || call.callstatus == 'outgoing_message') {
             sign = '<img src="./images/msg_in.png" width="10%" height="5%"/>'
             note = call.callNote
         } else if (call.callstatus == 'Outbound Call') {
