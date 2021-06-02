@@ -39,7 +39,7 @@ function login() {
 		},
 		success: function (data) {
 			console.log(data);
-			console.log('Hello Mallika');
+//			console.log('Hello Mallika');
 			$('#loader').hide();
 			$('#unauth').hide();
 			// window.location = 'businesslist_v2.html';

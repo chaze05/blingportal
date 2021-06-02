@@ -2,7 +2,7 @@
 UI_URL = "https://www.bling-center.com/business/"
 
 $('.accordion-toggle').click(function(){
-    console.log("Malika")
+//    console.log("Malika")
 	$('.hiddenRow').hide();
 	$(this).next('tr').find('.hiddenRow').show();
 });
@@ -30,7 +30,7 @@ $(document).ready(function() {
 function displaylist(data) {
     count = 1
     for(i in data) {
-        console.log(data[i])
+//        console.log(data[i])
         detail = data[i]
         row = document.createElement("tr")
         row.style = "background-color: rgba(100, 100, 100, 0.3); "

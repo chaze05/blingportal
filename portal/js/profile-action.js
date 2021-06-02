@@ -31,7 +31,7 @@ $(document).ready(function () {
         type: 'get',
         url: UI_URL + 'profile/' + id,
         success: function (data) {
-            console.log(data);
+//            console.log(data);
             $('#loader').hide();
             $('#profile-detail').show();
             displayprofile(data.data);
@@ -45,7 +45,7 @@ $(document).ready(function () {
         type: 'get',
         url: UI_URL + 'message/' + id,
         success: function (data) {
-            console.log(data);
+//            console.log(data);
             $('#loadermid').hide();
             displaymessage(data.data);
             $('#cardmessage').show();
@@ -60,7 +60,7 @@ $(document).ready(function () {
         type: 'get',
         url: UI_URL + 'callrecords/' + id,
         success: function (data) {
-            console.log(data);
+//            console.log(data);
             inbounddata(data);
         },
         error: function(err) {
@@ -72,7 +72,7 @@ $(document).ready(function () {
         type: 'get',
         url: UI_URL + 'call/count/portal/' + id,
         success: function (data) {
-            console.log(data.data);
+//            console.log(data.data);
             detail = data.data
             document.getElementById('callcount').innerHTML = detail.calls_accepted + "/" + detail.call_plan
         },
@@ -214,7 +214,7 @@ function displayprofile(data) {
 	} else {
 	    document.getElementById('callType').innerHTML = 'Outbound calls'
 	}
-	document.getElementById('callscriptlink').innerHTML = data.businessScript.script;
+	document.getElementById('callscriptlink').innerHTML = "<a target=\"_blank\" rel=\"noopener noreferrer\" href='" + data.businessScript.script + "' style=\"color: white\">Click Here</a>";
 }
 
 function cleanup() {
@@ -380,7 +380,7 @@ function getrecords() {
         type: 'get',
         url: UI_URL + 'search/' + number + '_' + id,
         success: function (data) {
-            console.log(data);
+//            console.log(data);
             $('#clist').show();
             if (data.length == 0) {
                 $('#phoneerror').show()
@@ -404,7 +404,7 @@ function allRecords() {
         type: 'get',
         url: UI_URL + 'callrecords/' + id,
         success: function (data) {
-            console.log(data);
+//            console.log(data);
             inbounddata(data);
         },
         error: function(err) {
