@@ -4,12 +4,14 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>BusinesslistAction</title>
+        <title>Bling Dashboard</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="./images/bling_sign.png">
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="./css/profile-action.css" />
         <link href="./css/custombling.css" rel="stylesheet">
         <link href="./css/glass-effect.css" rel="stylesheet">
+        <link href="./css/tooltip.css" rel="stylesheet">
         <script type='text/javascript' src='./js/profile-action.js'></script>
 	</head>
 	<body class="gradient" style="width: 100%; height: 100%; overflow: hidden">
@@ -40,40 +42,46 @@
                         <p style="color:yellow; font-family:Roboto; padding-left:15px;margin-bottom:10px;">My plan</p>
                         <div style="padding: 12px;margin-left: 10px; background-color: #A4A4A4; width: 80%; font-family: Roboto; border-radius: 20px;">
                             <div style="display: flex; font-size: 12px">
-                                <div style="width: 90%">
+                                <div style="width: 90%; display: flex">
                                     <strong>Status</strong>
+                                    <div class="help-tip" style="margin-left: 5px">
+                                        <p>Below Parameters define the plan for this client.</p>
+                                    </div>
                                 </div>
-                                <div id="price">$599</div>
+                                <div id="price">$</div>
                             </div>
                             <hr style='border:2px solid yellow;border-radius: 5px; margin: 5px;'/>
                             <table style="width: 100%; font-size: 12px">
                                 <tr>
                                     <td style="width: 90%">Outbound Calls</td>
-                                    <td id="outbound" style="color: yellow">$</td>
+                                    <td id="outbound" style="color: yellow">0</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 90%">Inbound Calls</td>
-                                    <td id="inbound" style="color: yellow">$</td>
+                                    <td id="inbound" style="color: yellow">0</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 90%">Emails</td>
-                                    <td id="email" style="color: yellow">$</td>
+                                    <td id="email" style="color: yellow">X</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 90%">Messages</td>
-                                    <td id="message" style="color: yellow">$</td>
+                                    <td id="message" style="color: yellow">X</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 90%">Surveys</td>
-                                    <td id="survey" style="color: yellow">$</td>
+                                    <td id="survey" style="color: yellow">X</td>
                                 </tr>
                             </table>
                         </div><br>
 
                         <div style="padding: 12px;margin-left: 10px; background-color: #A4A4A4; width: 80%; font-family: Roboto; border-radius: 20px;">
                             <div style="display: flex; font-size: 12px">
-                                <div style="width: 90%">
+                                <div style="width: 90%; display: flex">
                                     <strong>Greeting</strong>
+                                    <div class="help-tip" style="margin-left: 5px">
+                                        <p>The automated message played on dialing bling number.</p>
+                                    </div>
                                 </div>
                                 <div><button style='border:none;cursor:pointer; background: Transparent; outline:none' onclick="updategreeting()">
                                     <img src='./images/84380.png' style='width: 16px;'/></button></div>
@@ -82,8 +90,11 @@
                             </div><br>
 
                             <div style="display: flex; font-size: 12px">
-                                <div style="width: 90%">
+                                <div style="width: 90%; display: flex">
                                     <strong>Voicemail</strong>
+                                    <div class="help-tip" style="margin-left: 5px">
+                                        <p>The automated message played on dialing bling number during after work hours.</p>
+                                    </div>
                                 </div>
                                 <div><button style='border:none;cursor:pointer; background: Transparent; outline:none' onclick="updatevoicemail()">
                                     <img src='./images/84380.png' style='width: 16px;'/></button></div>
@@ -115,9 +126,16 @@
                         <div style="font-size: 12px; color: #FFD700; font-family: Roboto; width: 45%;">
                             <div style="display: flex">
                                 <span style="font-size: 20px;" id="businessname">Bling Client</span>
+                                <div style="margin-left: 5px"><button style='border:none;cursor:pointer; background: Transparent; outline:none' onclick="updatebname()">
+                                    <img src='./images/pencil_edit.png' style='width: 16px;'/></button></div>
                                 <span style='height: 8px; width: 2%; background-color:#FFD700; border-radius: 50%;
                                 margin-left: 20px;margin-right: 20px;margin-top:7px;'></span>
-                                <span style="font-size: 14px; margin-top: 3px; " id="callType"> Inbound calls</span>
+                                <span style="font-size: 14px; margin-top: 3px;" id="callType">
+                                    Inbound calls
+                                </span>
+                                <div class="help-tip" style="margin-left: 5px">
+                                    <p>Type of calls enabled for the client.</p>
+                                </div>
                             </div>
                         <!--        Message div-->
                             <div id="rightcard" style="width: 100%; height:90%;">
@@ -143,8 +161,10 @@
                         </div>
 
                         <div style="width: 55%; margin-left: 30px">
-                            <div style="font-size: 20px; font-weight: bold; color: #FFD700; font-family: Roboto;">
-                                <span id="managername">Meghan</span>
+                            <div style="font-size: 20px; font-weight: bold; color: #FFD700; font-family: Roboto; display: flex">
+                                <span id="managername"></span>
+                                <div style="margin-left: 5px"><button style='border:none;cursor:pointer; background: Transparent; outline:none' onclick="updatemanager()">
+                                    <img src='./images/pencil_edit.png' style='width: 16px;'/></button></div>
                             </div>
 
                             <!--        inbound/outbound calls-->
@@ -167,6 +187,12 @@
                                                   <a href="#list-parameters" class="nav-link light badge-info" data-toggle="tab" style='text-decoration: none;'>
                                                       <i class="flaticon-381-incoming-call"></i>
                                                       Service Parameters</a>
+                                              </li>
+
+                                              <li class="nav-item pill-size" style="padding-right: 5px">
+                                                  <a href="#list-script" class="nav-link light badge-info" data-toggle="tab" style='text-decoration: none;'>
+                                                      <i class="flaticon-381-incoming-call"></i>
+                                                      Script</a>
                                               </li>
                                           </ul>
                                           <div class="tab-content" id="nav-tabContent" style="height: 75%;">
@@ -235,6 +261,28 @@
                                                           </div>
                                                           <p style="color: red" id="overageerror">Failed to Change the status. Please Try again Later.</p>
                                                       </div>
+                                                      <div style="background-color: black; margin: 10px; padding:10px 40px 10px 40px; border-radius: 10px; font-size: 16px;">
+                                                          <div style="display: flex; justify-content: space-between" >
+                                                              <p style="color: yellow">Call Forwarding Enabled</p>
+                                                              <label class="switch">
+                                                                  <input type="checkbox" id="togBtntransfer" onchange="updateTransfer()">
+                                                                  <div class="slider round">
+                                                                      <!--ADDED HTML -->
+                                                                      <span class="on">ON</span>
+                                                                      <span class="off">OFF</span>
+                                                                      <!--END-->
+                                                                  </div>
+                                                              </label>
+                                                          </div>
+                                                          <p style="color: red" id="transfererror">Failed to Change the call forward status. Please Try again Later.</p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="tab-pane fade" id="list-script" style="height: 100%; width: 100%">
+                                                  <div style="margin-top: 50px">
+                                                      <div style="background-color: black; margin: 10px; padding:10px 40px 10px 40px; border-radius: 10px; font-size: 16px; display: flex; justify-content: space-between">
+                                                          <p id="callscriptlink" style="color: yellow">Not Available at moment. Work is in Progress.</p>
+                                                      </div>
                                                   </div>
                                               </div>
                                           </div>
@@ -269,6 +317,27 @@
                             </div>
                             <div class="text-center">
                                 <button style="outline: none; border: none; background-color: black; color: white;width: 100%; border-radius: 10px; padding: 15px" id="updategreet" onclick="updateGreeting()">Update</button>
+                            </div>
+                        </div>
+
+                        <div id="bndiv">
+                            <div class="form-group">
+                                <textarea style="border-radius: 10px; border: 1px solid #f3f3f3; width: 100%;" rows="2" id="bnamechange"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button style="outline: none; border: none; background-color: black; color: white;width: 100%; border-radius: 10px; padding: 15px" id="updatebname" onclick="updateBname()">Update</button>
+                            </div>
+                        </div>
+
+                        <div id="mgdiv">
+                            <div class="form-group">
+                                <label>Manager Name:</label>
+                                <textarea style="border-radius: 10px; border: 1px solid #f3f3f3; width: 60%; padding: 8px" rows="1" id="mname"></textarea><br><br>
+                                <label>Manager Email:</label>
+                                <textarea style="border-radius: 10px; border: 1px solid #f3f3f3; width: 60%; padding: 8px" rows="1" id="memail"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button style="outline: none; border: none; background-color: black; color: white;width: 100%; border-radius: 10px; padding: 15px" id="updatemdetails" onclick="updateManager()">Update</button>
                             </div>
                         </div>
                     </div>
