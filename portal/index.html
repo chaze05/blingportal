@@ -31,6 +31,8 @@
         <center><img src="./images/yellow_logo.png" width="40%" alt="" /></center>
         <h2 style="color: #ffe600; margin: 10px">Log in</h2>
         <p style="color: #ffe600; margin: 10px">Welcome</p>
+        <p id="unauth" style="color: red; margin-left: 10px">Incorrect Email or Password.</p>
+        <p id="failedupdate" style="color: red; margin-left: 10px">Failed to update. Please try again.</p>
         <div id="loader">
             <div data-title=".dot-spin">
                 <div class="stage">
@@ -38,12 +40,25 @@
                 </div>
             </div>
         </div>
-        <input id="username" type="text" placeholder="Email" />
-        <p id="emailmissing" style="color: red; margin-left: 10px">Please Enter your username.</p>
-        <input id="password" type="password" placeholder="Password" />
-        <p id="passwordmissing" style="color: red; margin-left: 10px">Please Enter the password.</p>
 
-        <center><button class="login-btn" onclick="login()">Log in</button></center>
+        <div id="signuprepeat">
+            <input id="username" type="text" placeholder="Email" />
+            <p id="emailmissing" style="color: red; margin-left: 10px">Please Enter your username.</p>
+            <input id="password" type="password" placeholder="Password" />
+            <p id="passwordmissing" style="color: red; margin-left: 10px">Please Enter the password.</p>
+            <center><button class="login-btn" onclick="login()">Log in</button></center>
+        </div>
+
+        <div id="signupfirst">
+            <label id="emailval">Email: </label><br><br>
+            <label>New Password *</label>
+            <input id="newpass" type="password" placeholder="New Password" /><br>
+            <label>Confirm Password *</label>
+            <input id="confirmpass" type="password" placeholder="Confirm Password" />
+            <p id="passwordmatchnot" style="color: red; margin-left: 10px">Passwords do not Match. Please Enter again</p>
+            <center><button class="login-btn" onclick="updatepassword()">Update Credential</button></center>
+        </div>
+
     </div>
 
 <!--    <div class="sign-up">-->

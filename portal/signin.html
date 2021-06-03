@@ -29,7 +29,7 @@
 		<p>Welcome</p>
 	</div>
 
-	<form>
+	<form id="signinrepeat">
 		<div class="container">
 			<input type="text" placeholder="Email" required />
 			<input type="password" placeholder="Password" required />
@@ -37,6 +37,19 @@
 			<button class="login-btn">Log in</button>
 		</div>
 	</form>
+
+	<form id="signinfirsttime">
+		<div class="container">
+			<label>Email: </label>
+			<label>Password*</label>
+			<input type="password" placeholder="Password" id="pass" required />
+			<label>Confirm Password*</label>
+			<input type="password" placeholder="Password" id="confirm" required />
+
+			<button class="login-btn">Update Credential</button>
+		</div>
+	</form>
+
 	<div class="sign-up">
 		<p>
 			Dont have an account?<button>
