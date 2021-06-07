@@ -159,7 +159,7 @@ function addMessage() {
 			data: {
 				content: $('#newmessage')[0].value,
 				id: id,
-				from: 'wing',
+				from: 'wingToBling',
 			},
 			headers: { 'Accept': 'application/json' },
 			success: function (data) {
