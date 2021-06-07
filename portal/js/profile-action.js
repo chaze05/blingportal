@@ -241,9 +241,9 @@ function displaymessage(data) {
 
 		dt = new Date(msg.createdDate);
 
-		if (msg.messageFrom == 'wing') {
+		if (msg.messageFrom == 'wingToBling') {
 		    addWingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
-		} else {
+		} else if (msg.messageFrom == 'blingToWing') {
 		    addBlingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
 		}
 	}
