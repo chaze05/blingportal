@@ -159,7 +159,7 @@ function addMessage() {
 			data: {
 				content: $('#newmessage')[0].value,
 				id: id,
-				from: 'wing',
+				from: 'wingToBling',
 			},
 			headers: { 'Accept': 'application/json' },
 			success: function (data) {
@@ -241,9 +241,9 @@ function displaymessage(data) {
 
 		dt = new Date(msg.createdDate);
 
-		if (msg.messageFrom == 'wing') {
+		if (msg.messageFrom == 'wingToBling') {
 		    addWingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
-		} else {
+		} else if (msg.messageFrom == 'blingToWing') {
 		    addBlingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
 		}
 	}
