@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bling Dashboard</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/bling_sign.png">
+<!--    <link rel="icon" type="image/png" sizes="16x16" href="./images/bling_sign.png">-->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/wing_logo.png">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     <link rel="stylesheet" href="./css/signin.css" />
     <link href="./css/custombling.css" rel="stylesheet">
@@ -28,7 +29,8 @@
     </div>
 
     <div class="container">
-        <center><img src="./images/yellow_logo.png" width="40%" alt="" /></center>
+<!--        <center><img src="./images/yellow_logo.png" width="40%" alt="" /></center>-->
+        <center><img src="./images/wing_logo.png" width="30%" alt="" /></center>
         <h2 style="color: #ffe600; margin: 10px">Log in</h2>
         <p style="color: #ffe600; margin: 10px">Welcome</p>
         <p id="unauth" style="color: red; margin-left: 10px">Incorrect Email or Password.</p>
@@ -46,7 +48,7 @@
             <p id="emailmissing" style="color: red; margin-left: 10px">Please Enter your username.</p>
             <input id="password" type="password" placeholder="Password" />
             <p id="passwordmissing" style="color: red; margin-left: 10px">Please Enter the password.</p>
-            <center><button class="login-btn" onclick="login()">Log in</button></center>
+            <center><button class="login-btn" onclick="login()" id="login">Log in</button></center>
         </div>
 
         <div id="signupfirst">
@@ -56,7 +58,7 @@
             <label>Confirm Password *</label>
             <input id="confirmpass" type="password" placeholder="Confirm Password" />
             <p id="passwordmatchnot" style="color: red; margin-left: 10px">Passwords do not Match. Please Enter again</p>
-            <center><button class="login-btn" onclick="updatepassword()">Update Credential</button></center>
+            <center><button class="login-btn" onclick="updatepassword()" id="updatecred">Update Credential</button></center>
         </div>
 
     </div>

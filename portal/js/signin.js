@@ -33,6 +33,8 @@ function login() {
 	$('#loader').show();
 	$('#passwordmissing').hide();
 	$('#emailmissing').hide();
+	document.cookie = "username_bling="+ $('#username')[0].value
+	document.cookie = "expires="+ new Date(new Date().getTime() + 60*12*60000);
 	$.ajax({
 		type: 'post',
 		url: UI_URL + 'business/login',
@@ -97,3 +99,18 @@ function updatepassword() {
 		},
 	});
 }
+
+
+document.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    if ($('#signuprepeat').is(":visible")) {
+        document.getElementById("login").click();
+    } else if ($('#signupfirst').is(":visible")) {
+          document.getElementById("updatecred").click();
+      }
+  }
+});

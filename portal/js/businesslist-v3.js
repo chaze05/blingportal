@@ -12,8 +12,23 @@ function buttonclick(id) {
 }
 
 $(document).ready(function() {
+    var cookies = document.cookie.split(";")
+    for(i in cookies) {
+        cookie = cookies[i]
+        if (cookie.indexOf("expires=") > 0) {
+            var time = cookie.split("=")[1]
+            if (new Date() > new Date(time)) {
+                console.log("cookie expired")
+                document.getElementById("logout").click()
+            } else {
+                getListOfBusiness();
+            }
+        }
+    }
+})
 
-    $.ajax({
+function getListOfBusiness() {
+ $.ajax({
         type: 'get',
         url: UI_URL + 'list/wing',
         success: function (data) {
@@ -25,7 +40,7 @@ $(document).ready(function() {
             $('#blistcard').show()
         }
       });
-})
+}
 
 function displaylist(data) {
     count = 1
