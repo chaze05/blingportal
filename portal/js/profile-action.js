@@ -260,9 +260,9 @@ function displaymessage(data) {
 
 		dt = new Date(msg.createdDate);
 
-		if (msg.messageFrom == 'wingToBling') {
+		if (msg.messageFrom == 'wingToBling' || msg.messageFrom == 'wingCustomerToBling') {
 		    addWingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
-		} else if (msg.messageFrom == 'blingToWing') {
+		} else if (msg.messageFrom == 'blingToWing' || msg.messageFrom == 'blingToWingCustomer') {
 		    addBlingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
 		}
 	}
