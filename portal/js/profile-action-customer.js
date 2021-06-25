@@ -27,26 +27,7 @@ $(document).ready(function () {
     id = window.location.href.split('id=').pop()
 
     $('#profile-detail').hide();
-    $(document).ready(function() {
-        var cookies = document.cookie.split(";")
-        for(i in cookies) {
-                cookie = cookies[i]
-                if (cookie.indexOf("expires=") > 0) {
-                    var time = cookie.split("=")[1]
-                    if (new Date() > new Date(time)) {
-                        console.log("cookie expired")
-                        document.getElementById("logout").click()
-                    } else {
-                        afterCookieCheck();
-                    }
-                }
-            }
-    })
-
-});
-
-function afterCookieCheck() {
-$.ajax({
+    $.ajax({
         type: 'get',
         url: UI_URL + 'profile/' + id,
         success: function (data) {
@@ -123,7 +104,7 @@ $.ajax({
        $('#mgdiv').hide()
      }
    }
-}
+});
 
 function updateGreeting() {
 	document.getElementById('updating').innerHTML = 'Updating';
