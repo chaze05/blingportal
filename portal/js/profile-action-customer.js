@@ -9,10 +9,6 @@ $('.accordion-toggle').click(function () {
 	$(this).next('tr').find('.hiddenRow').show();
 });
 
-function backbusiness() {
-    window.location.href = 'businesslist_v3.html'
-}
-
 $(document).ready(function () {
     $('#loadermid').show();
     $('#loaderright').hide();
@@ -180,7 +176,7 @@ function addMessage() {
 function displayprofile(data) {
 	detail = data.business;
 
-	document.getElementById('businessname').innerHTML = detail.businessname;
+//	document.getElementById('businessname').innerHTML = detail.businessname;
 	mdetail = detail.managerName;
 	manageremail = detail.managerEmail;
 
@@ -241,11 +237,11 @@ function displaymessage(data) {
 
 		dt = new Date(msg.createdDate);
 
-		if (msg.messageFrom == 'wingToBling') {
-		    addWingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
-		} else if (msg.messageFrom == 'blingToWing') {
-		    addBlingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
-		}
+		if (msg.messageFrom == 'wingToBling' || msg.messageFrom == 'wingCustomerToBling') {
+        		    addWingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
+        		} else if (msg.messageFrom == 'blingToWing' || msg.messageFrom == 'blingToWingCustomer') {
+        		    addBlingMessage(msg.messagecontent, dt.toLocaleTimeString('en-US', options))
+        		}
 	}
 }
 
