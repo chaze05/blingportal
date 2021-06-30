@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Bling Dashboard</title>
+		<link rel="icon" type="image/png" sizes="16x16" href="./images/bling_sign.png">
+		<link rel="stylesheet" href="./css/customer-signup.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+		<script
+			type="text/javascript"
+			src="https://code.jquery.com/jquery-1.9.1.min.js"
+		></script>
+		<script src="./js/customer-signup.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link href="./css/custombling.css" rel="stylesheet">
+		<link href="./css/tooltip.css" rel="stylesheet">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="./css/stripe.css">
+		<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+		<script src="https://js.stripe.com/v3/"></script>
+		<title>Signup</title>
+		<style>
+			.help-tip{
+				text-align: center;
+				background-color: #f00664;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				font-size: 14px;
+				color: white;
+			}
+
+			.help-tip p{    /* The tooltip */
+				position: relative;
+				display: none;
+				text-align: left;
+				background-color: #f00664;
+				padding: 8px;
+				width: 200px;
+				border-radius: 3px;
+				box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+				color: white;
+				font-size: 12px;
+				z-index: 100;
+			}
+		</style>
+	</head>
+	<body style="background-color: #fffdd0; overflow:hidden; height: 100vh">
+		<div class="row" style="height: 100%">
+			<div class="col-12 col-md-6" style="padding: 0px; overflow: scroll; height: 100%">
+				<img src="./images/bling_logo.png" style="max-width: 20%; margin-left: 30px; margin-top: 20px" />
+				<div class="signup" style="padding: 20px">
+
+					<h1>Create an account</h1>
+					<p>These details will be used to setup up your new account</p>
+					<center>
+						<section id="stripcheckout">
+							<div class="product">
+								<img class="stripe-img"
+										src="./images/bling_sign.png"
+								/>
+								<div class="description">
+									<h3 class="stripe-h3" id="lineitem">Pro Plan</h3>
+									<div style="font-size: 12px; color: black">This plan includes 30 inbound calls, emails and messages.</div>
+									<h5 class="stripe-h5" id="amount">$549</h5>
+								</div>
+							</div>
+							<button type="button" id="checkout-button" onclick="stripecheckout()">Checkout</button>
+						</section>
+					</center>
+
+					<div id="loader">
+						<center><h3 style="font-family:Open Sans; color: yellow; margin: 20px; font-">Signing you up with Bling. This May take a few seconds.
+						</h3></center>
+						<div data-title=".dot-spin">
+							<div class="stage">
+								<div class="dot-spin"></div>
+							</div>
+						</div>
+					</div>
+					<div id="signup-success">
+						<center><h3 style="font-family:Open Sans; color: yellow; margin: 20px;">
+							<p>Thank you for Signing Up with Bling.<br>
+							Your calling will start soon.</p>
+						</h3>
+						<div class="btn-signup" onclick="back()"><button>Back To business List</button></div>
+						</center>
+					</div>
+					<div id="signup-error" style="margin-bottom: 20px">
+						<center><h4 style="font-family:Open Sans; color: yellow; margin: 20px;">
+							<p>Sorry, we could not sign you up.<br>Please try again</p>
+						</h4>
+						</center>
+					</div>
+					<div id="signup-form">
+						<div id="error_message"></div>
+						<div style="margin: 7px; padding:5px; background-color: #FFD700">
+							<div class="row" style="padding-left: 15px; margin-bottom: 10px">
+								<div class="col-12 col-md-6">
+									<label for="name">Full Name</label><br />
+									<input
+										type="text"
+										id="name"
+										placeholder=""
+										required
+									/>
+								</div>
+								<div class="col-12 col-md-6">
+									<label for="email">Work email</label><br />
+									<input
+										type="email"
+										id="email"
+										placeholder=""
+										required
+									/>
+								</div>
+							</div>
+
+							<div class="row" style="padding-left: 15px; margin-bottom: 10px">
+								<div class="col-12 col-md-6">
+										<label id="phoneno" for="phone">Phone number</label><br />
+										<input type="number" id="phone" />
+								</div>
+								<div class="col-12 col-md-6">
+										<label for="">Start date</label><br />
+										<input id="startdate" type="date" />
+								</div>
+							</div>
+						</div>
+
+						<div class="plan1" style="padding-left: 15px; margin-bottom: 20px; margin-top: 30px">
+							<h2>Select plan</h2>
+							<div style="display:flex">
+								<button id="minimal" class="plan" onclick="selectplan(this.id)">
+									Basic
+									<span style="float: right; font-size: 14px; padding-right: 10px"
+									>$199
+										<span style="font-size: 10px; font-weight: 500">/month</span>
+									</span>
+								</button>
+								<div class="help-tip" style="margin-left: 5px">
+									<p>This plan includes 5 inbound calls, emails and messages.</p>
+								</div>
+							</div>
+
+							<div style="display:flex">
+								<button id="basic" class="plan" onclick="selectplan(this.id)">
+									Plus
+									<span style="float: right; font-size: 14px; padding-right: 10px"
+										>$349
+										<span style="font-size: 10px; font-weight: 500">/month</span>
+									</span>
+								</button>
+								<div class="help-tip" style="margin-left: 5px">
+									<p>This plan includes 15 inbound calls, emails and messages.</p>
+								</div>
+							</div>
+							<div style="display:flex">
+								<button id="plus" class="plan" onclick="selectplan(this.id)">
+									Pro
+									<span style="float: right; font-size: 14px; padding-right: 10px"
+										>$549
+										<span style="font-size: 10px; font-weight: 500">/month</span>
+									</span>
+								</button>
+								<div class="help-tip" style="margin-left: 5px">
+									<p>This plan includes 30 inbound calls, emails and messages.</p>
+								</div>
+							</div>
+							<div style="display:flex">
+								<button id="pro" class="plan" onclick="selectplan(this.id)">
+									Unlimited
+									<span style="float: right; font-size: 14px; padding-right: 10px"
+										>$999
+										<span style="font-size: 10px; font-weight: 500">/month</span>
+									</span>
+								</button>
+								<div class="help-tip" style="margin-left: 5px">
+									<p>This plan includes unlimited inbound calls, emails, messages and customer feedback/ survey calls.</p>
+								</div>
+							</div>
+						</div>
+
+						<div
+							class="btn-signup"
+							style="padding-left: 20px; margin-bottom: 10px"
+						>
+						<button onclick="signUp()">Sign up</button>
+						</div>
+					</div>
+
+					<!--					<div class="already-acc">-->
+					<!--						<p>Already have an account?<button>Log in</button></p>-->
+					<!--					</div>-->
+				</div>
+			</div>
+
+			<div class="col-12 col-md-6" style="padding: 0px">
+				<div class="signup-background">
+					<div class="main-img">
+						<img src="./images/signup/call2 1.png" alt="" />
+					</div>
+					<div class="mainimg-dot1">
+						<img src="./images/signup/Ellipse 3.png" alt="" />
+					</div>
+					<div class="mainimg-dot2">
+						<img src="./images/signup/Ellipse 1.png" alt="" />
+					</div>
+					<h2>Let’s get started</h2>
+					<p>You didnt start a business to take calls. Luckily we did!</p>
+					<div class="mainimg-dot3">
+						<img src="./images/signup/Ellipse 2.png" alt="" />
+					</div>
+					<div class="mainimg-dot4">
+						<img src="./images/signup/Ellipse 5.png" alt="" />
+					</div>
+					<div class="arrowline1">
+						<img src="./images/signup/Vector 2.png" alt="" />
+					</div>
+					<div class="arrowline2">
+						<img src="./images/signup/Vector 1.png" alt="" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

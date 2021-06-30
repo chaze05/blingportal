@@ -1,0 +1,280 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.signup-page {
+	display: flex;
+}
+
+.signup {
+	background: #fffdd0;
+	font-family: 'Poppins', sans-serif;
+}
+
+/* Validation */
+#error_message {
+	margin-top: -25px;
+	background: black;
+	color: #ffd700;
+	font-weight: 600;
+	padding: 0px;
+	text-align: center;
+	font-size: 12px;
+	transition: all 0.5s ease;
+}
+
+.signup > img {
+	width: 12%;
+	margin: 20px;
+}
+.signup > h1 {
+	position: absolute;
+	width: 345px;
+	margin: -10px 0px 0px 25px;
+	font-weight: 600;
+	font-size: 25px;
+	color: rgba(1, 1, 1, 0.8);
+}
+
+.signup > p {
+	margin: 25px;
+	width: 55%;
+	color: rgba(120, 120, 120, 1);
+}
+.form-data {
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	flex-flow: row;
+	flex-wrap: wrap;
+	margin: 25px;
+	line-height: 30px;
+	justify-content: space-between;
+}
+
+input {
+	width: 95%;
+	height: 34px;
+	border: 0   .5px solid rgba(83, 83, 83, 0.6);
+	box-sizing: border-box;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	background: #f00664;
+	color: #f9f9f9;
+	padding: 5px;
+	font-size: 10px;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+	cursor: pointer;
+	border-radius: 4px;
+	margin-right: 2px;
+	opacity: 0.6;
+	filter: invert(0.9);
+	font-size: 14px;
+}
+
+input[type='text'] {
+	font-size: 14px
+}
+
+input[type='email'] {
+	font-size: 14px
+}
+
+input[type='number'] {
+	font-size: 14px
+}
+
+label {
+	font-size: 12px;
+	font-weight: 600;
+	color: black;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.plan1 {
+	width: 60%;
+	font-size: 14px;
+	color: rgba(168, 168, 168, 0.87);
+}
+.plan1 > h2 {
+	font-size: 14.5px;
+	font-weight: 600;
+	color: black
+}
+
+.plan {
+	width: 115%;
+	height: 30px;
+	background: #ffd700;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+	border-radius: 5px;
+	margin: 5px 0px 5px 0px;
+	text-align: left;
+	padding: 5px 5px 5px 15px;
+	font-weight: 600;
+	border: none;
+	cursor: pointer;
+}
+
+.click {
+    width: 115%;
+    	height: 30px;
+    	background: #f00664;
+    	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    	border-radius: 5px;
+    	margin: 5px 0px 5px 0px;
+    	text-align: left;
+    	padding: 5px 5px 5px 15px;
+    	font-weight: 600;
+    	border: none;
+    	cursor: pointer;
+}
+
+.plan:hover {
+    background: #fbc3c3;
+}
+
+.btn-signup > button {
+	width: 40.5%;
+	height: 40px;
+	font-size: 16px;
+	font-weight: 600;
+	background: #f00664;
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+}
+.already-acc {
+	position: absolute;
+	width: 40%;
+	left: 14%;
+	top: 96%;
+	font-size: 13px;
+	color: rgba(168, 168, 168, 0.6);
+}
+.already-acc > p > button {
+	border: none;
+	padding: 0;
+	background: none;
+	color: #fff;
+	padding-left: 5px;
+	outline: none;
+	cursor: pointer;
+}
+
+.signup-background {
+	height: 100vh;
+	background: #f00664;
+	font-family: 'Poppins', sans-serif;
+	z-index: 2;
+}
+#spinner:not([hidden]) {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#spinner::after {
+	content: '';
+	width: 80px;
+	height: 80px;
+	border: 2px solid #f3f3f3;
+	border-top: 3px solid #f25a41;
+	border-radius: 100%;
+	will-change: transform;
+	animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.main-img {
+	text-align: center;
+}
+
+.main-img > img {
+	width: 55%;
+	margin-top: 22%;
+	margin-left: -15%;
+	margin-right: auto;
+	z-index: 1;
+}
+.mainimg-dot1 > img {
+	position: absolute;
+	width: 6%;
+	left: 58%;
+	top: 8%;
+	z-index: 10;
+}
+.mainimg-dot2 > img {
+	position: absolute;
+	width: 11%;
+	left: 75%;
+	top: 25%;
+	z-index: 10;
+}
+
+.signup-background > h2 {
+	font-weight: 600;
+	font-size: 34px;
+	line-height: 54px;
+	margin-left: 80px;
+	color: #f9f9f9;
+}
+.signup-background > p {
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 21px;
+	margin-left: 80px;
+	color: #f9f9f9;
+}
+.mainimg-dot3 > img {
+	position: absolute;
+	width: 6%;
+	left: 54%;
+	top: 65%;
+	z-index: 10;
+}
+
+.mainimg-dot4 > img {
+	position: absolute;
+	width: 8%;
+	left: 90%;
+	top: 75%;
+	z-index: 10;
+}
+.arrowline1 > img {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	top: 0%;
+	z-index: 10;
+}
+.arrowline2 > img {
+	position: absolute;
+	width: 20%;
+	height: 40%;
+	left: 80%;
+	top: 0%;
+	z-index: 10;
+}

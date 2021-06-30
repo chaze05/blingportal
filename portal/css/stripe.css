@@ -1,0 +1,51 @@
+section {
+  background: #ffffff;
+  width: 400px;
+  height: 112px;
+  border-radius: 6px;
+}
+.product {
+  display: flex;
+  background-color: #ffd700;
+  padding:10px;
+}
+.description {
+  text-align: left;
+}
+
+.stripe-img {
+  border-radius: 6px;
+  margin: 10px;
+  width: 30px;
+  height: 37px;
+}
+.stripe-h3,
+.stripe-h5 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+  color: #242d60;
+  margin: 0;
+}
+.stripe-h5 {
+  opacity: 0.7;
+}
+#checkout-button {
+  height: 36px;
+  background: #f00664;
+  color: white;
+  width: 100%;
+  font-size: 14px;
+  border: 0;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.6;
+  border-radius: 0 0 6px 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+}
+#checkout-button:hover {
+  opacity: 0.8;
+}
