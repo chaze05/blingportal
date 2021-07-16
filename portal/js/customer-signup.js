@@ -1,6 +1,6 @@
 //  JS validation
-UI_URL= "http://localhost:8080/business/"
-//UI_URL = 'https://www.bling-center.com/business/';
+//UI_URL= "http://localhost:8080/business/"
+UI_URL = 'https://www.bling-center.com/business/';
 
 
 /*
