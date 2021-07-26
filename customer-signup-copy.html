@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Bling Dashboard</title>
+		<link rel="icon" type="image/png" sizes="16x16" href="./images/bling_sign.png">
+		<script src="./vendor/global/global.min.js"></script>
+
+		<link rel="stylesheet" href="./css/style.css" />
+<!--		<script type="text/javascript" src="./js/jquery-1.9.js"></script>-->
+		<script
+			type="text/javascript"
+			src="https://code.jquery.com/jquery-1.9.1.min.js"
+		></script>
+		<script src="./js/customer-signup.js"></script>
+		<script src="./js/bootstrap.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link href="./css/custombling.css" rel="stylesheet">
+		<link href="./css/tooltip.css" rel="stylesheet">
+		<link rel="stylesheet" href="./css/customer-signup.css" />
+<!--		<script src="./js/jquery.js"></script>-->
+
+<!--		<script src="./js/jquery-1.8.js"></script>-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="./css/stripe.css">
+		<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+		<script src="https://js.stripe.com/v3/"></script>
+		<title>Signup</title>
+		<style>
+			.help-tip{
+				text-align: center;
+				background-color: #f00664;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				font-size: 14px;
+				color: white;
+			}
+
+			.help-tip p{    /* The tooltip */
+				position: relative;
+				display: none;
+				text-align: left;
+				background-color: #ffd700;
+				padding: 8px;
+				width: 200px;
+				border-radius: 3px;
+				box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+				color: black;
+				font-size: 12px;
+				z-index: 100;
+			}
+
+			.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+				color: white;
+				background-color: #21b731;
+			}
+		</style>
+	</head>
+	<body style="overflow:hidden; height: 100vh; background-color: #f00664">
+		<div class="row" style="height: 100%">
+			<div class="col-4 col-md-3" style="padding: 0px; overflow: scroll; height: 100%; background-image:url('./images/yellow back.jpeg'); background-size: cover;">
+				<img src="./images/bling_logo.png" style="max-width: 25%; margin-left: 30px; margin-top: 20px;" />
+					<center><div id="startup" style="height: 100%">
+						<div class="metric">
+							<span style="font-size: 9px; color: #ffd700; font-family: sanchez; font-weight: bold">COMMUNICATION</span>
+							<span style="font-size: 9px; color: #ffd700; font-family: sanchez; font-weight: bold">MESSAGING</span>
+							<span style="font-size: 9px; color: #ffd700; font-family: sanchez; font-weight: bold">TALKING</span>
+							<img src="./images/ccback.png" width="60%" height="60%"/>
+						</div>
+
+						<div style="height: 50%; display: flex; justify-content: space-around; margin:20px">
+							<div class="metric">
+								<center><p style="font-size: 16px; color: #ffd700; font-family: sanchez; font-weight: bold">
+									Calls <span style="font-size: 22px">10,000</span>
+								</p>
+								</center>
+							</div>
+
+							<div class="metric">
+								<center><p style="font-size: 16px; color: #ffd700;  font-family: sanchez; font-weight: bold">
+									Clients <span style="font-size: 28px;"> 100</span>
+								</p>
+								</center>
+							</div>
+						</div>
+						<div style="height: 40%; margin-left: 20px">
+							<div style="padding: 10px; margin-right: 15px;margin-left: 25px;color: yellow; font-size: 14px; text-align: left; font-family: gabriela">
+								<center><div class="info">
+									<span><strong>Appointment confirmations</strong></span>
+								</div></center>
+
+								<center><div class="info">
+									<span><strong>Surveys for you after the service</strong></span></div></center>
+
+								<center><div class="info">
+										<span><strong>Filter spam and sales calls. Not counted towards your daily quota</strong></span></div></center>
+
+								<center><div class="info">
+									<span><strong>Add personalized message or sound during holiday season.</strong></span></div></center>
+
+								<center><div class="info">
+									<span><strong>Update your CRMs with call records with plans more than 15 calls per day</strong></span></div></center>
+							</div>
+						</div>
+					</div></center>
+					<center>
+						<div id="gameplay" style="height: 100%; margin-left: 30px; padding:5px">
+							<div style="height:35%;margin-top: 10px">
+							<h2 style="color: black;" class="blingfont" id="callcount">5 calls per Day</h2>
+							<h4 style="color: black; font-size: 10px" class="blingfont" id="calldescription">~ 200 calls/ month</h4>
+							<Button class="btn btn-warning" style="color: black; background: transparent; border: 2px solid black; margin-top: 5px; padding: 8px" onclick="displayPlans()" id="switchplanbutton">Switch Plan</Button>
+							<div id="minPlans" class="minplan1">
+									<div style="display:flex">
+										<button id="BasicPlan" class="minplan" onclick="switchplan(this.id)">
+											Basic
+											<span style="float: right; font-size: 14px; padding-right: 10px"
+											>$199
+												<span style="font-size: 10px; font-weight: 500">/month
+												</span>
+											</span>
+											<p style="font-size: 10px;">This plan includes 5 inbound calls, emails and messages.</p>
+										</button>
+									</div>
+
+									<div style="display:flex">
+										<button id="PlusPlan" class="minplan" onclick="switchplan(this.id)">
+											Plus
+											<span style="float: right; font-size: 14px; padding-right: 10px"
+											>$349
+												<span style="font-size: 10px; font-weight: 500">/month</span>
+											</span>
+											<p style="font-size: 10px;">This plan includes 15 inbound calls, emails and messages.</p>
+										</button>
+									</div>
+									<div style="display:flex">
+										<button id="ProPlan" class="minplan" onclick="switchplan(this.id)">
+											Pro
+											<span style="float: right; font-size: 14px; padding-right: 10px"
+											>$549
+												<span style="font-size: 10px; font-weight: 500">/month</span>
+											</span>
+											<p style="font-size: 10px;">This plan includes 30 inbound calls, emails and messages.</p>
+										</button>
+									</div>
+									<div style="display:flex">
+										<button id="UnlimitedPlan" class="minplan" onclick="switchplan(this.id)">
+											Unlimited
+											<span style="float: right; font-size: 14px; padding-right: 10px"
+											>$999
+												<span style="font-size: 10px; font-weight: 500">/month</span>
+											</span>
+											<p style="font-size: 10px;">This plan includes unlimited inbound calls, emails, messages and customer feedback/ survey calls.</p>
+										</button>
+									</div>
+									<Button class="btn btn-warning" style="color: black; background: transparent; border: 2px solid black; margin-top: 5px; padding: 8px" onclick="canceldisplayplan()">Cancel</Button>
+						</div>
+						<div style="color: black; height: 0%; width: 80%; border-top: 1px solid black; margin-top: 20px" />
+						<div style="height:40%;margin-top: 30px; text-align: right; margin-right: -8px">
+							<Button class="btn btn-warning progress" id="progress_1" onclick="clickOutOrder(this.id)">
+								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">1</span>
+								Select Phone Number
+							</Button>
+							<Button class="btn btn-warning progress" id="progress_2" onclick="clickOutOrder(this.id)">
+								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">2</span>
+								Welcome Message
+							</Button>
+							<Button class="btn btn-warning progress" id="progress_3" onclick="clickOutOrder(this.id)">
+								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">3</span>
+								Off hour message
+							</Button>
+							<Button class="btn btn-warning progress" id="progress_4" onclick="clickOutOrder(this.id)">
+								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">4</span>
+								Connect over call
+							</Button>
+							<Button class="btn btn-warning progress" id="progress_5" onclick="clickOutOrder(this.id)">
+								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">5</span>
+								Go Live Date
+							</Button>
+							<Button class="btn btn-warning progress" id="progress_6" onclick="clickOutOrder(this.id)">
+								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">6</span>
+								Payment
+							</Button>
+						</div>
+
+					</div>
+						</div>
+					</center>
+			</div>
+			<div class="col-8 col-md-9" style="height: 100%; padding: 0px; overflow: scroll; background-color: #ebebeb">
+				<img src="./images/signup/call2 1.png" alt="" width="15%" style="top: 10px; position: fixed; right: 0px"/>
+				<div class="signup-background" id="welcome" style="background-color: white; box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2)">
+					<h3 class="blingfont" style="color: black">Welcome Malika! We are Excited to get you started</h3>
+				</div>
+				<div class="box-data">
+				<div class="blingfont" id="selectplan" style="margin-top: 20px;">
+
+					<h3>Create an account</h3>
+					<p>These details will be used to setup up your new account</p><br>
+
+					<div id="signup-form">
+						<div id="error_message"></div>
+						<div style="margin: 7px; padding:5px; background-color: rgba(255, 215, 0, 0.5); box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);">
+							<div class="row" style="padding-left: 15px; margin-bottom: 10px">
+								<div class="col-12 col-md-6">
+									<label for="name">Your Full Name</label><br />
+									<input
+										type="text"
+										id="name"
+										placeholder=""
+										required
+									/>
+								</div>
+								<div class="col-12 col-md-6">
+									<label for="email">Work email</label><br />
+									<input
+										type="email"
+										id="email"
+										placeholder=""
+										required
+									/>
+								</div>
+							</div>
+
+							<div class="row" style="padding-left: 15px; margin-bottom: 10px">
+								<div class="col-12 col-md-6">
+										<label id="phoneno" for="phone">Phone number</label><br />
+										<input type="number" id="phone" />
+								</div>
+								<div class="col-12 col-md-6">
+										<label for="business">Your Business Name</label><br />
+										<input id="business" type="text" />
+								</div>
+							</div>
+						</div>
+
+						<div class="plan1" style="padding-left: 15px; margin-bottom: 20px; margin-top: 30px">
+							<h2>Select plan</h2>
+							<div style="display:flex">
+								<button id="Basic" class="plan" onclick="selectplan(this.id)">
+									Basic
+									<span style="float: right; font-size: 14px; padding-right: 10px"
+									>$199
+										<span style="font-size: 10px; font-weight: 500">/month</span>
+									</span>
+								</button>
+								<div class="help-tip" style="margin-left: 5px">
+									<p>This plan includes 5 inbound calls, emails and messages.</p>
+								</div>
+							</div>
+
+							<div style="display:flex">
+								<button id="Plus" class="plan" onclick="selectplan(this.id)">
+									Plus
+									<span style="float: right; font-size: 14px; padding-right: 10px"
+										>$349
+										<span style="font-size: 10px; font-weight: 500">/month</span>
+									</span>
+								</button>
+								<div class="help-tip" style="margin-left: 5px">
+									<p>This plan includes 15 inbound calls, emails and messages.</p>
+								</div>
+							</div>
+							<div style="display:flex">
+								<button id="Pro" class="plan" onclick="selectplan(this.id)">
+									Pro
+									<span style="float: right; font-size: 14px; padding-right: 10px"
+										>$549
+										<span style="font-size: 10px; font-weight: 500">/month</span>
+									</span>
+								</button>
+								<div class="help-tip" style="margin-left: 5px">
+									<p>This plan includes 30 inbound calls, emails and messages.</p>
+								</div>
+							</div>
+							<div style="display:flex">
+								<button id="Unlimited" class="plan" onclick="selectplan(this.id)">
+									Unlimited
+									<span style="float: right; font-size: 14px; padding-right: 10px"
+										>$999
+										<span style="font-size: 10px; font-weight: 500">/month</span>
+									</span>
+								</button>
+								<div class="help-tip" style="margin-left: 5px">
+									<p>This plan includes unlimited inbound calls, emails, messages and customer feedback/ survey calls.</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<!--					<div class="already-acc">-->
+					<!--						<p>Already have an account?<button>Log in</button></p>-->
+					<!--					</div>-->
+				</div>
+
+
+					<div id="selectnumber" class="blingfont">
+						<h3 style="color: black; font-size: 20px">Lets choose a number:</h3>
+						<div class="divider"> </div>
+						<p style="color: black; font-size: 13px">This number is associated with your business. You will be required to forward all your calls to this number. Any outgoing call to your clients will be from this number. </p>
+
+						<div style="background-color: #FEF9E7; padding: 5px; border-radius: 5px;margin-bottom: 20px" id="currentnum">
+							<h4 style="color: grey">Current Number Selected: </h4>
+							<p style="color: black; font-size: 14px" id="currentblingnumber"></p>
+						</div>
+
+						<div id="displaynumber">
+
+						</div>
+						<div id="getareacode" >
+							<h4 style="color: black;">Enter a Area Code:</h4>
+							<input type="text" id="areacode" placeholder="Area Code" />
+							<div style="margin-top: 10px"><Button class="btn btn-primary" onclick="listnumbers()">Get Available Numbers</Button></div>
+						</div>
+					</div>
+					<div id="welcomemessagediv" style="width: 100%; margin-bottom: 30px" class="blingfont">
+						<h3 style="color: black; font-size: 20px">Lets setup your greeting message:</h3>
+						<div class="divider"> </div>
+						<p style="color: black; font-size: 13px">This message is played after accepting the call.</p>
+						<div style="background-color: #FEF9E7; padding: 5px; border-radius: 5px;">
+							<h4 style="color: grey">Current Message: </h4>
+							<p style="color: black; font-size: 14px" id="currentwelcome">Thanks for calling Business Name. We will be right with you.</p>
+						</div>
+						<h4 style="margin-top: 20px; color: black">Would you like to change the message: </h4>
+						<textarea id="greetingmessage" placeholder="Enter Greeting Message" style="margin-top: 10px; border: 0px;border-radius: 5px;padding: 3px; width: 100%; font-size: 14px; background-color: #FEF9E7"></textarea>
+						<div style="margin-top: 10px"><Button class="btn button-next blingfont" onclick="updateGreeting()">Change Message</Button></div>
+					</div>
+					<div id="offhourmessagediv" style="width: 100%">
+						<h3 style="color: black; font-size: 20px">Lets setup your Off Business hour message:</h3>
+						<div class="divider"> </div>
+						<h5 style="font-size: 13px; color: black">This message is played during after Business hours. Your customers can leave a voicemail. We will callback the next business day.</h5>
+						<div style="background-color: #FEF9E7; padding: 5px">
+							<h4 style="color: grey">Current Message: </h4>
+							<p style="color: black; font-size: 14px" id="currentvoicemail">Thank you for calling Business name. This is Meghan. Please leave a message and I will get back to you soon.</p>
+						</div>
+						<h4 style="margin-top: 20px; color: black">Would you like to change the message: </h4>
+						<textarea id="voicemailmessage" placeholder="Enter Off hour Message" style="margin-top: 10px; border: 0px;border-radius: 5px;padding: 3px; width: 100%; font-size: 14px; background-color: #FEF9E7"></textarea>
+						<div style="margin-top: 10px"><Button class="btn button-next" onclick="updateVoicemail()">Change Message</Button></div>
+					</div>
+					<div id="connectcalldiv" style="width: 100%; height: 90%" class="blingfont">
+						<h3 style="color: black; font-size: 20px">Would you like to talk to an Account Manager?</h3>
+						<div class="divider"> </div>
+						<div style="display: flex" id="calloptions">
+							<div style="margin: 10px"><Button class="btn btn-primary" onclick="callnow()">Get a call Now</Button></div>
+							<div style="margin: 10px"><Button class="btn btn-primary" onclick="schedulecall()">Schedule a Call at a later time</Button></div>
+						</div>
+						<div id="callnow">
+							<input type="text" id="callbacknumber" placeholder="Enter a callback number" />
+							<div style="margin: 10px"><Button class="btn btn-primary" onclick="requestcallback()">Request a call back</Button></div>
+						</div>
+						<iframe src="https://calendly.com/alexcarter-100/15min" style="width: 100%; height: 800px; border: 0px" id="schedulecall"></iframe>
+					</div>
+					<div id="golivediv" style="width: 100%; height: 90%" class="blingfont">
+						<h3 style="color: black; font-size: 20px ">Choose Go live date</h3>
+						<div class="divider"> </div>
+						<div style="width: 100%; height: 100%; margin-top: 20px; display: flex">
+							<div class="calendar-left">
+								<center>
+									<div style="margin-top: 20px">You selected:</div>
+									<div class="num-date" id="selecteddate">27</div>
+									<div style="margin-top: -30px">May</div>
+									<!--num-date -->
+									<div class="day" style="margin-top: 20px">THURSDAY</div>
+								</center>
+							</div>
+							<div style="width: 70%; height: 100%;">
+								<button class="button-next" style="height: 30%; width:25%; margin: 10px">
+									<h1 style="font-family: sanchez">01</h1> May, 2021<br>
+									<h4>Monday</h4>
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div id="processpayment" class="basic-list-group" style="width: 100%; height: 90%; border-radius: 10px; background-color: white; padding: 10px">
+						<ul class="nav nav-pills" style="padding:2px; display: flex; ">
+							<li class="nav-item" style="width: 50%">
+								<a href="#bling-cart" class="nav-link active" data-toggle="tab">
+									Bling Cart</a>
+							</li>
+							<li class="nav-item" style="width: 50%">
+								<a href="#pull-payment" class="nav-link" data-toggle="tab">
+									Payment</a>
+							</li>
+						</ul>
+
+						<div class="tab-content" id="nav-tabContent" style="height: 85%; width: 100%">
+
+							<div class="tab-pane fade active in show" id="bling-cart" style="height: 100%; width: 100%">
+								<center><div style="display: flex; margin-top: 20px; height: 100%; width: 100%">
+	<!--								<img src="./images/hello.jpeg" width="20%" height="20%"/>-->
+									<div style="width: 20%; height: 80%; font-family: droid; border: 1px solid black">
+										<p style="font-size: 12px; background-color: #306EFF; color: white">Go Live Date</p>
+										<p style="font-size: 70px">24</p>
+										<p>May, 2021</p>
+										<p>MONDAY</p>
+										<button class="btn btn-primary" style="margin: 10px">Edit</button>
+									</div>
+									<div>
+										<table class=" table-bordered" style="margin: 10px">
+											<tr>
+												<th>Product</th>
+												<th>Price</th>
+											</tr>
+											<tr>
+												<td style="padding: 5px">
+													<p>Bling Receptionist</p>
+													<ul>
+													<li>~200 calls/month</li>
+													<li>Unlimited Messages</li>
+													<li>Unlimited Emails</li>
+													<li>Callbacks</li>
+													<li>Filter spam calls</li>
+													<li>CRM updates</li>
+													<li>Slack notifications</li>
+													</ul>
+												</td>
+												<td style="padding: 5px">$199/month</td>
+											</tr>
+										</table>
+										<button class="btn btn-primary">Checkout</button>
+									</div>
+								</div>
+								</center>
+							</div>
+
+							<div class="tab-pane fade" id="pull-payment" style="height: 100%; width: 100%">
+								<h1 style="color: black">Pull Payment</h1>
+							</div>
+						</div>
+					</div>
+
+					<center>
+						<div id="loader">
+							<div class="loaderprogress"></div>
+							<span class="blink_me blingfont" id="processtext">GETTING PHONE NUMBERS</span>
+						</div>
+					</center>
+				</div>
+				<div class="box-data blingfont" id="nextbutton">
+					<h3 style="color: black; font-size: 16px" id="nexttitle">Filled all data. Lets move to next step.</h3>
+					<div class="divider"> </div>
+					<div
+							style="margin-top: 10px;"
+					>
+						<button onclick="nextStep()" class="btn button-next blingfont">Continue to Next Step</button>
+					</div>
+				</div>
+
+			</div>
+			</div>
+		</div>
+
+	</body>
+</html>
