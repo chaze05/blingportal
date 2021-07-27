@@ -90,7 +90,6 @@ label {
 	font-size: 12px;
 	font-weight: 600;
 	color: black;
-	margin-bottom:0px !important;
 }
 
 input[type='number']::-webkit-inner-spin-button,
@@ -151,21 +150,19 @@ input[type='number']::-webkit-outer-spin-button {
 
 .minplan {
 	width: 100%;
-	background-color: #f00664;
-	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+	background-color: white;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
 	border-radius: 5px;
 	text-align: left;
-	padding: 5px 0px 0px 10px;
+	padding: 5px 5px 0px 10px;
 	font-weight: 600;
 	border: none;
 	cursor: pointer;
-	margin-top: 8px;
-	color: white;
+	margin-top: 5px;
 }
 
 .minplan:hover {
     background: #fbc3c3;
-    color: black;
 }
 
 .btn-signup > button {
@@ -410,6 +407,16 @@ input[type='number']::-webkit-outer-spin-button {
   bottom: 20px;
 }
 
+.dateselect {
+    background-color: blue;
+    color: white;
+}
+
+.datenotselected {
+    background-color: white;
+    color: black;
+}
+
 .nav-link {
     color: black;
     font-family: droid;
@@ -418,7 +425,7 @@ input[type='number']::-webkit-outer-spin-button {
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
-    background-color: #ebebeb;
+    background-color: #21b731;
 }
 
 .tab-content > .tab-pane {
@@ -454,13 +461,22 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .progress {
-    height: 40px;
-    background: yellow;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
-    border-radius: 50%;
-    color: #f00664;
+	width: 100%;
+	height: 40px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+	margin: 5px 0px 5px 0px;
+	padding: 5px 5px 5px 15px;
+	border: none;
+	background-color: white;
+	color: black;
+	margin-top: 20px;
 }
 
+.progress:disabled {
+    background-color: #ffd700;
+    color: black;
+}
 
 .progressclick {
     background-color: lightgreen;
@@ -468,22 +484,14 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .loaderprogress {
-  border: 10px solid #f3f3f3;
+  border: 16px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 10px solid black;
-  border-bottom: 10px solid black;
-  width: 50px;
-  height: 50px;
+  border-top: 16px solid black;
+  border-bottom: 16px solid black;
+  width: 90px;
+  height: 90px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
-}
-
-.connectline {
-   width: 6%;
-   text-align: center;
-   border-bottom: 1px solid yellow;
-   line-height: 0.1em;
-   margin: 10px 0 10px;
 }
 
 @-webkit-keyframes spin {
@@ -498,8 +506,8 @@ input[type='number']::-webkit-outer-spin-button {
 
 .blink_me {
   animation: blinker 2s linear infinite;
-  color: blue;
-  font-size: 20px;
+  color: black;
+  font-size: 30px;
   font-weight: bold;
   letter-spacing: 2px;
 }
@@ -510,8 +518,9 @@ input[type='number']::-webkit-outer-spin-button {
 
 .box-data {
     margin:20px;
-    margin-left: 0px;
+    margin-left: 40px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    width: 80%;
     border-radius: 10px;
     padding:30px;
     background-color: white;
@@ -523,326 +532,13 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .button-next {
-    background-color: #f00664;
-    color: white;
-    float: right;
-    padding: 5px 25px 5px 25px;
-    margin-top: 10px;
-    border: 0 !important;
-    outline:0 !important;
+    background-color: white;
+    border: 1px solid #ebebeb;
+    color: black;
 }
 
 .button-next:hover {
-    background-color: yellow;
-    color: #f00664;
-    border: none;
+    border: 1px solid #DE3163;
+    color: #DE3163;
     outline:none;
-}
-
-.btn:focus {
-outline:0 !important;
-}
-
-.detail-box {
-    margin-top: 5px;
-    height: 90%;
-    text-align: left
-}
-
-.button-add {
-    background-color: white;
-    color: black;
-    border: 1px solid #ebebeb;
-}
-
-.button-add:hover {
-    color: #f00664;
-    border: 1px solid #f00664;
-}
-
-.button-add-click {
-    color: white;
-    background-color: #f00664;
-    outline: none;
-    border: none;
-}
-
-.button-add-click:hover {
-    color: yellow;
-    border: none;
-    outline: none;
-}
-
-.dropbtn {
-  background-color: white;
-  border: 1px solid #ebebeb;
-  border-radius: 10px;
-  margin: 30px;
-  margin-bottom: 3px;
-  color: black;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.dropbtn:hover{
-  background-color: yellow;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: rgba(1,1,1,1);
-    min-width: 240px;
-    border: 1px solid #ddd;
-    z-index: 1;
-    max-height: 300px;
-    overflow: scroll;
-    border: none;
-    border-radius: 5px;
-}
-
-.dropdown-content button {
-    color: white;
-    background-color: Transparent;
-    text-decoration: none;
-    display: block;
-    border: none;
-    margin: 0px;
-    width: 240px;
-    padding: 10px;
-    font-size: 16px;
-}
-
-.dropdown button:hover {background-color: #ebebeb; color: black}
-
-.show {display: block;}
-
-.options {
-    background-color: white;
-    border: 1px solid #ebebeb;
-    color: black;
-    margin: 3px;
-    margin-bottom: 0px;
-    margin-top: -2px;
-    padding: 5px;
-    width: 30%;
-    height: 90%;
-}
-
-.options:hover {
-    background-color: #f00664;
-        color: white;
-}
-
-.checkout-table {
-    padding: 5px;
-    color: black;
-    font-weight: normal;
-    padding-top: 10px;
-    padding-bottom: 10px
-}
-
-
-
-.example.example1 * {
-  font-family: Roboto, Open Sans, Segoe UI, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.example.example1 fieldset {
-  margin: 10px;
-  padding: 10px;
-  padding-top: 20px;
-  border-style: none;
-  background-color: #f00664;
-  border-radius: 4px;
-}
-
-.example.example1 .row {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-left: 15px;
-}
-
-
-.example.example1 label {
-  width: 15%;
-  padding: 10px 0;
-  color: white;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.example.example1 input, .example.example1 button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  outline: none;
-  border-style: none;
-  width: 80%;
-}
-
-.example.example1 input:-webkit-autofill {
-  -webkit-text-fill-color: #fce883;
-  transition: background-color 100000000s;
-  -webkit-animation: 1ms void-animation-out;
-}
-
-.example.example1 .StripeElement--webkit-autofill {
-  background: transparent !important;
-}
-
-.example.example1 .StripeElement {
-  width: 100%;
-  padding: 11px 15px 11px 0;
-}
-
-.example.example1 input {
-  width: 80%;
-  height: 100%;
-  padding: 8px 11px 8px 5px;
-  color: white;
-  background-color: transparent;
-  -webkit-animation: 1ms void-animation-out;
-}
-
-.example.example1 input::-webkit-input-placeholder {
-  color:  #69ffa5;
-}
-
-.example.example1 input::-moz-placeholder {
-  color: yellow;
-}
-
-.example.example1 input:-ms-input-placeholder {
-  color: yellow;
-}
-
-.example.example1 button {
-  display: block;
-  width: calc(100% - 30px);
-  height: 40px;
-  margin: 20px 15px 0;
-  background-color: #69ffa5;
-  border-radius: 4px;
-  color: black;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.example.example1 button:active {
-  background-color: #d782d9;
-    inset 0 1px 0 #e298d8;
-}
-
-.example.example1 .error svg .base {
-  fill: #fff;
-}
-
-.example.example1 .error svg .glyph {
-  fill: #6772e5;
-}
-
-.example.example1 .error .message {
-  color: #fff;
-}
-
-.example.example1 .success .icon .border {
-  stroke: #87bbfd;
-}
-
-.example.example1 .success .icon .checkmark {
-  stroke: #fff;
-}
-
-.example.example1 .success .title {
-  color: #fff;
-}
-
-.example.example1 .success .message {
-  color: #9cdbff;
-}
-
-.example.example1 .success .reset path {
-  fill: #fff;
-}
-
-.error-outline {
-    border: 1px solid red;
-}
-
-.calendar-date {
-    border: 1px solid black; border-radius: 5px; height: 100%; width: 13%; color: black
-}
-
-.calendar-date:hover {
-    background-color: #f00664;
-    color: white;
-}
-
-.line {
-  height:1px;
-  width:100%;
-  margin-top:10px;
-  margin-bottom:10px;
-  background:black;
-}
-
-.order-table td:first-of-type {
-  width:100%;
-}
-.order-table {
-    position:relative;
-}
-
-
-.total {
-  margin-top:25px;
-  font-size:20px;
-  font-size:1.3rem;
-  position:absolute;
-  bottom:30px;
-  right:27px;
-  left:35px;
-}
-
-.thin {
-  font-weight:400;
-}
-
-.small {
-  font-size:12px;
-  font-size:.8rem;
-}
-
-.price {
-  bottom:0px;
-  position:absolute;
-  right:0px;
-  color:#f00664;
-}
-
-.btn-custom {
-    outline: none;
-    padding: 8px;
-    padding-left:17px;
-    padding-right: 17px;
-    font-size: 13px;
-    border-radius: 5px;
-}
-
-.btn-custom:disabled {
-    opacity: 50%;
-}
-
-.bubble {
-    background-color: yellow;
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
 }

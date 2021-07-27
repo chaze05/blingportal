@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bling Dashboard</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/bling_sign.png">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" href="./css/customer-signin.css" />
+    <link href="./css/custombling.css" rel="stylesheet">
+    <script src="./js/signin.js"></script>
+</head>
+<body style="overflow: hidden; background-color: #f00664">
+<section>
+    <img src="./images/back1.png" width="75%" style="position: fixed; top: -170px; right: 0px; opacity: 30% "/>
+    <img src="./images/yellow_logo.png" width="10%" style="position: fixed; top: 10px; left: 10px"/>
+<!--    <div class="background"></div>-->
+
+    <div class="backshadow1">
+        <img src="./images/signin/Vector (20).png" alt="" />
+    </div>
+    <div class="backshadow2">
+        <img src="./images/signin/Vector (21).png" alt="" />
+    </div>
+    <div class="backshadow3">
+        <img src="./images/signin/Vector (22).png" alt="" />
+    </div>
+<!--    <div class="backshadow4">-->
+<!--        <img src="./images/signin/Vector (23).png" alt="" />-->
+<!--    </div>-->
+
+    <div class="container blingfont">
+        <center>
+        <img src="./images/callicon_up.png" width="15%" />
+        <p style="color: #69ffa5; margin: 10px; font-size: 30px; font-weight: bold">WELCOME</p>
+        <p id="unauth" style="color: red; margin-left: 10px">Incorrect Email or Password.</p>
+        <p id="failedupdate" style="color: red; margin-left: 10px">Failed to update. Please try again.</p>
+        <div id="loader">
+            <div data-title=".dot-spin">
+                <div class="stage">
+                    <div class="dot-spin"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="signuprepeat">
+            <input id="username" type="text" placeholder="Email" />
+            <p id="emailmissing" style="color: red; margin-left: 10px">Please Enter your username.</p>
+            <input id="password" type="password" placeholder="Password" />
+            <p id="passwordmissing" style="color: red; margin-left: 10px">Please Enter the password.</p>
+            <button class="login-btn" onclick="login()" id="login">LOGIN</button><br>
+            <button class="button-link">New User</button>
+            <span>|</span>
+            <button class="button-link">forgot password?</button>
+            <div style="margin-bottom: 20px"></div>
+        </div>
+
+        <div id="signupfirst">
+            <label id="emailval">Email: </label><br><br>
+            <label>New Password *</label>
+            <input id="newpass" type="password" placeholder="New Password" /><br>
+            <label>Confirm Password *</label>
+            <input id="confirmpass" type="password" placeholder="Confirm Password" />
+            <p id="passwordmatchnot" style="color: red; margin-left: 10px">Passwords do not Match. Please Enter again</p>
+            <center><button class="login-btn" onclick="updatepassword()" id="updatecred">Update Credential</button></center>
+        </div>
+        </center>
+
+    </div>
+
+<!--    <div class="sign-up">-->
+<!--        <p>-->
+<!--            Dont have an account?<button>-->
+<!--            <span style="color: #fff"> Sign up</span>-->
+<!--        </button>-->
+<!--        </p>-->
+<!--    </div>-->
+</section>
+</body>
+</html>

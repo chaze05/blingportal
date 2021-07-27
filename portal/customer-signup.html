@@ -7,6 +7,7 @@
 		<title>Bling Dashboard</title>
 		<link rel="icon" type="image/png" sizes="16x16" href="./images/bling_sign.png">
 		<script src="./vendor/global/global.min.js"></script>
+		<script src="https://js.stripe.com/v3/"></script>
 
 		<link rel="stylesheet" href="./css/style.css" />
 <!--		<script type="text/javascript" src="./js/jquery-1.9.js"></script>-->
@@ -17,6 +18,7 @@
 		<script src="./js/customer-signup.js"></script>
 		<script src="./js/bootstrap.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="//code.tidio.co/xbg8wfojc5hzyk4k9ii48xbt4b52sqf2.js" async></script>
 		<link href="./css/custombling.css" rel="stylesheet">
 		<link href="./css/tooltip.css" rel="stylesheet">
 		<link rel="stylesheet" href="./css/customer-signup.css" />
@@ -29,7 +31,6 @@
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="./css/stripe.css">
 		<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
-		<script src="https://js.stripe.com/v3/"></script>
 		<title>Signup</title>
 		<style>
 			.help-tip{
@@ -56,460 +57,382 @@
 				z-index: 100;
 			}
 
+			.nav-link {
+				border: 1px solid #ebebeb;
+			}
+
 			.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
 				color: white;
-				background-color: #21b731;
+				background-color: black;
 			}
 		</style>
 	</head>
-	<body style="background-color: #fffdd0; overflow:hidden; height: 100vh">
-		<div class="row" style="height: 100%">
-			<div class="col-4 col-md-3" style="padding: 0px; overflow: scroll; height: 100%; background-image:url('./images/yellow back.jpeg'); background-size: cover;">
-				<img src="./images/bling_logo.png" style="max-width: 25%; margin-left: 30px; margin-top: 20px;" />
-					<center><div id="startup" style="height: 100%">
-						<div class="metric">
-							<span style="font-size: 9px; color: #ffd700; font-family: sanchez; font-weight: bold">COMMUNICATION</span>
-							<span style="font-size: 9px; color: #ffd700; font-family: sanchez; font-weight: bold">MESSAGING</span>
-							<span style="font-size: 9px; color: #ffd700; font-family: sanchez; font-weight: bold">TALKING</span>
-							<img src="./images/ccback.png" width="60%" height="60%"/>
-						</div>
+	<body style="overflow:hidden; height: 100vh; width:100%; background-color: #f00664;">
+		<img src="./images/yellow_logo.png" style="max-width: 10%; padding:20px" />
+<!--		<img src="./images/background-portal.png" style="max-width: 70%; padding:20px; position: fixed; top: 50px; right: -30px; opacity: 50%" />-->
+		<img src="./images/Communication.png" style="width: 50%; position: fixed; bottom: 0px; left: 0px; opacity: 15%;" />
+		<img src="./images/Communication.png" style="width: 50%; position: fixed; bottom: 0px; right: 0px; opacity: 15%; transform: rotate(45deg);" />
+<!--		<img src="./images/background-portal.png" style="max-width: 20%; padding:20px; position: fixed; top: 300px; right: -50px" />-->
 
-						<div style="height: 50%; display: flex; justify-content: space-around; margin:20px">
-							<div class="metric">
-								<center><p style="font-size: 16px; color: #ffd700; font-family: sanchez; font-weight: bold">
-									Calls <span style="font-size: 22px">10,000</span>
-								</p>
-								</center>
+		<div id="accountcreate" class="row" style="height: 100%; width: 100%; overflow: scroll">
+			<div style="height: 100%; width: 100%;">
+				<div style="display: flex; align-items: center; justify-content: center;">
+					<button class="btn progress" id="progress_1" onclick="clickOutOrder(this.id)">1</button>
+					<div class="connectline"></div>
+					<button class="btn progress" id="progress_2" onclick="clickOutOrder(this.id)">2</button>
+					<div class="connectline"></div>
+					<button class="btn progress" id="progress_3" onclick="clickOutOrder(this.id)">3</button>
+					<div class="connectline"></div>
+					<button class="btn progress" id="progress_4" onclick="clickOutOrder(this.id)">4</button>
+					<div class="connectline"></div>
+					<button class="btn progress" id="progress_5" onclick="clickOutOrder(this.id)">5</button>
+				</div>
+
+				<center style="height: 80%; width: 100%">
+				<div class="row" style="height: 100%; width: 70%">
+					<div class="col-12 col-md-3 box-data blingfont" style="background-color: #69ffa5; height: 80%;">
+						<div id="gameplay">
+							<div style="text-align: left">
+								<div style="background-color: yellow; color: #f00664; position: absolute; top: 0px; right: 0px; font-weight: bold; padding:7px; font-size: 11px; border-radius: 0px 5px 0px 5px">SELECTED</div>
+								<div style="display: flex">
+									<h2 style="color: black; font-size: 50px; font-weight: bold; color: #f00664" id="planname">Basic</h2>
+								</div>
+								<h2 style="color: black; font-size: 20px; font-weight: bold; color: #f00664" id="planprice">$199/mon</h2>
 							</div>
+							<div style="text-align: right" id="plandetails">
 
-							<div class="metric">
-								<center><p style="font-size: 16px; color: #ffd700;  font-family: sanchez; font-weight: bold">
-									Clients <span style="font-size: 28px;"> 100</span>
-								</p>
-								</center>
-							</div>
-						</div>
-						<img src="./images/guaranteed.png" width="40%" height="40%" style="margin-top: -20px"/>
-						<div style="height: 40%; margin-left: 20px">
-							<div style="padding: 10px; margin-right: 15px;margin-left: 25px;color: yellow; font-size: 14px; text-align: left; font-family: gabriela">
-								<center><div class="info">
-									<span><strong>Appointment confirmations</strong></span>
-								</div></center>
-
-								<center><div class="info">
-									<span><strong>Surveys for you after the service</strong></span></div></center>
-
-								<center><div class="info">
-										<span><strong>Filter spam and sales calls. Not counted towards your daily quota</strong></span></div></center>
-
-								<center><div class="info">
-									<span><strong>Add personalized message or sound during holiday season.</strong></span></div></center>
-
-								<center><div class="info">
-									<span><strong>Update your CRMs with call records with plans more than 15 calls per day</strong></span></div></center>
-							</div>
-						</div>
-					</div></center>
-					<center>
-						<div id="gameplay" style="height: 100%; margin-left: 40px; padding:5px">
-							<div style="height:35%;margin-top: 10px">
-							<h2 style="color: black;" class="blingfont" id="callcount">5 calls per Day</h2>
-							<h4 style="color: black; font-size: 10px" class="blingfont" id="calldescription">~ 200 calls/ month</h4>
-							<Button class="btn btn-warning" style="color: black; background: transparent; border: 2px solid black; margin-top: 5px; padding: 8px" onclick="displayPlans()" id="switchplanbutton">Switch Plan</Button>
+							</div><br>
 							<div id="minPlans" class="minplan1">
-									<div style="display:flex">
-										<button id="BasicPlan" class="minplan" onclick="switchplan(this.id)">
-											Basic
-											<span style="float: right; font-size: 14px; padding-right: 10px"
-											>$199
-												<span style="font-size: 10px; font-weight: 500">/month
-												</span>
+								<div style="display:flex">
+									<button id="Basic" class="minplan" onclick="updatePlan(this.id)">
+										Basic
+										<span style="float: right; font-size: 14px; padding-right: 10px"
+										>$199
+											<span style="font-size: 10px; font-weight: 500">/month
 											</span>
-											<p style="font-size: 10px;">This plan includes 5 inbound calls, emails and messages.</p>
-										</button>
-									</div>
-
-									<div style="display:flex">
-										<button id="PlusPlan" class="minplan" onclick="switchplan(this.id)">
-											Plus
-											<span style="float: right; font-size: 14px; padding-right: 10px"
-											>$349
-												<span style="font-size: 10px; font-weight: 500">/month</span>
-											</span>
-											<p style="font-size: 10px;">This plan includes 15 inbound calls, emails and messages.</p>
-										</button>
-									</div>
-									<div style="display:flex">
-										<button id="ProPlan" class="minplan" onclick="switchplan(this.id)">
-											Pro
-											<span style="float: right; font-size: 14px; padding-right: 10px"
-											>$549
-												<span style="font-size: 10px; font-weight: 500">/month</span>
-											</span>
-											<p style="font-size: 10px;">This plan includes 30 inbound calls, emails and messages.</p>
-										</button>
-									</div>
-									<div style="display:flex">
-										<button id="UnlimitedPlan" class="minplan" onclick="switchplan(this.id)">
-											Unlimited
-											<span style="float: right; font-size: 14px; padding-right: 10px"
-											>$999
-												<span style="font-size: 10px; font-weight: 500">/month</span>
-											</span>
-											<p style="font-size: 10px;">This plan includes unlimited inbound calls, emails, messages and customer feedback/ survey calls.</p>
-										</button>
-									</div>
-									<Button class="btn btn-warning" style="color: black; background: transparent; border: 2px solid black; margin-top: 5px; padding: 8px" onclick="canceldisplayplan()">Cancel</Button>
-						</div>
-						<div style="color: black; height: 0%; width: 80%; border-top: 1px solid black; margin-top: 20px" />
-						<div style="height:40%;margin-top: 30px; text-align: right; margin-right: -8px">
-							<Button class="btn btn-warning progress" id="progress_1" onclick="clickOutOrder(this.id)">
-								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">1</span>
-								Select Phone Number
-							</Button>
-							<Button class="btn btn-warning progress" id="progress_2" onclick="clickOutOrder(this.id)">
-								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">2</span>
-								Welcome Message
-							</Button>
-							<Button class="btn btn-warning progress" id="progress_3" onclick="clickOutOrder(this.id)">
-								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">3</span>
-								Off hour message
-							</Button>
-							<Button class="btn btn-warning progress" id="progress_4" onclick="clickOutOrder(this.id)">
-								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">4</span>
-								Connect over call
-							</Button>
-							<Button class="btn btn-warning progress" id="progress_5" onclick="clickOutOrder(this.id)">
-								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">5</span>
-								Go Live Date
-							</Button>
-							<Button class="btn btn-warning progress" id="progress_6" onclick="clickOutOrder(this.id)">
-								<span style="border-radius: 50%; background-color: black; color: white; padding: 5px; margin-right: 5px">6</span>
-								Payment
-							</Button>
-						</div>
-
-					</div>
-						</div>
-					</center>
-			</div>
-			<div class="col-8 col-md-9" style="height: 100%; padding: 0px; overflow: scroll;">
-				<img src="./images/signup/call2 1.png" alt="" width="15%" style="top: 10px; position: fixed; right: 0px"/>
-				<div class="signup-background" id="welcome">
-					<h3 class="blingfont" style="color: black">Welcome Malika! We are Excited to get you started</h3>
-				</div>
-				<div style="margin:20px; margin-left: 40px; box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); width: 80%; border-radius: 10px; padding:30px; background-color: white;">
-				<div class="blingfont" id="selectplan" style="margin-top: 20px;">
-
-					<h1>Create an account</h1>
-					<p>These details will be used to setup up your new account</p><br>
-
-					<div id="signup-form">
-						<div id="error_message"></div>
-						<div style="margin: 7px; padding:5px; background-color: rgba(255, 215, 0, 0.5); box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);">
-							<div class="row" style="padding-left: 15px; margin-bottom: 10px">
-								<div class="col-12 col-md-6">
-									<label for="name">Your Full Name</label><br />
-									<input
-										type="text"
-										id="name"
-										placeholder=""
-										required
-									/>
+										</span>
+										<p style="font-size: 10px;">5 inbound calls</p>
+									</button>
 								</div>
-								<div class="col-12 col-md-6">
-									<label for="email">Work email</label><br />
-									<input
-										type="email"
-										id="email"
-										placeholder=""
-										required
-									/>
-								</div>
-							</div>
 
-							<div class="row" style="padding-left: 15px; margin-bottom: 10px">
-								<div class="col-12 col-md-6">
-										<label id="phoneno" for="phone">Phone number</label><br />
-										<input type="number" id="phone" />
-								</div>
-								<div class="col-12 col-md-6">
-										<label for="business">Your Business Name</label><br />
-										<input id="business" type="text" />
-								</div>
-							</div>
-						</div>
-
-						<div class="plan1" style="padding-left: 15px; margin-bottom: 20px; margin-top: 30px">
-							<h2>Select plan</h2>
-							<div style="display:flex">
-								<button id="Basic" class="plan" onclick="selectplan(this.id)">
-									Basic
-									<span style="float: right; font-size: 14px; padding-right: 10px"
-									>$199
-										<span style="font-size: 10px; font-weight: 500">/month</span>
-									</span>
-								</button>
-								<div class="help-tip" style="margin-left: 5px">
-									<p>This plan includes 5 inbound calls, emails and messages.</p>
-								</div>
-							</div>
-
-							<div style="display:flex">
-								<button id="Plus" class="plan" onclick="selectplan(this.id)">
-									Plus
-									<span style="float: right; font-size: 14px; padding-right: 10px"
+								<div style="display:flex">
+									<button id="Plus" class="minplan" onclick="updatePlan(this.id)">
+										Plus
+										<span style="float: right; font-size: 14px; padding-right: 10px"
 										>$349
-										<span style="font-size: 10px; font-weight: 500">/month</span>
-									</span>
-								</button>
-								<div class="help-tip" style="margin-left: 5px">
-									<p>This plan includes 15 inbound calls, emails and messages.</p>
+											<span style="font-size: 10px; font-weight: 500">/month</span>
+										</span>
+										<p style="font-size: 10px;">15 inbound calls</p>
+									</button>
 								</div>
-							</div>
-							<div style="display:flex">
-								<button id="Pro" class="plan" onclick="selectplan(this.id)">
-									Pro
-									<span style="float: right; font-size: 14px; padding-right: 10px"
+								<div style="display:flex">
+									<button id="Pro" class="minplan" onclick="updatePlan(this.id)">
+										Pro
+										<span style="float: right; font-size: 14px; padding-right: 10px"
 										>$549
-										<span style="font-size: 10px; font-weight: 500">/month</span>
-									</span>
-								</button>
-								<div class="help-tip" style="margin-left: 5px">
-									<p>This plan includes 30 inbound calls, emails and messages.</p>
+											<span style="font-size: 10px; font-weight: 500">/month</span>
+										</span>
+										<p style="font-size: 10px;">30 inbound calls</p>
+									</button>
 								</div>
-							</div>
-							<div style="display:flex">
-								<button id="Unlimited" class="plan" onclick="selectplan(this.id)">
-									Unlimited
-									<span style="float: right; font-size: 14px; padding-right: 10px"
+								<div style="display:flex">
+									<button id="NoLimit" class="minplan" onclick="updatePlan(this.id)">
+										NoLimit
+										<span style="float: right; font-size: 14px; padding-right: 10px"
 										>$999
-										<span style="font-size: 10px; font-weight: 500">/month</span>
-									</span>
-								</button>
-								<div class="help-tip" style="margin-left: 5px">
-									<p>This plan includes unlimited inbound calls, emails, messages and customer feedback/ survey calls.</p>
+											<span style="font-size: 10px; font-weight: 500">/month</span>
+										</span>
+										<p style="font-size: 10px;">unlimited inbound calls</p>
+									</button>
 								</div>
 							</div>
 						</div>
 
+						<div class="blingfont" style="width: 100%; height: 100%; text-align:left; padding: 0px; margin: 0px; color: black;"  id="checkoutdata">
+							<div style="display: flex; justify-content: space-around;">
+								<h3 style="color: black; font-size: 16px;">Order Summary</h3>
+								<button class="btn-custom button-next" onclick="nextPayment()" style="padding: 3px; padding-left: 7px; padding-right: 7px;margin: 0px">Edit</button>
+							</div>
+							<div class='line'></div><br>
+							<table class='order-table'>
+								<tbody>
+									<tr>
+										<td style="width: 60%">
+											<span class='thin'><strong>Pro Plan</strong></span><br>
+											<span class='thin small'>
+												15 inbound calls per day<br>
+												CRM Updates<br>
+											</span>
+										</td>
+
+									</tr>
+									<tr>
+										<td style="width: 40%">
+											<div class='price'>$99.95</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class='line'></div>
+							<table class='order-table'>
+								<tbody>
+								<tr>
+									<td style="width: 60%">
+										<span class='thin'><strong>Weekend Plan</strong></span><br>
+										<span class='thin small'>
+												15 inbound calls per day<br>
+												CRM Updates<br>
+											</span>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 40%">
+										<div class='price'>$235.95</div>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+
+							<div class='line'></div>
+							<table class='order-table'>
+								<tbody>
+								<tr>
+									<td style="width: 60%">
+										<span class='thin'><strong>Weekend Plan</strong></span><br>
+										<span class='thin small'>
+												15 inbound calls per day<br>
+												CRM Updates<br>
+											</span>
+									</td>
+
+								</tr>
+								<tr>
+									<td style="width: 40%">
+										<div class='price'>$25.95</div>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+
+							<div class='line'></div>
+
+							<div class='total' style="background-color: #f00664; color: white; padding: 5px; border-radius: 5px">
+							  	<span style='float:left;'>
+									TOTAL
+								</span>
+
+								<span style='float:right; text-align:right;'>
+								$435.55
+							  </span>
+							</div>
+
+						</div>
 					</div>
 
-					<!--					<div class="already-acc">-->
-					<!--						<p>Already have an account?<button>Log in</button></p>-->
-					<!--					</div>-->
-				</div>
+<!--					Right box to get data-->
+					<div class="col-md-8" style="height: 80%; padding: 0px;">
+						<div class="box-data" style="height: 100%;">
+<!--							Create a new account screen-->
+							<div class="blingfont" id="selectplan" style="text-align: left">
+
+								<h3 style="font-weight: bold; color: #f00664">Create Account</h3>
+								<span style="margin-bottom: 10px">These details will be used to setup up your new account</span><br>
+								<span style="font-size: 12px; color: red; background-color: white; margin: 5px" id="error_message">please enter all required details correctly</span><br>
+
+								<div id="signup-form" style="margin-top: 15px">
+									<div class="blingfont" style="margin: 5px; padding:10px; background-color: rgba(255, 215, 0, 0.5); box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);">
+										<div class="row" style="padding-left: 15px; margin-bottom: 10px">
+											<div class="col-12 col-md-6">
+												<label for="name">Full Name*</label><br />
+												<input type="text" id="name" placeholder="John Doe" required />
+											</div>
+										</div>
+
+										<div class="row" style="padding-left: 15px; margin-bottom: 10px">
+											<div class="col-12 col-md-6">
+												<label for="email">Work Email*</label><br />
+												<input
+														type="email"
+														id="email"
+														placeholder="team@bling.cloud"
+														required
+												/>
+											</div>
+											<div class="col-12 col-md-6">
+													<label id="phoneno" for="phone">Phone Number*</label><br />
+													<input type="number" id="phone" placeholder="999-999-9999"/>
+											</div>
+										</div>
+									</div>
+									<div style="margin: 5px; padding:10px; background-color: rgba(255, 215, 0, 0.5); box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);">
+										<div class="row" style="padding-left: 15px; margin-bottom: 10px">
+											<div class="col-12 col-md-6">
+												<label for="business">Business Name*</label><br />
+												<input
+														type="text"
+														id="business"
+														placeholder="Bling Cloud"
+														required
+												/>
+											</div>
+											<div class="col-12 col-md-6">
+												<label for="title">Title*</label><br />
+												<input id="title" type="text" placeholder="CEO"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 
 
-					<div id="selectnumber" class="blingfont">
-						<h3 style="color: black;">Lets choose a number:</h3>
-						<p style="color: black; font-size: 13px">This number is associated with your business. You will be required to forward all your calls to this number. Any outgoing call to your clients will be from this number. </p>
+							<div id="selectnumber" class="blingfont" style="text-align:left">
+								<h3 style="font-weight: bold; color: #f00664">Select a Number</h3>
+								<p>This will be bling number associated with your business.</p>
+								<div id="displaynumber">
 
-						<div id="displaynumber">
-
-						</div>
-						<div id="getareacode" >
-							<h4 style="color: black;">Enter a Area Code:</h4>
-							<input type="text" id="areacode" placeholder="Area Code" />
-							<div style="margin-top: 10px"><Button class="btn btn-primary" onclick="listnumbers()">Get Available Numbers</Button></div>
-						</div>
-					</div>
-					<div id="welcomemessagediv" style="width: 100%; margin-bottom: 30px" class="blingfont">
-						<h3 style="color: black;">Lets setup your greeting message:</h3>
-						<h5 style="color: black; font-size: 13px">This message is played after accepting the call.</h5>
-						<div style="background-color: #ffd700; padding: 5px; border-radius: 5px;">
-							<h4 style="color: black">Current Message: </h4>
-							<p style="color: black; font-size: 14px" id="currentwelcome">Thanks for calling Business Name. We will be right with you.</p>
-						</div>
-						<h4 style="margin-top: 20px; color: black">Would you like to change the message: </h4>
-						<textarea id="greetingmessage" placeholder="Enter Greeting Message" style="margin-top: 10px; border: 0px;border-radius: 5px;padding: 3px; width: 100%; font-size: 14px; background-color: Transparent"></textarea>
-						<div style="margin-top: 10px"><Button class="btn btn-primary" onclick="updateGreeting()">Change Message</Button></div>
-						<h4 style="margin-top: 20px; color: black">click next to continue:</h4>
-					</div>
-					<div id="offhourmessagediv" style="width: 100%">
-						<h3 style="color: black;">Lets setup your Off Business hour message:</h3>
-						<h5 style="font-size: 13px; color: black">This message is played during after Business hours. Your customers can leave a voicemail. We will callback the next business day.</h5>
-						<div style="background-color: #ffd700; padding: 5px">
-							<h4 style="font-family: holden">Current Message: </h4>
-							<p style="color: black; font-size: 14px" id="currentvoicemail">Thank you for calling Business name. This is Meghan. Please leave a message and I will get back to you soon.</p>
-						</div>
-						<h4 style="margin-top: 20px; color: black">Would you like to change the message: </h4>
-						<textarea id="voicemailmessage" placeholder="Enter Off hour Message" style="margin-top: 10px; border: 0px;border-radius: 5px;padding: 3px; width: 100%; font-size: 14px"></textarea>
-						<div style="margin-top: 10px"><Button class="btn btn-primary" onclick="updateVoicemail()">Change Message</Button></div>
-						<h4 style="margin-top: 20px; color: black">click next to continue:</h4>
-					</div>
-					<div id="connectcalldiv" style="width: 100%; height: 90%" class="blingfont">
-						<h3 style="color: black;">Would you like to talk to an Account Manager?</h3>
-						<h5 style="color: black">You can continue to next step if you got nothing to discuss.</h5>
-						<div style="display: flex" id="calloptions">
-							<div style="margin: 10px"><Button class="btn btn-primary" onclick="callnow()">Get a call Now</Button></div>
-							<div style="margin: 10px"><Button class="btn btn-primary" onclick="schedulecall()">Schedule a Call at a later time</Button></div>
-						</div>
-						<div id="callnow">
-							<input type="text" id="callbacknumber" placeholder="Enter a callback number" />
-							<div style="margin: 10px"><Button class="btn btn-primary">Request a call back</Button></div>
-						</div>
-						<iframe src="https://calendly.com/alexcarter-100/15min" style="width: 100%; height: 90%; border: 0px" id="schedulecall"></iframe>
-						<div style="margin-bottom: 20px" />
-					</div>
-					<div id="golivediv" style="width: 100%; height: 90%">
-						<h2 style="color: black; font-family: gabriela">Choose Go live date</h2>
-						<div style="width: 100%; height: 90%; margin-top: 20px; display: flex">
-							<div class="calendar-left">
+								</div>
+								<div id="getareacode" >
+									<h4 style="color: black;">Enter a Area Code:</h4>
+									<p style='font-size: 12px; color: #f00664'>(or simply press the button below to get more random numbers)</p>
+									<input type="text" id="areacode" placeholder="Area Code" />
+									<div style="margin-top: 10px"><Button class="btn-custom" style="background-color: #69ffa5; color: black; border: none" onclick="listnumbers()">Get Available Numbers</Button></div>
+								</div>
 								<center>
-									<div style="margin-top: 20px">You selected:</div>
-									<div class="num-date" id="selecteddate">27</div>
-									<div style="margin-top: -30px">May</div>
-									<!--num-date -->
-									<div class="day" style="margin-top: 20px">THURSDAY</div>
+									<div id="loader">
+										<div class="loaderprogress"></div>
+										<span class="blink_me blingfont" id="processtext">GETTING PHONE NUMBERS</span>
+									</div>
 								</center>
 							</div>
-							<div style="width: 70%; height: 100%;">
-								<button class="datenotselected" style="height: 30%; width:25%; border: 1px solid black; border-radius: 3px; margin: 10px">
-									<h1>01</h1> May, 2021<br>
-									<h4>Monday</h4>
-								</button>
-								<button class="datenotselected" style="height: 30%; width:25%; border: 1px solid black; border-radius: 3px; margin: 10px">
-									<h1>02</h1> May, 2021<br>
-									<h4>Monday</h4>
-								</button>
-								<button class="datenotselected" style="height: 30%; width:25%; border: 1px solid black; border-radius: 3px; margin: 10px">
-									<h1>03</h1> May, 2021<br>
-									<h4>Monday</h4>
-								</button>
-								<button class="datenotselected" style="height: 30%; width:25%; border: 1px solid black; border-radius: 3px; margin: 10px">
-									<h1>04</h1> May, 2021<br>
-									<h4>Monday</h4>
-								</button>
-								<button class="datenotselected" style="height: 30%; width:25%; border: 1px solid black; border-radius: 3px; margin: 10px">
-									<h1>05</h1> May, 2021<br>
-									<h4>Monday</h4>
-								</button>
-								<button class="datenotselected" style="height: 30%; width:25%; border: 1px solid black; border-radius: 3px; margin: 10px">
-									<h1>06</h1> May, 2021<br>
-									<h4>Monday</h4>
-								</button>
-								<button class="datenotselected" style="height: 30%; width:25%; border: 1px solid black; border-radius: 3px; margin: 10px" disabled>
-									<h1>07</h1> May, 2021<br>
-									<h4>Monday</h4>
-								</button>
-								<button class="datenotselected" style="height: 30%; width:25%; border: 1px solid black; border-radius: 3px; margin: 10px">
-									<h1>08</h1> May, 2021<br>
-									<h4>Monday</h4>
-								</button>
-								<button class="datenotselected" style="height: 30%; width:25%; border: 1px solid black; border-radius: 3px; margin: 10px">
-									<h1>09</h1> May, 2021<br>
-									<h4>Monday</h4>
-								</button>
+
+<!--							Set welcome message-->
+							<div id="welcomemessagediv" class="blingfont" style="text-align: left">
+								<h3 style="font-weight: bold; color: #f00664">Setup</h3>
+								<p>Let's get your two important messages setup.</p>
+								<h4 style="color: #f00664; margin-top: 15px">1. GREETING Message </h4>
+								<p style="color: black; font-size: 14px" id="currentwelcome"></p>
+								<input type="text" id="greetingmessage" placeholder="Custom Greeting Message" style="margin-top: -5px;"/>
+								<div style="margin-top: 10px"><Button class="btn-custom blingfont" style="background-color: #69ffa5; color: black; border: none" onclick="updateGreeting()">Use Custom Message</Button></div>
 							</div>
-						</div>
-					</div>
 
-					<div id="processpayment" class="basic-list-group" style="width: 100%; height: 90%; border-radius: 10px; background-color: white; padding: 10px">
-						<ul class="nav nav-pills" style="padding:2px; display: flex; ">
-							<li class="nav-item" style="width: 50%">
-								<a href="#bling-cart" class="nav-link active" data-toggle="tab">
-									Bling Cart</a>
-							</li>
-							<li class="nav-item" style="width: 50%">
-								<a href="#pull-payment" class="nav-link" data-toggle="tab">
-									Payment</a>
-							</li>
-						</ul>
+<!--							Set voicemail message-->
+							<div id="offhourmessagediv" class="blingfont" style="text-align: left">
+								<h3 style="font-weight: bold; color: #f00664">Setup</h3>
+								<p>Let's get your two important messages setup.</p>
+								<h4 style="color: #f00664; margin-top: 15px">2. VOICE MAIL Message </h4>
+								<p style="color: black; font-size: 14px" id="currentvoicemail"></p>
+								<input type="text" id="voicemailmessage" placeholder="Custom Voicemail Message" style="margin-top: -5px;"/>
+								<div style="margin-top: 10px"><Button class="btn-custom blingfont" style="background-color: #69ffa5; color: black; border: none" onclick="updateVoicemail()">Use Custom Message</Button></div>
+							</div>
 
-						<div class="tab-content" id="nav-tabContent" style="height: 85%; width: 100%">
-
-							<div class="tab-pane fade active in show" id="bling-cart" style="height: 100%; width: 100%">
-								<center><div style="display: flex; margin-top: 20px; height: 100%; width: 100%">
-	<!--								<img src="./images/hello.jpeg" width="20%" height="20%"/>-->
-									<div style="width: 20%; height: 80%; font-family: droid; border: 1px solid black">
-										<p style="font-size: 12px; background-color: #306EFF; color: white">Go Live Date</p>
-										<p style="font-size: 70px">24</p>
-										<p>May, 2021</p>
-										<p>MONDAY</p>
-										<button class="btn btn-primary" style="margin: 10px">Edit</button>
-									</div>
-									<div>
-										<table class=" table-bordered" style="margin: 10px">
-											<tr>
-												<th>Product</th>
-												<th>Price</th>
-											</tr>
-											<tr>
-												<td style="padding: 5px">
-													<p>Bling Receptionist</p>
-													<ul>
-													<li>~200 calls/month</li>
-													<li>Unlimited Messages</li>
-													<li>Unlimited Emails</li>
-													<li>Callbacks</li>
-													<li>Filter spam calls</li>
-													<li>CRM updates</li>
-													<li>Slack notifications</li>
-													</ul>
-												</td>
-												<td style="padding: 5px">$199/month</td>
-											</tr>
-										</table>
-										<button class="btn btn-primary">Checkout</button>
-									</div>
+<!--							Select go live date-->
+							<div id="golivediv" class="blingfont" style="height: 95%; overflow: scroll; text-align: left">
+								<h3 style="font-weight: bold; color: #f00664">Last Step</h3>
+								<h3 style="color: black; font-size: 16px">I need help...</h3>
+								<div class="divider"> </div>
+								<div style="width: 100%; margin-top: 10px; display: flex; justify-content: space-around">
+									<Button class="btn-custom" style="background-color: #69ffa5; color: black" onclick="chatnow()">Chat Now</Button>
+									<Button class="btn-custom" style="background-color: #69ffa5; color: black" onclick="callback()">Get a callBack</Button>
+									<Button class="btn-custom" style="background-color: #69ffa5; color: black" onclick="schedulecall()">Schedule a Call</Button>
 								</div>
-								</center>
+								<h3 style="color: black; font-size: 16px; margin-top: 10px">My Start Date is...</h3>
+								<div class="divider"> </div>
+								<div style="width: 100%; height: 16%; margin-top: 10px; display: flex; justify-content: space-around" id="datesavailable">
+
+								</div>
+								<h3 style="color: black; font-size: 16px; margin-top: 15px;">I want to add...</h3>
+								<div class="divider"> </div>
+								<div style="display: flex; height: 28%; width: 100%">
+									<button class="btn-custom blingfont options" id="wdc" onclick="addPlan(this.id)">
+										<span style="font-size: 14px">Weekend Day</span><br>
+										<font size="1">Reception service for 8 hrs during the weekend</font><br>
+										<p style="font-size: 16px">+ $<span id="wdcprice"></span><font size="1">/month only</font></p>
+									</button>
+									<button class="btn-custom blingfont options" id="wnc" onclick="addPlan(this.id)">
+										<span style="font-size: 14px">Weekend Night</span><br>
+										<font size="1">Reception service for 8 hrs during the weekend nights</font><br>
+										<p style="font-size: 16px">+ $<span id="wncprice"></span><font size="1">/month only</font></p>
+									</button>
+									<button class="btn-custom blingfont options" id="dnc" onclick="addPlan(this.id)">
+										<span style="font-size: 14px">Daily Night</span><br>
+										<font size="1">Reception service for 8 hrs during the weekday nights</font><br>
+										<span style="font-size: 16px">+ $<span id="dncprice"></span><font size="1">/month only</font></span>
+									</button>
+								</div>
 							</div>
 
-							<div class="tab-pane fade" id="pull-payment" style="height: 100%; width: 100%">
-								<h1 style="color: black">Pull Payment</h1>
+<!--							Process payment + bling cart-->
+							<div id="processpayment" class="blingfont" style="width: 100%; height: 90%; border-radius: 10px; background-color: white; padding: 10px; text-align: left">
+								<span style="position: absolute; bottom: -10px; right: 30px; color: #f00664; font-weight: bold; font-size:10px">Powered by Stripe</span>
+								<h3 style="font-weight: bold; color: #f00664">Payment</h3>
+								<p>We will get the payment method but <strong>won't charge till start date.</strong></p>
+								<form id="payment-form" style="padding: 0px;width: 100%; height: 73%; margin-top: -5px">
+										<div class="cell example example1" id="example-1" style="padding: 1px">
+											<form>
+												<fieldset>
+													<div class="row">
+														<label for="example1-name" data-tid="elements_examples.form.name_label">Name</label>
+														<input id="example1-name" data-tid="elements_examples.form.name_placeholder" type="text" placeholder="Jane Doe" required="" autocomplete="name">
+													</div>
+													<div class="row">
+														<label for="example1-email" data-tid="elements_examples.form.email_label">Email</label>
+														<input id="example1-email" data-tid="elements_examples.form.email_placeholder" type="email" placeholder="janedoe@gmail.com" required="" autocomplete="email">
+													</div>
+													<div class="row">
+														<label for="example1-phone" data-tid="elements_examples.form.phone_label">Phone</label>
+														<input id="example1-phone" data-tid="elements_examples.form.phone_placeholder" type="tel" placeholder="(941) 555-0123" required="" autocomplete="tel">
+													</div>
+												</fieldset>
+												<fieldset>
+													<div class="row">
+														<div id="example1-card" style="padding: 5px"></div>
+													</div>
+												</fieldset>
+												<button data-tid="elements_examples.form.pay_button" style="border: none; outline: none; box-shadow: none">Pay $25</button>
+<!--												<div class="error" role="alert"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17">-->
+<!--													<path class="base" fill="#000" d="M8.5,17 C3.80557963,17 0,13.1944204 0,8.5 C0,3.80557963 3.80557963,0 8.5,0 C13.1944204,0 17,3.80557963 17,8.5 C17,13.1944204 13.1944204,17 8.5,17 Z"></path>-->
+<!--													<path class="glyph" fill="#FFF" d="M8.5,7.29791847 L6.12604076,4.92395924 C5.79409512,4.59201359 5.25590488,4.59201359 4.92395924,4.92395924 C4.59201359,5.25590488 4.59201359,5.79409512 4.92395924,6.12604076 L7.29791847,8.5 L4.92395924,10.8739592 C4.59201359,11.2059049 4.59201359,11.7440951 4.92395924,12.0760408 C5.25590488,12.4079864 5.79409512,12.4079864 6.12604076,12.0760408 L8.5,9.70208153 L10.8739592,12.0760408 C11.2059049,12.4079864 11.7440951,12.4079864 12.0760408,12.0760408 C12.4079864,11.7440951 12.4079864,11.2059049 12.0760408,10.8739592 L9.70208153,8.5 L12.0760408,6.12604076 C12.4079864,5.79409512 12.4079864,5.25590488 12.0760408,4.92395924 C11.7440951,4.59201359 11.2059049,4.59201359 10.8739592,4.92395924 L8.5,7.29791847 L8.5,7.29791847 Z"></path>-->
+<!--												</svg>-->
+<!--													<span class="message"></span></div>-->
+											</form>
+<!--											<div class="success">-->
+<!--												<div class="icon">-->
+<!--													<svg width="84px" height="84px" viewBox="0 0 84 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
+<!--														<circle class="border" cx="42" cy="42" r="40" stroke-linecap="round" stroke-width="4" stroke="#000" fill="none"></circle>-->
+<!--														<path class="checkmark" stroke-linecap="round" stroke-linejoin="round" d="M23.375 42.5488281 36.8840688 56.0578969 64.891932 28.0500338" stroke-width="4" stroke="#000" fill="none"></path>-->
+<!--													</svg>-->
+<!--												</div>-->
+<!--												<h3 class="title" data-tid="elements_examples.success.title">Payment successful</h3>-->
+<!--												<p class="message"><span data-tid="elements_examples.success.message">Thanks for trying Stripe Elements. No money was charged, but we generated a token: </span><span class="token">tok_189gMN2eZvKYlo2CwTBv9KKh</span></p>-->
+<!--												<a class="reset" href="#">-->
+<!--													<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
+<!--														<path fill="#000000" d="M15,7.05492878 C10.5000495,7.55237307 7,11.3674463 7,16 C7,20.9705627 11.0294373,25 16,25 C20.9705627,25 25,20.9705627 25,16 C25,15.3627484 24.4834055,14.8461538 23.8461538,14.8461538 C23.2089022,14.8461538 22.6923077,15.3627484 22.6923077,16 C22.6923077,19.6960595 19.6960595,22.6923077 16,22.6923077 C12.3039405,22.6923077 9.30769231,19.6960595 9.30769231,16 C9.30769231,12.3039405 12.3039405,9.30769231 16,9.30769231 L16,12.0841673 C16,12.1800431 16.0275652,12.2738974 16.0794108,12.354546 C16.2287368,12.5868311 16.5380938,12.6540826 16.7703788,12.5047565 L22.3457501,8.92058924 L22.3457501,8.92058924 C22.4060014,8.88185624 22.4572275,8.83063012 22.4959605,8.7703788 C22.6452866,8.53809377 22.5780351,8.22873685 22.3457501,8.07941076 L22.3457501,8.07941076 L16.7703788,4.49524351 C16.6897301,4.44339794 16.5958758,4.41583275 16.5,4.41583275 C16.2238576,4.41583275 16,4.63969037 16,4.91583275 L16,7 L15,7 L15,7.05492878 Z M16,32 C7.163444,32 0,24.836556 0,16 C0,7.163444 7.163444,0 16,0 C24.836556,0 32,7.163444 32,16 C32,24.836556 24.836556,32 16,32 Z"></path>-->
+<!--													</svg>-->
+<!--												</a>-->
+<!--											</div>-->
+										</div>
+
+										<!-- We'll put the error messages in this element -->
+										<div id="card-element-errors" role="alert"></div>
+								</form>
 							</div>
+
+							<button class="btn-custom button-next" style="position: absolute; bottom: -5px; left: 40px" onclick="backStep()" id="backbutton">Back</button>
+							<button class="btn-custom button-next" style="position: absolute; bottom: -5px; right: 40px" onclick="nextStep()" id="nextbutton">Next</button>
 						</div>
 					</div>
-
-
 				</div>
-
-				<center>
-					<div id="loader">
-						<div class="loaderprogress"></div>
-						<span class="blink_me blingfont" id="processtext">GETTING PHONE NUMBERS</span>
-					</div>
 				</center>
-				<div
-						class="btn-signup"
-						style="padding-left: 20px; margin-bottom: 10px"
-						id="nextbutton"
-				>
-					<button onclick="nextStep()" >Next</button>
-				</div>
-			</div>
-
-<!--			<div class="col-12 col-md-2" style="padding: 0px">-->
-<!--				<div class="signup-background">-->
-<!--					<div class="main-img">-->
-<!--						<img src="./images/signup/call2 1.png" alt="" />-->
-<!--					</div>-->
-<!--					<div class="mainimg-dot1">-->
-<!--						<img src="./images/signup/Ellipse 3.png" alt="" />-->
-<!--					</div>-->
-<!--					<div class="mainimg-dot2">-->
-<!--						<img src="./images/signup/Ellipse 1.png" alt="" />-->
-<!--					</div><br><br>-->
-<!--					<h2 style="color: black; font-family: gabriela">Let’s get started</h2>-->
-<!--					<center><p style="color: black; padding:10px; font-family: gabriela">You didnt start a business to take calls. Luckily we did!</p>-->
-<!--					</center>-->
-<!--					<div class="mainimg-dot3">-->
-<!--						<img src="./images/signup/Ellipse 2.png" alt="" />-->
-<!--					</div>-->
-<!--					<div class="mainimg-dot4">-->
-<!--						<img src="./images/signup/Ellipse 5.png" alt="" />-->
-<!--					</div>-->
-<!--					<div class="arrowline1">-->
-<!--						<img src="./images/signup/Vector 2.png" alt="" />-->
-<!--					</div>-->
-<!--					<div class="arrowline2">-->
-<!--						<img src="./images/signup/Vector 1.png" alt="" />-->
-<!--					</div>-->
-<!--				</div>-->
 			</div>
 		</div>
 
+
+
+<!--		<div class="bubble" style="position: fixed; top: 100px; right: 0px"></div>-->
+<!--		<div class="bubble" style="position: fixed; top: 400px; right: 200px">2</div>-->
+<!--		<div class="bubble" style="position: fixed; top: 300px; left: 50px">3</div>-->
+<!--		<div class="bubble" style="position: fixed; bottom: 30px; right: 600px">4</div>-->
+<!--		<div class="bubble" style="position: fixed; bottom: 50px; left: 100px">5</div>-->
 	</body>
 </html>

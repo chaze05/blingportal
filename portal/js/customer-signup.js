@@ -23,20 +23,31 @@ var signup_details = {
     'email': '',
     'number': '',
     'address': '',
+    'blingphonenumber': '',
+    'add_on_plan': {},
+    'welcome_message': '',
+    'voicemail_message': ''
 }
 
 var plan_details = {
-    'Basic': '5 calls per day',
-    'Plus': '15 calls per day',
-    'Pro': '30 calls per day',
-    'Unlimited': 'Unlimited calls per day',
+    'Basic': '199|200|CRM Updates ',
+    'Plus': '349|300|Emails/Messages|CRM Updates',
+    'Pro': '549|600|Emails/Messages|CRM Updates',
+    'NoLimit': '999|1800|Emails/Messages|CRM Updates|Surveys/Feedbacks',
 }
 
-var current_screen_index = 0;
-var next_screen_index = 1;
-var in_progress_screen_index = 0;
-var screens = ['selectplan', 'selectnumber', 'welcomemessagediv', 'offhourmessagediv', 'connectcalldiv', 'golivediv', 'processpayment']
-var function_calls = [do_nothing,displayBlingNumber, display_welcome, display_voicemail,do_nothing, do_nothing, do_nothing]
+var plan_count = {
+    'Basic': '5 inbound calls per day',
+    'Plus': '15 inbound calls per day',
+    'Pro': '30 inbound calls per day',
+    'NoLimit': '90 inbound calls per day',
+}
+
+var current_screen_index = 3;
+var next_screen_index = 4;
+var in_progress_screen_index = 3;
+var screens = ['selectplan', 'selectnumber', 'welcomemessagediv', 'golivediv', 'processpayment']
+var function_calls = [do_nothing,displayBlingNumber, display_welcome, golivedate, display_process_payment]
 var clicked_out_order = false
 var updated_welcome = false
 var updated_voicemail = false
@@ -51,10 +62,13 @@ $(document).ready(function () {
     var day = ("0" + todaysDate.getDate()).slice(-2);
     var minDate = (year +"-"+ month +"-"+ day);
 
+    var link = window.location.href.split("?")
+//    console.log(link[1])
+    updatePlan(link[1]);
+
     hideAll();
-    $('#startup').show();
-    $('#selectplan').show();
-    $('#welcome').hide();
+    $('#accountsuccess').hide();
+//    golivedate();
 
     hideInterval = setInterval(function() {
             if ($('#nextbutton').length > 0) {
@@ -65,24 +79,18 @@ $(document).ready(function () {
 
     elements = document.getElementsByClassName('progress')
 
+     // remove after testing
+        plan = document.getElementById('Pro')
+
+        signup_details['plan_name'] = "Pro Plan"
+        signup_details['business'] = "Bling"
+
     for(i=0; i< elements.length; i++) {
         elements[i].disabled = true
     }
 
-    // remove after testing
-//    plan = document.getElementById('Pro')
-//
-//    signup_details['plan_name'] = "Pro Plan"
-//    signup_details['plan_description'] = plan.nextElementSibling.innerHTML.replace("<p>","").replace("</p>","").replace(/\t|\n/g, "")
-//    signup_details['plan_amount'] = plan.getElementsByTagName("span")[0].innerText.replace(/\t|\n/g, "")
-//    display_next_screen();
-//    display_next_screen();
-//    display_next_screen();
-//    display_next_screen();
-
-    //next screen values
-//    $('#callcount')[0].innerText = plan_details['Pro']
-//    $('#calldescription')[0].innerText = signup_details['plan_description']
+    display_next_screen();
+//    nextStep()
 });
 
 function do_nothing() {
@@ -90,9 +98,6 @@ function do_nothing() {
 }
 
 function hideAll() {
-        $('#startup').hide();
-        $('#gameplay').hide();
-        $('#minPlans').hide();
 
         $('#selectplan').hide();
         $('#selectnumber').hide();
@@ -103,16 +108,25 @@ function hideAll() {
         $('#processpayment').hide();
         $('#loader').hide();
         $('#nextbutton').show();
+        $('#nextbutton')[0].disabled = false
         $('#callnow').hide();
         $('#schedulecall').hide();
         $('#welcome').show();
+        $('#BasicPlan').hide();
+        $('#requestmessage').hide();
+        $('#checkoutdata').hide();
+        $('#backbutton').hide();
+        $('#checkoutdata').hide();
+        $('#gameplay').show();
 }
 
 function display_next_screen() {
-    console.log(signup_details)
+//    console.log(signup_details)
     hideAll();
-     $('#gameplay').show();
-     $('#progress_' + current_screen_index).removeClass('progressclick')
+     $('#progress_' + (current_screen_index + 1)).removeClass('progressclick')
+     if (current_screen_index == 'partial_screen') {
+        $('#progress_3').removeClass('progressclick')
+     }
 
      if (!clicked_out_order) {
         if (current_screen_index != in_progress_screen_index) {
@@ -126,9 +140,10 @@ function display_next_screen() {
     screen_name = screens[current_screen_index]
     function_calls[current_screen_index]()
     $('#' + screen_name).show();
-    document.getElementsByClassName('progress')[current_screen_index - 1].disabled = false
+    document.getElementsByClassName('progress')[current_screen_index].disabled = false
     clicked_out_order = false;
-    $('#progress_' + current_screen_index).addClass('progressclick')
+    $('#progress_' + (current_screen_index + 1)).addClass('progressclick')
+    console.log(current_screen_index)
 }
 
 function validate() {
@@ -136,111 +151,179 @@ function validate() {
 	const phone = document.getElementById('phone').value;
 	const email = document.getElementById('email').value;
 	const business = document.getElementById('business').value;
-	const error_message = document.getElementById('error_message');
-
-	error_message.style.padding = '10px';
+	const title = document.getElementById('title').value;
+	flag = 0;
 
 	var text;
 	if (name.length < 2) {
-		text = 'Please Enter valid Name';
-		error_message.innerHTML = text;
-		return false;
+	    $('#name').addClass('error-outline')
+		flag = 1;
 	}
 
 	if (email.indexOf('@') == -1 || email.length < 6) {
-		text = 'Please Enter valid Email';
-		error_message.innerHTML = text;
-		return false;
+	    $('#email').addClass('error-outline')
+		flag = 1;
 	}
 	if (isNaN(phone) || phone.length != 10) {
-		text = 'Please Enter valid Phone Number';
-		error_message.innerHTML = text;
-		return false;
+	    $('#phone').addClass('error-outline')
+		flag = 1;
 	}
 
 	if (business.length < 2) {
-        text = 'Please Enter valid Business Name';
-        error_message.innerHTML = text;
-        return false;
+	    $('#business').addClass('error-outline')
+        flag = 1;
     }
 
-	if (selectedPlan == '') {
-        text = 'Please Select a Plan';
-        error_message.innerHTML = text;
-        return false;
+    if (title.length < 2) {
+        $('#title').addClass('error-outline')
+        flag = 1;
     }
 
+    if (flag == 1) {
+        return false;
+    }
 	return true;
 }
 
 function signUp() {
-    $('#signup-error').hide();
+    $('#name').removeClass('error-outline')
+    $('#email').removeClass('error-outline')
+    $('#phone').removeClass('error-outline')
+    $('#business').removeClass('error-outline')
+    $('#title').removeClass('error-outline')
+
 	const valid = validate();
 	if (valid) {
 	    signup_details['fullname'] = $('#name')[0].value
 	    signup_details['email'] = $('#email')[0].value
 	    signup_details['number'] = $('#phone')[0].value
 	    signup_details['business'] = $('#business')[0].value
+	    signup_details['title'] = $('#title')[0].value
 
-        if (!updated_welcome) {
-	        signup_details['welcome_message'] = "Thanks for calling "+$('#business')[0].value+ ". We will be right with you."
-	    }
-
-	    if (!updated_voicemail) {
-	        signup_details['voicemail_message'] = "Thank you for calling "+$('#business')[0].value+ ". This is Meghan. Please leave a message and I will get back to you soon."
-        }
-
-//	    $('#signup-form').hide();
-//	    $('#stripcheckout').show();
-        updatePlan();
         display_next_screen();
 	}
 }
 
-function updatePlan() {
+function updatePlan(plan) {
+    selectedPlan = plan
      plan = document.getElementById(selectedPlan)
+     details = plan_details[selectedPlan].split("|")
 
     signup_details['plan_name'] = selectedPlan + " Plan"
-    signup_details['plan_description'] = plan.nextElementSibling.innerHTML.replace("<p>","").replace("</p>","").replace(/\t|\n/g, "")
-    signup_details['plan_amount'] = plan.getElementsByTagName("span")[0].innerText.replace(/\t|\n/g, "")
-    console.log(signup_details)
+    signup_details['plan_amount'] = details[0]
+
 
     //next screen values
-    $('#callcount')[0].innerText = plan_details[selectedPlan]
-    $('#calldescription')[0].innerText = signup_details['plan_description']
+    $('#planname')[0].innerText = selectedPlan
+    $('#planprice')[0].innerText = "$" + details[0] + "/month"
+
+    plandetails = "<h4 style='color: black; font-size: 12px'><font size='4'>"+ details[1]+"</font> calls/month</h4>"
+    for (i=2;i<details.length;i++) {
+        plandetails += "<h4 style='color: black; font-size: 12px'>"+ details[i]+"</h4>"
+    }
+    document.getElementById('plandetails').innerHTML = plandetails
+
+    showAllPlans();
+    $('#'+ selectedPlan).hide();
+    $('#wdcprice')[0].innerText = Math.floor(details[0] / 2)
+    $('#wncprice')[0].innerText = Math.floor(details[0] / 2)
+    $('#dncprice')[0].innerText = Math.floor(details[0] / 2)
+
+    for(i in signup_details['add_on_plan']) {
+        additional_plan = signup_details['add_on_plan'][i]
+        div = document.createElement('h4')
+        div.style = 'color: black; font-size: 12px'
+        text = "+ " + additional_plan['name']
+        div.id = additional_plan['plan'] + "_div"
+        text += "  <button id=" +additional_plan['plan']+"_button onclick=cancelPlan(this.id) style='background-color: #f00664; border-radius: 50%; border: none; outline:none; color: white; padding: 3px'>x</button>"
+        div.innerHTML = text
+        signup_details['add_on_plan'][i]['amount'] = Math.floor(signup_details['plan_amount']/2)
+        document.getElementById('plandetails').appendChild(div)
+    }
+    updatePlanList();
+
+}
+
+function addPlan(plan) {
+
+    $('#' + plan).addClass("button-add-click");
+    additional_plan = {'plan': plan}
+    switch(plan) {
+        case 'wdc':
+            additional_plan['name'] = "Weekend Day coverage"
+            break;
+        case 'wnc':
+            additional_plan['name'] = "Weekend Night coverage"
+            break;
+        case 'dnc':
+            additional_plan['name'] = "Daily Night coverage"
+    }
+
+    additional_plan['amount'] = Math.floor(signup_details['plan_amount']/2)
+
+    signup_details['add_on_plan'][plan] = additional_plan
+
+
+//    div = document.createElement('h4')
+//    div.style = 'color: black; font-size: 12px'
+//    text = "+ " + additional_plan['name']
+//    div.id = plan + "_div"
+//    text += "  <button id=" +plan+"_button onclick=cancelPlan(this.id) style='background-color: #f00664; border-radius: 50%; border: none; outline:none; color: white; padding: 3px'>x</button>"
+//    div.innerHTML = text
+//
+//    document.getElementById('plandetails').appendChild(div)
+}
+
+function cancelPlan(planid) {
+    plan = planid.split("_")[0]
+    node = document.getElementById(plan + "_div")
+    document.getElementById('plandetails').removeChild(node)
+    delete signup_details['add_on_plan'][plan]
+    $('#' + plan).show();
+    updatePlanList();
+}
+
+function showAllPlans() {
+    $('#Basic').show();
+    $('#Pro').show();
+    $('#Plus').show();
+    $('#NoLimit').show();
 }
 
 function addblingnumber(id) {
+    if (signup_details['blingphonenumber'] != '') {
+        $('#' +signup_details['blingphonenumber'] ).removeClass('button-add-click')
+        $('#' +signup_details['blingphonenumber'] ).addClass('button-add')
+    }
     signup_details['blingphonenumber'] = id
-    display_next_screen();
-}
-
-function setwelcomemsg() {
-    display_next_screen();
-}
-
-function setoffhourmsg() {
-    display_next_screen();
+    $('#' + id).addClass('button-add-click')
+    $('#nextbutton')[0].disabled = false;
 }
 
 function nextStep() {
-    console.log("Next screen")
-    switch(current_screen_index) {
-        case 0: signUp();
-            break;
-        case 1: addblingnumber(0);
-            break;
-        case 2: setwelcomemsg();
-            break;
-        case 3: setoffhourmsg();
-            break;
-        case 4: connectToAgent();
-            break;
-        case 5: setgolivedate();
-            break;
-        case 6: processpayment();
-            break;
-    }
+
+        if (current_screen_index == "partial_screen") {
+            display_voicemail();
+            current_screen_index = 2;
+            $('#offhourmessagediv').show();
+            $('#welcomemessagediv').hide();
+            $('#backbutton').show();
+            return;
+        }
+
+        switch(parseInt(current_screen_index)) {
+            case 0: signUp();
+                break;
+            case 1: display_next_screen();
+                current_screen_index = "partial_screen"
+                break;
+            case 2: display_next_screen();
+                break;
+            case 3: display_next_screen();
+                break;
+            case 4: display_next_screen();
+                break;
+        }
 }
 
 
@@ -250,6 +333,7 @@ function selectplan(id) {
         selectedPlan = id
         $('#'+ id).addClass('click')
         $('#'+ id).removeClass('plan hover')
+        updatePlanList();
 }
 
 
@@ -278,12 +362,6 @@ function stripecheckout() {
       });
 }
 
-function cancelcheckout() {
-    $('#stripcheckout').hide();
-    $('#error_message').hide();
-    $('#signup-form').show();
-}
-
 
 function paynow() {
 
@@ -308,70 +386,181 @@ function paynow() {
 }
 
 
-function displayPlans() {
-    $('#minPlans').show();
-    $('#switchplanbutton').hide();
+function golivedate() {
+    var nextDate = new Date();
+
+    var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+    $('#datesavailable')[0].innerHTML = ""
+
+    for(i=0; i<6; i++) {
+        button = document.createElement('button')
+        button.onclick = function() {
+            updateDate(this.id)
+        }
+        if ([6, 0].includes(nextDate.getDay())) {
+            button.disabled = true
+        }
+
+        tempDate = nextDate.toLocaleString('default', options).split(",");
+        button.id = nextDate.toLocaleString('default', options)
+        button.className = "btn-custom calendar-date"
+        text = '<div style="background-color:#69ffa5; height: 15%;"></div>'
+        text += '<span style="font-family: droid; font-size: 11px; width: 100%">'+tempDate[1].trim() +'</span>'
+        text += '<p style="font-family: droid; font-size: 14px">'+tempDate[0]+'</p>'
+        button.innerHTML = text;
+
+         if (i==1) {
+            tempDate = nextDate.toLocaleString('default', options);
+            signup_details['startdate'] = tempDate
+            button.className = "btn-custom button-add-click"
+        }
+        document.getElementById('datesavailable').appendChild(button);
+        nextDate.setDate(nextDate.getDate() + 1);
+    }
+
+    button = document.createElement('button')
+    button.id = "laterdate"
+    button.className = "btn-custom calendar-date"
+    text = '<div style="background-color:#69ffa5; height: 15%;"></div>'
+    text += '<span style="font-family: droid; font-size: 11px; width: 100%" onclick="laterdate()">Later Date</span>'
+    button.innerHTML = text;
+    document.getElementById('datesavailable').appendChild(button);
 }
 
-function canceldisplayplan() {
-    $('#minPlans').hide();
-    $('#switchplanbutton').show();
-}
-
-function switchplan(id) {
-    selectedPlan = id.replace("Plan", "")
-    updatePlan();
-    canceldisplayplan();
+function updateDate(date) {
+    document.getElementById(signup_details['startdate']).classList.remove('button-add-click')
+    document.getElementById(signup_details['startdate']).classList.add('calendar-date')
+    document.getElementById(date).classList.add("button-add-click")
+    signup_details['startdate'] = date
 }
 
 function displayBlingNumber() {
-    hideInterval = setInterval(function() {
-        if ($('#nextbutton').length > 0) {
-            clearInterval(hideInterval);
-            $('#nextbutton').hide();
-        }
-    }, 100)
+
+    if (signup_details['blingphonenumber'] == '') {
+        hideInterval = setInterval(function() {
+            if ($('#nextbutton').length > 0) {
+                clearInterval(hideInterval);
+                $('#nextbutton')[0].disabled = true;
+            }
+        }, 100)
+        listnumbers();
+    } else {
+        $('#nextbutton').show();
+    }
 }
 
 function display_welcome() {
-    $('#currentwelcome')[0].value = signup_details['welcome_message']
+    if($('#currentwelcome')[0].innerHTML != '') {
+        console.log($('#currentwelcome')[0].innerHTML + " is the value")
+        return
+    }
+    var messages = [
+        "Thanks for calling " + signup_details['business'] + ". How may I help you today?",
+        "Thanks for calling " + signup_details['business'] + ". How are you doing?",
+        signup_details['business']  + " here. what can we do for you today?",
+    ]
+
+    $('#currentwelcome')[0].innerHTML = "<span style='color: grey'>Select a message or add a new custom message</span>"
+    for(i in messages) {
+        button = document.createElement('button')
+        button.id = "greeting_message_" + i;
+        button.className = "btn-custom button-add"
+        if (i == 0) {
+            button.className = "btn-custom button-add-click"
+            signup_details['welcome_message'] = messages[i]
+            signup_details['welcome_message_id'] = button.id
+        }
+        button.style = "margin: 5px; padding: 5px; text-align: left"
+        button.onclick = function() {
+            clickNewGreeting(this.innerText, this.id)
+        }
+        button.innerText = messages[i]
+        document.getElementById('currentwelcome').appendChild(button)
+    }
 }
 
 function display_voicemail() {
-    $('#currentvoicemail')[0].value = signup_details['voicemail_message']
+    $('#offhourmessagediv').show();
+    if($('#currentvoicemail')[0].innerHTML != '') {
+        console.log($('#currentvoicemail')[0].innerHTML + " is the value")
+        return
+    }
+    var messages = [
+        "Thanks for calling " + signup_details['business'] + ". This is Meghan. Please leave a message and I will callback soon.",
+        "Thanks for calling " + signup_details['business'] + ". Our office is closed. Please leave a message and we will callback soon.",
+    ]
+
+    $('#currentvoicemail')[0].innerHTML = "<span style='color: grey'>Select a message or add a new custom message</span>"
+    for(i in messages) {
+        button = document.createElement('button')
+        button.id = "voicemail_message_" + i;
+        button.className = "btn-custom button-add"
+        if (i == 0) {
+            button.className = "btn-custom button-add-click"
+            signup_details['voicemail_message'] = messages[i]
+            signup_details['voicemail_message_id'] = button.id
+        }
+
+        button.style = "margin: 5px; padding: 5px; text-align: left"
+        button.onclick = function() {
+            clickNewVoicemail(this.innerText, this.id)
+        }
+        button.innerText = messages[i]
+        document.getElementById('currentvoicemail').appendChild(button)
+    }
 }
 
 function clickOutOrder(id) {
-    $('#progress_' + current_screen_index).removeClass('progressclick')
+    console.log(id)
+    console.log(current_screen_index)
+    $('#progress_' + (current_screen_index+1)).removeClass('progressclick')
+    if (current_screen_index == 'partial_screen') {
+        $('#progress_3').removeClass('progressclick')
+     }
     button_id = id.split("_")[1]
     clicked_out_order = true
-    current_screen_index = parseInt(button_id)
+    current_screen_index = parseInt(button_id) -1
     display_next_screen();
 }
 
 function listnumbers() {
+    if ($('#areacode')[0].value != '' && $('#areacode')[0].value.length < 3) {
+        $('#areacode').addClass('error-outline')
+        return
+    }
     $('#getareacode').hide();
     $('#loader').show();
     document.getElementById('displaynumber').innerHTML = ""
     document.getElementById('displaynumber').style = ""
+    $('#areacode').removeClass('error-outline')
     $.ajax({
         type: 'post',
         url: UI_URL + 'list/phonenumber/',
         data: {email: signup_details['email'], areacode: $('#areacode')[0].value},
         success: function (data) {
-            console.log(data)
+            type = "showing random numbers"
+            for(i=0; i< data.length; i++) {
+                if(data[i].substring(1,4) == $('#areacode')[0].value) {
+                    type = "showing numbers with selected area code:"
+                    break;
+                }
+            }
             $('#getareacode').show();
             $('#areacode')[0].value = ""
             $('#loader').hide();
-            document.getElementById('displaynumber').innerHTML = "<h4 class='blingfont' style='color: black'> Select a number: </h4>"
+            document.getElementById('displaynumber').innerHTML = "<p style='font-size: 12px; color: #f00664'>"+ type+"</p> "
             document.getElementById('displaynumber').style = "margin-bottom: 30px;"
+            div = document.createElement('div')
+            div.style = "margin-top: 10px; display: flex; justify-content: space-around"
+            innerhtml = ""
 
             for(i=0; i< data.length; i++) {
-                div = document.createElement('div')
-                div.style = "margin-top: 10px"
-                div.innerHTML = "<Button class='btn btn-primary' id="+data[i]+" onclick=addblingnumber(this.id)>" + data[i] + "</Button>"
-                document.getElementById('displaynumber').appendChild(div)
+                var match = data[i].match(/^(\d{1})(\d{3})(\d{3})(\d{4})$/);
+                num = '(' + match[2] + ') ' + match[3] + '-' + match[4];
+                innerhtml += "<Button class='btn-custom button-add' id="+data[i]+" onclick=addblingnumber(this.id)>" + num + "</Button>"
             }
+            div.innerHTML = innerhtml
+            document.getElementById('displaynumber').appendChild(div)
         },
         error: function(err) {
             $('#getareacode').show();
@@ -381,125 +570,297 @@ function listnumbers() {
       });
 }
 
+function clickNewGreeting(greeting, id) {
+    $('#nextbutton')[0].disabled = false
+    $('#greetingmessage').removeClass('error-outline')
+    if (signup_details['welcome_message'] != '') {
+        $('#'+signup_details['welcome_message_id']).removeClass('button-add-click')
+        $('#'+signup_details['welcome_message_id']).addClass('button-add')
+    }
+    signup_details['welcome_message'] = greeting
+    signup_details['welcome_message_id'] = id
+    $('#'+id).addClass('button-add-click')
+}
+
 function updateGreeting() {
-    signup_details['welcome_message'] = $('#greetingmessage')[0].value
-    updated_welcome = true
-    $('#currentwelcome')[0].innerHTML = $('#greetingmessage')[0].value
+    lastchild = document.getElementById('currentwelcome').lastChild
+    lastid = parseInt(lastchild.id.split("_")[2])
+    newMessage = $('#greetingmessage')[0].value
+
+     $('#greetingmessage').removeClass('error-outline')
+    if(newMessage == '') {
+        $('#greetingmessage').addClass('error-outline')
+        return
+    }
+
+    button = document.createElement('button')
+    button.id = "greeting_message_" + lastid;
+    button.className = "btn-custom button-add"
+    button.style = "margin: 5px; padding: 5px; text-align: left"
+    button.onclick = function() {
+        clickNewGreeting(this.innerText, this.id)
+    }
+    button.innerText = newMessage
+    document.getElementById('currentwelcome').removeChild(lastchild)
+    document.getElementById('currentwelcome').appendChild(button)
+    clickNewGreeting(newMessage, button.id)
     $('#greetingmessage')[0].value = ""
 }
 
+function clickNewVoicemail(voicemail, id) {
+    $('#nextbutton')[0].disabled = false
+    $('#voicemailmessage').removeClass('error-outline')
+    if (signup_details['voicemail_message'] != '') {
+        $('#'+signup_details['voicemail_message_id']).removeClass('button-add-click')
+        $('#'+signup_details['voicemail_message_id']).addClass('button-add')
+    }
+    signup_details['voicemail_message'] = voicemail
+    signup_details['voicemail_message_id'] = id
+    $('#'+id).addClass('button-add-click')
+}
+
 function updateVoicemail() {
-    signup_details['voicemail_message'] = $('#voicemailmessage')[0].value
-    updated_voicemail = true
-    $('#currentvoicemail')[0].innerHTML = $('#voicemailmessage')[0].value
+    lastchild = document.getElementById('currentvoicemail').lastChild
+    lastid = parseInt(lastchild.id.split("_")[2])
+    newMessage = $('#voicemailmessage')[0].value
+
+     $('#voicemailmessage').removeClass('error-outline')
+    if(newMessage == '') {
+        $('#voicemailmessage').addClass('error-outline')
+        return
+    }
+
+    button = document.createElement('button')
+    button.id = "voicemail_message_" + lastid;
+    button.className = "btn-custom button-add"
+    button.style = "margin: 5px; padding: 5px; text-align:left"
+    button.onclick = function() {
+        clickNewVoicemail(this.innerText, this.id)
+    }
+    button.innerText = newMessage
+    document.getElementById('currentvoicemail').removeChild(lastchild)
+    document.getElementById('currentvoicemail').appendChild(button)
+    clickNewVoicemail(newMessage, button.id)
     $('#voicemailmessage')[0].value = ""
 }
 
-//fetch("/create-payment-intent", {
-//  method: "POST",
-//  headers: {
-//    "Content-Type": "application/json"
-//  },
-//  body: JSON.stringify(purchase)
-//})
-//  .then(function(result) {
-//    return result.json();
-//  })
-//  .then(function(data) {
-//    var elements = stripe.elements();
+function backStep() {
+    $('#nextbutton')[0].disabled = false;
+    $('#voicemailmessage').removeClass('button-add-click')
+    $('#greetingmessage').removeClass('button-add-click')
+    $('#offhourmessagediv').hide();
+    $('#welcomemessagediv').show();
+    $('#backbutton').hide();
+    current_screen_index = "partial_screen"
+}
+
+function callnow() {
+    $('#callnow').show()
+    $('#schedulecall').hide()
+}
+
+function schedulecall() {
+    $('#callnow').hide()
+    $('#schedulecall').show()
+}
+
+function requestcallback() {
+    var content = "Client Requested a call back. " + signup_details['name'] + " | " + signup_details['email'] + " | " + signup_details['number'] + " | Requested number - " + $('#callbacknumber')[0].value
+    $.post("https://www.bling-center.com/slack/note", {message: content, channel: "https://hooks.slack.com/services/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"}, function(data){
+                console.log(data)
+                $('#callnow').hide();
+                $('#requestmessage').show();
+            })
+}
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function display_process_payment() {
+    $('#checkoutdata').show();
+    $('#gameplay').hide();
+    hideInterval = setInterval(function() {
+        if ($('#nextbutton').length > 0) {
+            clearInterval(hideInterval);
+            $('#nextbutton').hide();
+        }
+    }, 100)
+}
+
+function updatePlanList() {
+//        $('#planlist')[0].innerHTML = ""
 //
-//    var style = {
-//      base: {
-//        color: "#32325d",
-//        fontFamily: 'Arial, sans-serif',
-//        fontSmoothing: "antialiased",
-//        fontSize: "16px",
-//        "::placeholder": {
-//          color: "#32325d"
+//        total_amount = 0;
+//        // main plan selected
+//        text = "<tr>"
+//        text += '<td style="padding: 5px; color: black; font-weight: normal; padding-top: 10px; padding-bottom: 10px">'
+//        text += '<span>'+selectedPlan+' Plan</span><br>'
+//        text += '<span style="font-size: 14px">'+plan_count[selectedPlan]+'</span>'
+//        text += '</td>'
+//        text += '<td style="padding: 5px; color: black; font-weight: normal">$'+signup_details['plan_amount']+'</td>'
+//        text += '</tr>'
+//        total_amount += parseInt(signup_details['plan_amount'])
+//        // additional plans
+//
+//        for(i in signup_details['add_on_plan']) {
+//            plan = signup_details['add_on_plan'][i]
+//            text += "<tr>"
+//            text += '<td style="padding: 5px; color: black; font-weight: normal; padding-top: 10px; padding-bottom: 10px">'
+//            text += '<span>'+plan['name']+'</span>'
+//            text += '<td style="padding: 5px; color: black; font-weight: normal">$'+plan['amount']+'</td>'
+//            text += '</tr>'
+//            total_amount += parseInt(plan['amount'])
 //        }
+//
+//        plan = signup_details['add_on_plan'][i]
+//        text += '<tr style="background-color: #69ffa5">'
+//        text += '<td style="padding: 5px; color: black; font-weight: normal; padding-top: 10px; padding-bottom: 10px">'
+//        text += '<span>Total</span>'
+//        text += '<td style="padding: 5px; color: black; font-weight: normal">$'+total_amount+'</td>'
+//        text += '</tr>'
+//
+//        signup_details['total_amount'] = total_amount
+//
+//        $('#planlist')[0].innerHTML = text
+}
+
+function nextPayment() {
+    $('#pullpayment')[0].click()
+}
+
+function editgolive() {
+    current_screen_index = 4
+    clicked_out_order = true
+    display_next_screen()
+}
+
+function subscribe() {
+    console.log("Subscription")
+    $('#accountcreate').hide();
+    $('#accountsuccess').show();
+}
+
+// Set your publishable key: remember to change this to your live publishable key in production
+// See your keys here: https://dashboard.stripe.com/apikeys
+
+let stripe = Stripe('pk_test_51J8KaqKxfflH0kh13Qd1Klve2fwpgENVBEoX84jHj2EcUB5uybB0ogd1u3J6AyUUOTNf8s7MYdTxaRj2CaGbZy7Q00RChAtWFu');
+
+
+
+var elements = stripe.elements({
+fonts: [
+  {
+    cssSrc: 'https://fonts.googleapis.com/css?family=Roboto',
+  },
+],
+locale: window.__exampleLocale
+});
+
+var card = elements.create('card', {
+iconStyle: 'solid',
+style: {
+  base: {
+    iconColor: '#c4f0ff',
+    color: '#fff',
+    fontWeight: 500,
+    fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+    fontSize: '16px',
+    fontSmoothing: 'antialiased',
+
+    ':-webkit-autofill': {
+      color: '#fce883',
+    },
+    '::placeholder': {
+      color: '#69ffa5',
+    },
+  },
+  invalid: {
+    iconColor: '#FFC7EE',
+    color: '#FFC7EE',
+  },
+},
+});
+
+cardInterval = setInterval(function() {
+            if ($('#example1-card').length > 0) {
+                clearInterval(cardInterval);
+                card.mount('#example1-card');
+            }
+        }, 100)
+
+
+registerElements([card], 'example1');
+
+
+card.on('change', function (event) {
+  displayError(event);
+});
+
+function displayError(event) {
+  changeLoadingStatePrices(false);
+  let displayError = document.getElementById('card-element-errors');
+  if (event.error) {
+    displayError.textContent = event.error.message;
+  } else {
+    displayError.textContent = '';
+  }
+}
+
+const btn = document.querySelector('#submit-payment-btn');
+//btn.addEventListener('click', async (e) => {
+//  e.preventDefault();
+//  const nameInput = document.getElementById('name');
+//  console.log("Hello Mallika")
+//
+//  // Create payment method and confirm payment intent.
+//  stripe.confirmCardPayment(clientSecret, {
+//    payment_method: {
+//      card: cardElement,
+//      billing_details: {
+//        name: nameInput.value,
 //      },
-//      invalid: {
-//        fontFamily: 'Arial, sans-serif',
-//        color: "#fa755a",
-//        iconColor: "#fa755a"
-//      }
-//    };
-//
-//    var card = elements.create("card", { style: style });
-//    // Stripe injects an iframe into the DOM
-//    card.mount("#card-element");
-//
-//    card.on("change", function (event) {
-//      // Disable the Pay button if there are no card details in the Element
-//      document.querySelector("button").disabled = event.empty;
-//      document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
-//    });
-//
-//    var form = document.getElementById("payment-form");
-//    form.addEventListener("submit", function(event) {
-//      event.preventDefault();
-//      // Complete payment when the submit button is clicked
-//      payWithCard(stripe, card, data.clientSecret);
-//    });
+//    }
+//  }).then((result) => {
+//    if(result.error) {
+//      alert(result.error.message);
+//    } else {
+//      // Successful subscription payment
+//    }
 //  });
-//
-//// Calls stripe.confirmCardPayment
-//// If the card requires authentication Stripe shows a pop-up modal to
-//// prompt the user to enter authentication details without leaving your page.
-//var payWithCard = function(stripe, card, clientSecret) {
-//  loading(true);
-//  stripe
-//    .confirmCardPayment(clientSecret, {
-//      payment_method: {
-//        card: card
-//      }
-//    })
-//    .then(function(result) {
-//      if (result.error) {
-//        // Show error to your customer
-//        showError(result.error.message);
-//      } else {
-//        // The payment succeeded!
-//        orderComplete(result.paymentIntent.id);
-//      }
-//    });
-//};
-//
-///* ------- UI helpers ------- */
-//
-//// Shows a success message when the payment is complete
-//var orderComplete = function(paymentIntentId) {
-//  loading(false);
-//  document
-//    .querySelector(".result-message a")
-//    .setAttribute(
-//      "href",
-//      "https://dashboard.stripe.com/test/payments/" + paymentIntentId
-//    );
-//  document.querySelector(".result-message").classList.remove("hidden");
-//  document.querySelector("button").disabled = true;
-//};
-//
-//// Show the customer the error from Stripe if their card fails to charge
-//var showError = function(errorMsgText) {
-//  loading(false);
-//  var errorMsg = document.querySelector("#card-error");
-//  errorMsg.textContent = errorMsgText;
-//  setTimeout(function() {
-//    errorMsg.textContent = "";
-//  }, 4000);
-//};
-//
-//// Show a spinner on payment submission
-//var loading = function(isLoading) {
-//  if (isLoading) {
-//    // Disable the button and show a spinner
-//    document.querySelector("button").disabled = true;
-//    document.querySelector("#spinner").classList.remove("hidden");
-//    document.querySelector("#button-text").classList.add("hidden");
-//  } else {
-//    document.querySelector("button").disabled = false;
-//    document.querySelector("#spinner").classList.add("hidden");
-//    document.querySelector("#button-text").classList.remove("hidden");
-//  }
-//};
+//});
+
+function checkout() {
+     $.ajax({
+        type: 'post',
+        url: 'http://localhost:8080/business/checkoutsession',
+        data: {lineitem: "Pro", amount: "20", bid: 1030},
+        success: function (data) {
+            console.log(data)
+        },
+        error: function(err) {
+            console.log("error is " + err)
+        }
+      });
+}
+
+function chatnow() {
+    tidioChatApi.open();
+    tidioChatApi.messageFromOperator("Hi, I am here. How can I help you?");
+}
+
+function callback() {
+    tidioChatApi.open();
+    tidioChatApi.messageFromOperator("Hi, We would love to talk to you. Please drop your callback number. An account manager will call you soon.");
+}
+
+function schedulecall() {
+    tidioChatApi.open();
+    tidioChatApi.messageFromOperator("Hi, We would love to talk to you. Please click the link below to setup some time as per your availability.");
+    tidioChatApi.messageFromOperator("https://calendly.com/alexcarter-100/15min");
+}
+
+function laterdate() {
+    tidioChatApi.open();
+    tidioChatApi.messageFromOperator("Hi, What date would you like to start? We can definitely get you started as per your convenience.")
+}
