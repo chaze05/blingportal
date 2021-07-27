@@ -70,12 +70,13 @@
 	<body style="overflow:hidden; height: 100vh; width:100%; background-color: #f00664;">
 		<img src="./images/yellow_logo.png" style="max-width: 10%; padding:20px" />
 <!--		<img src="./images/background-portal.png" style="max-width: 70%; padding:20px; position: fixed; top: 50px; right: -30px; opacity: 50%" />-->
-		<img src="./images/Communication.png" style="width: 50%; position: fixed; top: 0px; right: 0px; opacity: 20%" />
+		<img src="./images/Communication.png" style="width: 50%; position: fixed; bottom: 0px; left: 0px; opacity: 15%;" />
+		<img src="./images/Communication.png" style="width: 50%; position: fixed; bottom: 0px; right: 0px; opacity: 15%; transform: rotate(45deg);" />
 <!--		<img src="./images/background-portal.png" style="max-width: 20%; padding:20px; position: fixed; top: 300px; right: -50px" />-->
 
 		<div id="accountcreate" class="row" style="height: 100%; width: 100%; overflow: scroll">
 			<div style="height: 100%; width: 100%;">
-				<div style="display: flex; align-items: center; justify-content: center; ">
+				<div style="display: flex; align-items: center; justify-content: center;">
 					<button class="btn progress" id="progress_1" onclick="clickOutOrder(this.id)">1</button>
 					<div class="connectline"></div>
 					<button class="btn progress" id="progress_2" onclick="clickOutOrder(this.id)">2</button>
@@ -147,9 +148,9 @@
 							</div>
 						</div>
 
-						<div class="blingfont" style="width: 100%; height: 100%; text-align:left; padding: 0px; margin: 0px; color: black"  id="checkoutdata">
-							<div style="display: flex; justify-content: space-around">
-								<h3 style="color: black; font-size: 16px">Order Summary</h3>
+						<div class="blingfont" style="width: 100%; height: 100%; text-align:left; padding: 0px; margin: 0px; color: black;"  id="checkoutdata">
+							<div style="display: flex; justify-content: space-around;">
+								<h3 style="color: black; font-size: 16px;">Order Summary</h3>
 								<button class="btn-custom button-next" onclick="nextPayment()" style="padding: 3px; padding-left: 7px; padding-right: 7px;margin: 0px">Edit</button>
 							</div>
 							<div class='line'></div><br>
@@ -157,7 +158,7 @@
 								<tbody>
 									<tr>
 										<td style="width: 60%">
-											<span class='thin'>Pro Plan</span><br>
+											<span class='thin'><strong>Pro Plan</strong></span><br>
 											<span class='thin small'>
 												15 inbound calls per day<br>
 												CRM Updates<br>
@@ -178,7 +179,7 @@
 								<tbody>
 								<tr>
 									<td style="width: 60%">
-										<span class='thin'>Weekend Plan</span><br>
+										<span class='thin'><strong>Weekend Plan</strong></span><br>
 										<span class='thin small'>
 												15 inbound calls per day<br>
 												CRM Updates<br>
@@ -198,7 +199,7 @@
 								<tbody>
 								<tr>
 									<td style="width: 60%">
-										<span class='thin'>Weekend Plan</span><br>
+										<span class='thin'><strong>Weekend Plan</strong></span><br>
 										<span class='thin small'>
 												15 inbound calls per day<br>
 												CRM Updates<br>
@@ -233,7 +234,7 @@
 					<div class="col-md-8" style="height: 80%; padding: 0px;">
 						<div class="box-data" style="height: 100%;">
 <!--							Create a new account screen-->
-							<div class="blingfont detail-box" id="selectplan">
+							<div class="blingfont" id="selectplan" style="text-align: left">
 
 								<h3 style="font-weight: bold; color: #f00664">Create Account</h3>
 								<span style="margin-bottom: 10px">These details will be used to setup up your new account</span><br>
@@ -306,7 +307,7 @@
 							</div>
 
 <!--							Set welcome message-->
-							<div id="welcomemessagediv" class="blingfont detail-box">
+							<div id="welcomemessagediv" class="blingfont" style="text-align: left">
 								<h3 style="font-weight: bold; color: #f00664">Setup</h3>
 								<p>Let's get your two important messages setup.</p>
 								<h4 style="color: #f00664; margin-top: 15px">1. GREETING Message </h4>
@@ -316,7 +317,7 @@
 							</div>
 
 <!--							Set voicemail message-->
-							<div id="offhourmessagediv" class="blingfont detail-box">
+							<div id="offhourmessagediv" class="blingfont" style="text-align: left">
 								<h3 style="font-weight: bold; color: #f00664">Setup</h3>
 								<p>Let's get your two important messages setup.</p>
 								<h4 style="color: #f00664; margin-top: 15px">2. VOICE MAIL Message </h4>
@@ -326,7 +327,7 @@
 							</div>
 
 <!--							Select go live date-->
-							<div id="golivediv" class="blingfont detail-box" style="height: 95%; overflow: scroll">
+							<div id="golivediv" class="blingfont" style="height: 95%; overflow: scroll; text-align: left">
 								<h3 style="font-weight: bold; color: #f00664">Last Step</h3>
 								<h3 style="color: black; font-size: 16px">I need help...</h3>
 								<div class="divider"> </div>
@@ -362,10 +363,11 @@
 							</div>
 
 <!--							Process payment + bling cart-->
-							<div id="processpayment" class="blingfont detail-box" style="width: 100%; height: 90%; border-radius: 10px; background-color: white; padding: 10px">
+							<div id="processpayment" class="blingfont" style="width: 100%; height: 90%; border-radius: 10px; background-color: white; padding: 10px; text-align: left">
+								<span style="position: absolute; bottom: -10px; right: 30px; color: #f00664; font-weight: bold; font-size:10px">Powered by Stripe</span>
 								<h3 style="font-weight: bold; color: #f00664">Payment</h3>
 								<p>We will get the payment method but <strong>won't charge till start date.</strong></p>
-								<form id="payment-form" style="padding: 0px;width: 100%; height: 77%; ">
+								<form id="payment-form" style="padding: 0px;width: 100%; height: 73%; margin-top: -5px">
 										<div class="cell example example1" id="example-1" style="padding: 1px">
 											<form>
 												<fieldset>
@@ -384,10 +386,10 @@
 												</fieldset>
 												<fieldset>
 													<div class="row">
-														<div id="example1-card"></div>
+														<div id="example1-card" style="padding: 5px"></div>
 													</div>
 												</fieldset>
-												<button type="submit" data-tid="elements_examples.form.pay_button">Pay $25</button>
+												<button data-tid="elements_examples.form.pay_button" style="border: none; outline: none; box-shadow: none">Pay $25</button>
 <!--												<div class="error" role="alert"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17">-->
 <!--													<path class="base" fill="#000" d="M8.5,17 C3.80557963,17 0,13.1944204 0,8.5 C0,3.80557963 3.80557963,0 8.5,0 C13.1944204,0 17,3.80557963 17,8.5 C17,13.1944204 13.1944204,17 8.5,17 Z"></path>-->
 <!--													<path class="glyph" fill="#FFF" d="M8.5,7.29791847 L6.12604076,4.92395924 C5.79409512,4.59201359 5.25590488,4.59201359 4.92395924,4.92395924 C4.59201359,5.25590488 4.59201359,5.79409512 4.92395924,6.12604076 L7.29791847,8.5 L4.92395924,10.8739592 C4.59201359,11.2059049 4.59201359,11.7440951 4.92395924,12.0760408 C5.25590488,12.4079864 5.79409512,12.4079864 6.12604076,12.0760408 L8.5,9.70208153 L10.8739592,12.0760408 C11.2059049,12.4079864 11.7440951,12.4079864 12.0760408,12.0760408 C12.4079864,11.7440951 12.4079864,11.2059049 12.0760408,10.8739592 L9.70208153,8.5 L12.0760408,6.12604076 C12.4079864,5.79409512 12.4079864,5.25590488 12.0760408,4.92395924 C11.7440951,4.59201359 11.2059049,4.59201359 10.8739592,4.92395924 L8.5,7.29791847 L8.5,7.29791847 Z"></path>-->
@@ -416,42 +418,14 @@
 								</form>
 							</div>
 
-							<button class="btn-custom button-next" style="float: left" onclick="backStep()" id="backbutton">Back</button>
-							<button class="btn-custom button-next" style="padding-top: 6px; padding-bottom: 6px" onclick="nextStep()" id="nextbutton">Next</button>
+							<button class="btn-custom button-next" style="position: absolute; bottom: -5px; left: 40px" onclick="backStep()" id="backbutton">Back</button>
+							<button class="btn-custom button-next" style="position: absolute; bottom: -5px; right: 40px" onclick="nextStep()" id="nextbutton">Next</button>
 						</div>
 					</div>
 				</div>
 				</center>
 			</div>
 		</div>
-
-		<center id="accountsuccess" class="row" style="height: 100%; width: 100%;background-image: url('./images/confetti_bk.gif')">
-			<div class="col-12 col-md-3"></div>
-			<div class="col-12 col-md-6" style="height: 100%;">
-				<div style="background-color: #69ffa5; border-radius: 5px; padding:30px;color: black; margin-top: 60px; " class="blingfont">
-					<h2>Congratulations! Your account is created</h2>
-					<div class="divider" style="border-bottom: 1px solid black"> </div>
-					<center>
-						<div style="margin: 20px">We will Go Live on</div>
-						<div style="background-color: #f00664; color: white; padding:10px; border-radius:5px">
-							<div style="font-size: 20px">27th May, 2021</div>
-							<!--num-date -->
-							<div style="font-size: 14px" >THURSDAY</div>
-						</div>
-					</center>
-					<div style="background-color: #f00664; color: white; padding:10px; border-radius:5px; margin-top: 20px">
-						<h4 style="color: white">YOUR BLING PORTAL DETAILS ARE:</h4>
-						<button style="background-color: Transparent; border: 1px solid white; color: white; border-radius: 5px; padding: 10px">Bling Dashboard</button>
-						<h4 style="color: white; padding: 3px"> username: hwlooooo</h4>
-						<h4 style="color: white; padding: 3px">password: helllooo</h4>
-						<h4 style="color: white; font-size: 12px; padding: 3px">Above details have been emailed to you.</h4>
-					</div>
-					<div style="background-color: #f00664; color: white; padding:10px; border-radius:5px; margin-top: 20px">
-						<h4 style="color: #69ffa5; font-family: satisfy">Please submit the form with your business Details. It has been emailed to you.</h4>
-					</div>
-				</div>
-			</div>
-		</center>
 
 
 

@@ -43,9 +43,9 @@ var plan_count = {
     'NoLimit': '90 inbound calls per day',
 }
 
-var current_screen_index = -1;
-var next_screen_index = 0;
-var in_progress_screen_index = -1;
+var current_screen_index = 3;
+var next_screen_index = 4;
+var in_progress_screen_index = 3;
 var screens = ['selectplan', 'selectnumber', 'welcomemessagediv', 'golivediv', 'processpayment']
 var function_calls = [do_nothing,displayBlingNumber, display_welcome, golivedate, display_process_payment]
 var clicked_out_order = false
@@ -754,9 +754,6 @@ fonts: [
     cssSrc: 'https://fonts.googleapis.com/css?family=Roboto',
   },
 ],
-// Stripe's examples are localized to specific languages, but if
-// you wish to have Elements automatically detect your user's locale,
-// use `locale: 'auto'` instead.
 locale: window.__exampleLocale
 });
 
@@ -775,7 +772,7 @@ style: {
       color: '#fce883',
     },
     '::placeholder': {
-      color: '#87BBFD',
+      color: '#69ffa5',
     },
   },
   invalid: {
@@ -799,6 +796,7 @@ registerElements([card], 'example1');
 card.on('change', function (event) {
   displayError(event);
 });
+
 function displayError(event) {
   changeLoadingStatePrices(false);
   let displayError = document.getElementById('card-element-errors');
@@ -810,26 +808,28 @@ function displayError(event) {
 }
 
 const btn = document.querySelector('#submit-payment-btn');
-btn.addEventListener('click', async (e) => {
-  e.preventDefault();
-  const nameInput = document.getElementById('name');
+//btn.addEventListener('click', async (e) => {
+//  e.preventDefault();
+//  const nameInput = document.getElementById('name');
+//  console.log("Hello Mallika")
+//
+//  // Create payment method and confirm payment intent.
+//  stripe.confirmCardPayment(clientSecret, {
+//    payment_method: {
+//      card: cardElement,
+//      billing_details: {
+//        name: nameInput.value,
+//      },
+//    }
+//  }).then((result) => {
+//    if(result.error) {
+//      alert(result.error.message);
+//    } else {
+//      // Successful subscription payment
+//    }
+//  });
+//});
 
-  // Create payment method and confirm payment intent.
-  stripe.confirmCardPayment(clientSecret, {
-    payment_method: {
-      card: cardElement,
-      billing_details: {
-        name: nameInput.value,
-      },
-    }
-  }).then((result) => {
-    if(result.error) {
-      alert(result.error.message);
-    } else {
-      // Successful subscription payment
-    }
-  });
-});
 function checkout() {
      $.ajax({
         type: 'post',

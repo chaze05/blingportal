@@ -1,0 +1,16 @@
+.blingfont {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.button-link {
+    border: none;
+    background-color: Transparent;
+    color: #69ffa5;
+    outline: none;
+    margin: 30px;
+    margin-left: 20%
+}
+
+.button-link:hover {
+    color: white;
+}

@@ -1,0 +1,142 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+}
+
+section .background {
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	background-color: #f00664;
+	display: flex;
+	overflow: hidden;
+}
+
+section .backshadow1 > img {
+	position: absolute;
+	left: 0%;
+	top: 50%;
+}
+.backshadow2 > img {
+	position: absolute;
+	top: 30%;
+	left: 3%;
+	height: 70%;
+}
+
+.backshadow3 > img {
+	position: absolute;
+	top: 13%;
+	left: 9%;
+	height: 87%;
+}
+.backshadow4 > img {
+	position: absolute;
+	top: 0%;
+	left: 20%;
+	height: 100%;
+}
+
+.form-box {
+	background: #000;
+	box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.1);
+	border-radius: 15px;
+}
+
+.form-box > img {
+	position: absolute;
+	width: 25%;
+	left: 32%;
+	top: 5%;
+}
+.form-box > h2 {
+	position: absolute;
+	width: 25%;
+	left: 17%;
+	top: 23%;
+	font-weight: bold;
+	font-size: 18px;
+	color: #ffe600;
+}
+.form-box > p {
+	position: absolute;
+	width: 10%;
+	left: 17%;
+	top: 30%;
+	font-size: 12px;
+	color: #ffe600;
+}
+
+.container {
+	position: absolute;
+	width: 35%;
+	top: 25%;
+	right: 18%;
+	border-radius: 20px;
+	font-size: 12px;
+	padding: 20px;
+	background: #000;
+	color: #fff;
+	border: 1px solid #ababab;
+}
+
+input {
+    width: 70%;
+	border-radius: 5px;
+	font-size: 12px;
+	padding: 10px;
+	margin: 10px;
+	color: black;
+	background: #000;
+	border-bottom: 1px solid #ababab;
+	background-color: white;
+	font-size: 16px;
+}
+
+.login-btn {
+	width: 70%;
+	border-radius: 10px;
+	font-size: 16px;
+	padding: 10px;
+	background: #69ffa5;
+	color: black;
+	cursor: pointer;
+	outline-style: none;
+	margin: 10px;
+	margin-top: 20px;
+	font-weight: normal;
+}
+
+.sign-up {
+	position: absolute;
+	width: 20%;
+	top: 95%;
+	left: 80%;
+	border-radius: 5px;
+	font-size: 13px;
+	color: #827b7b;
+}
+
+.sign-up > p > button {
+	border: none;
+	cursor: pointer;
+	background: none;
+	outline-style: none;
+	margin-left: 5px;
+}
+
+.blingfont {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.button-link {
+    border: none; border-bottom: 1px solid #69ffa5; background-color: Transparent; color: #69ffa5;
+    outline: none;
+    margin: 5px;
+}
+
+.button-link:hover {
+    color: white;
+    border-bottom: 1px solid white;
+}
