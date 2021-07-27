@@ -43,9 +43,9 @@ var plan_count = {
     'NoLimit': '90 inbound calls per day',
 }
 
-var current_screen_index = 3;
-var next_screen_index = 4;
-var in_progress_screen_index = 3;
+var current_screen_index = -1;
+var next_screen_index = 0;
+var in_progress_screen_index = -1;
 var screens = ['selectplan', 'selectnumber', 'welcomemessagediv', 'golivediv', 'processpayment']
 var function_calls = [do_nothing,displayBlingNumber, display_welcome, golivedate, display_process_payment]
 var clicked_out_order = false
