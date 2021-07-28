@@ -36,6 +36,13 @@ var plan_details = {
     'NoLimit': '999|1800|Emails/Messages|CRM Updates|Surveys/Feedbacks',
 }
 
+var not_included = {
+    'Basic': 'Emails/Messages|Surveys/Feedbacks',
+    'Plus': 'Surveys/Feedbacks',
+    'Pro': 'Surveys/Feedbacks',
+    'NoLimit': '',
+}
+
 var plan_count = {
     'Basic': '5 inbound calls per day',
     'Plus': '15 inbound calls per day',
@@ -118,6 +125,7 @@ function hideAll() {
         $('#backbutton').hide();
         $('#checkoutdata').hide();
         $('#gameplay').show();
+        $('#needhelp').hide();
 }
 
 function display_next_screen() {
@@ -217,9 +225,34 @@ function updatePlan(plan) {
     $('#planname')[0].innerText = selectedPlan
     $('#planprice')[0].innerText = "$" + details[0] + "/month"
 
-    plandetails = "<h4 style='color: black; font-size: 12px'><font size='4'>"+ details[1]+"</font> calls/month</h4>"
+    plandetails = "<div style='display: flex; justify-content: flex-end; width: 100%'>"
+    plandetails += "<h4 style='color: black; font-size: 11px; margin-right: 10px; margin-bottom: 5px'>"+ plan_count[selectedPlan]+"</h4>"
+    plandetails += "<img src='./images/black_tick.png' width='12px' height='12px'/>"
+    plandetails += "</div>"
+
+    plandetails += "<div style='display: flex; justify-content: flex-end; width: 100%'>"
+    plandetails += "<h4 style='color: black; font-size: 11px; margin-right: 10px; margin-bottom: 5px'><font size='1'>"+ details[1]+"</font> calls per month</h4>"
+    plandetails += "<img src='./images/black_tick.png' width='12px' height='12px' />"
+    plandetails += "</div>"
+
     for (i=2;i<details.length;i++) {
-        plandetails += "<h4 style='color: black; font-size: 12px'>"+ details[i]+"</h4>"
+        plandetails += "<div style='display: flex; justify-content: flex-end; width: 100%'>"
+        plandetails += "<h4 style='color: black; font-size: 11px; margin-right: 10px; margin-bottom: 5px'>"+ details[i]+"</h4>"
+        plandetails += "<img src='./images/black_tick.png' width='12px' height='12px' />"
+        plandetails += "</div>"
+    }
+
+    notincluded = not_included[selectedPlan].split("|")
+
+
+    for(i=0; i<notincluded.length;i++) {
+        if (notincluded[i] == "") {
+            continue;
+        }
+        plandetails += "<div style='display: flex; justify-content: flex-end; width: 100%'>"
+        plandetails += "<h4 style='color: black; font-size: 11px; margin-right: 10px; margin-bottom: 5px'><strike>"+ notincluded[i]+"</strike></h4>"
+        plandetails += "<div style='color: black; font-size: 12px; font-weight: bold'>X</div>"
+        plandetails += "</div>"
     }
     document.getElementById('plandetails').innerHTML = plandetails
 
@@ -388,6 +421,7 @@ function paynow() {
 
 function golivedate() {
     var nextDate = new Date();
+    $('#needhelp').show();
 
     var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     $('#datesavailable')[0].innerHTML = ""
@@ -412,7 +446,7 @@ function golivedate() {
          if (i==1) {
             tempDate = nextDate.toLocaleString('default', options);
             signup_details['startdate'] = tempDate
-            button.className = "btn-custom button-add-click"
+            button.className = "btn-custom calendar-add-click"
         }
         document.getElementById('datesavailable').appendChild(button);
         nextDate.setDate(nextDate.getDate() + 1);
@@ -428,9 +462,10 @@ function golivedate() {
 }
 
 function updateDate(date) {
-    document.getElementById(signup_details['startdate']).classList.remove('button-add-click')
+    document.getElementById(signup_details['startdate']).classList.remove('calendar-add-click')
     document.getElementById(signup_details['startdate']).classList.add('calendar-date')
-    document.getElementById(date).classList.add("button-add-click")
+    document.getElementById(date).classList.add("calendar-add-click")
+    document.getElementById(date).classList.remove("calendar-date")
     signup_details['startdate'] = date
 }
 
@@ -549,7 +584,7 @@ function listnumbers() {
             $('#areacode')[0].value = ""
             $('#loader').hide();
             document.getElementById('displaynumber').innerHTML = "<p style='font-size: 12px; color: #f00664'>"+ type+"</p> "
-            document.getElementById('displaynumber').style = "margin-bottom: 30px;"
+            document.getElementById('displaynumber').style = "margin-bottom: 30px; margin-top: 10px"
             div = document.createElement('div')
             div.style = "margin-top: 10px; display: flex; justify-content: space-around"
             innerhtml = ""
@@ -863,4 +898,10 @@ function schedulecall() {
 function laterdate() {
     tidioChatApi.open();
     tidioChatApi.messageFromOperator("Hi, What date would you like to start? We can definitely get you started as per your convenience.")
+}
+
+function needhelp() {
+    tidioChatApi.open();
+    tidioChatApi.messageFromOperator("Hey, my name is Alex. How can I help you.")
+    tidioChatApi.messageFromOperator("I can also give you a call to chat further. If you would like that, may I have your phone number?")
 }

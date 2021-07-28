@@ -3,6 +3,8 @@ var id;
 var msg_count = 0;
 UI_URL = 'https://www.bling-center.com/business/';
 var manageremail;
+var username;
+var slackChannel;
 
 $('.accordion-toggle').click(function () {
 	$('.hiddenRow').hide();
@@ -27,21 +29,25 @@ $(document).ready(function () {
     id = window.location.href.split('id=').pop()
 
     $('#profile-detail').hide();
-    $(document).ready(function() {
-        var cookies = document.cookie.split(";")
-        for(i in cookies) {
-                cookie = cookies[i]
-                if (cookie.indexOf("expires=") > 0) {
-                    var time = cookie.split("=")[1]
-                    if (new Date() > new Date(time)) {
-                        console.log("cookie expired")
-                        document.getElementById("logout").click()
-                    } else {
-                        afterCookieCheck();
-                    }
+
+    var cookies = document.cookie.split(";")
+    for(i in cookies) {
+            cookie = cookies[i]
+            if (cookie.indexOf("expires=") > 0) {
+                var time = cookie.split("=")[1]
+                if (new Date() > new Date(time)) {
+                    console.log("cookie expired")
+                    document.getElementById("logout").click()
+                } else {
+                    afterCookieCheck();
                 }
             }
-    })
+
+            if (cookie.indexOf("bling=") > 0) {
+                username = cookie.split("=")[1]
+                console.log(username)
+            }
+        }
 
 });
 
@@ -169,16 +175,21 @@ function updateVoicemail() {
 }
 
 function addMessage() {
+    console.log(username)
 	if ($('#newmessage')[0].value != '') {
 	    const options = { year: 'numeric', month: 'short', day: 'numeric' };
 	    dt = new Date();
+	    fromPerson = "wingToBling"
+	    if (["malika@bling.cloud", "abiblingops@gmail.com", "ivanblingops@gmail.com", "opsmanagementbling@gmail.com"].includes(username)) {
+	        fromPerson = "blingToWingCustome"
+	    }
 		$.ajax({
 			type: 'post',
 			url: UI_URL + 'message',
 			data: {
 				content: $('#newmessage')[0].value,
 				id: id,
-				from: 'wingToBling',
+				from: fromPerson,
 			},
 			headers: { 'Accept': 'application/json' },
 			success: function (data) {
@@ -186,7 +197,11 @@ function addMessage() {
 				    document.getElementById('mlist').innerHTML = ''
 				    msg_count = 1;
 				}
-				addWingMessage($('#newmessage')[0].value, dt.toLocaleTimeString('en-US', options))
+				if (["malika@bling.cloud", "abiblingops@gmail.com", "ivanblingops@gmail.com", "opsmanagementbling@gmail.com"].includes(username)) {
+                    addBlingMessage($('#newmessage')[0].value, dt.toLocaleTimeString('en-US', options))
+                } else {
+				    addWingMessage($('#newmessage')[0].value, dt.toLocaleTimeString('en-US', options))
+				}
 				$('#newmessage')[0].value = '';
 			},
 			error: function (err) {
@@ -202,6 +217,7 @@ function displayprofile(data) {
 	document.getElementById('businessname').innerHTML = detail.businessname;
 	mdetail = detail.managerName;
 	manageremail = detail.managerEmail;
+	slackChannel = detail.slack;
 
 	document.getElementById('price').innerHTML = '$' + detail.price;
 	document.getElementById('outbound').innerHTML = detail.outboundcall;
