@@ -54,7 +54,7 @@
 
 input {
 	width: 95%;
-	height: 34px;
+	height: 28px;
 	border: 0.5px solid white;
 	box-sizing: border-box;
 	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
@@ -145,7 +145,7 @@ input[type='number']::-webkit-outer-spin-button {
 
 .minplan1 {
  	width: 100%;
- 	font-size: 14px;
+ 	font-size: 12px;
  	color: rgba(168, 168, 168, 0.87);
  }
 
@@ -513,7 +513,7 @@ input[type='number']::-webkit-outer-spin-button {
     margin-left: 0px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    padding:30px;
+    padding:20px;
     background-color: white;
 }
 
@@ -526,7 +526,6 @@ input[type='number']::-webkit-outer-spin-button {
     background-color: #f00664;
     color: white;
     float: right;
-    padding: 5px 25px 5px 25px;
     margin-top: 10px;
     border: 0 !important;
     outline:0 !important;
@@ -626,14 +625,24 @@ outline:0 !important;
     margin-bottom: 0px;
     margin-top: -2px;
     padding: 5px;
-    width: 30%;
-    height: 90%;
+    width: 220px;
+    height: 120px;
+    text-align: left;
 }
 
 .options:hover {
     background-color: #f00664;
-        color: white;
+    color: white;
 }
+
+.short1 {
+    color: #f00664;
+}
+
+p:hover {
+        color: yellow !important;
+    }
+
 
 .checkout-table {
     padding: 5px;
@@ -777,7 +786,7 @@ outline:0 !important;
 }
 
 .calendar-date {
-    border: 1px solid black; border-radius: 5px; height: 100%; width: 13%; color: black
+    border: 1px solid #0e09091f; border-radius: 5px; height: 100%; width: 13%; color: black
 }
 
 .calendar-date:hover {
@@ -785,12 +794,20 @@ outline:0 !important;
     color: white;
 }
 
+.calendar-add-click {
+    color: white;
+    background-color: #f00664;
+    outline: none;
+    border: none;
+    width: 13%;
+}
+
 .line {
-  height:1px;
+  height:0.5px;
   width:100%;
   margin-top:10px;
   margin-bottom:10px;
-  background:black;
+  background:#f00664;
 }
 
 .order-table td:first-of-type {
@@ -829,10 +846,10 @@ outline:0 !important;
 
 .btn-custom {
     outline: none;
-    padding: 8px;
+    padding: 5px;
     padding-left:17px;
     padding-right: 17px;
-    font-size: 13px;
+    font-size: 12px;
     border-radius: 5px;
 }
 
