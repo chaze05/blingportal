@@ -96,7 +96,7 @@ $(document).ready(function () {
         }
 
         if (cookie.indexOf("reset=") > 0) {
-            reset = parseBoolean(cookie.split("=")[1])
+            reset = cookie.split("=")[1] == 'true' ? true : false
         }
     }
 
