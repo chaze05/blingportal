@@ -24,7 +24,7 @@ var signup_details = {
     'number': '',
     'address': '',
     'blingphonenumber': '',
-    'add_on_plan': {},
+    'add_on_plan': [],
     'welcome_message': '',
     'voicemail_message': ''
 }
@@ -44,10 +44,19 @@ var not_included = {
 }
 
 var plan_count = {
-    'Basic': '5 inbound calls per day',
-    'Plus': '15 inbound calls per day',
-    'Pro': '30 inbound calls per day',
-    'NoLimit': '90 inbound calls per day',
+    'Basic': '5 inbound calls/day',
+    'Plus': '15 inbound calls/day',
+    'Pro': '30 inbound calls/day',
+    'NoLimit': '90 inbound calls/day',
+}
+
+var add_on_package = {
+    "wdc": {"name": "Reception, Weekend", "amount": 0},
+    "w8c": {"name": "Reception, +8hrs Weekdays", "amount": 0},
+    "d5c": {"name": "Reception, 5 call extra/ day", "amount": 0},
+    "utm": {"name": "Unlimited, Texts/Messages", "amount": 199},
+    "scc": {"name": "Sales Call, 100 calls/day", "amount": 599},
+    "cpc": {"name": "Custom Plan", "amount": "After Signup"}
 }
 
 var current_screen_index = -1;
@@ -56,13 +65,47 @@ var in_progress_screen_index = -1;
 var screens = ['selectplan', 'selectnumber', 'welcomemessagediv', 'golivediv', 'processpayment']
 var function_calls = [do_nothing,displayBlingNumber, display_welcome, golivedate, display_process_payment]
 var clicked_out_order = false
-var updated_welcome = false
-var updated_voicemail = false
+var welcome_next_id = 4
+var voicemail_next_id = 3
+var chatuserid;
+var cookie_data = {}
 // A reference to Stripe.js initialized with a fake API key.
 // Sign in to see examples pre-filled with your key.
 //var stripe = Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
+
 $(document).ready(function () {
+
+    var cookie_available = false
+    var cookies = document.cookie.split(";")
+    var expire = ''
+    var reset = false
+    for(i in cookies) {
+        cookie = cookies[i]
+        if (cookie.indexOf("expires=") > 0) {
+            expire = cookie.split("=")[1]
+        }
+
+        if (cookie.indexOf("currentindex=") > 0) {
+            current_screen_index = cookie.split("=")[1]
+            cookie_available = true
+        }
+
+        if (cookie.indexOf("blingautosignupdetails=") > 0) {
+            cookie_data = JSON.parse(cookie.split("=")[1])
+        }
+
+        if (cookie.indexOf("reset=") > 0) {
+            reset = parseBoolean(cookie.split("=")[1])
+        }
+    }
+
+    if (!reset && new Date() > new Date(expire)) {
+        document.cookie = "reset=true; currentindex=-1;cookie_data={}"
+        window.location.replace("https://www.bling.cloud")
+        return
+    }
+
     var todaysDate = new Date();
     var year = todaysDate.getFullYear();
     var month = ("0" + (todaysDate.getMonth() + 1)).slice(-2);
@@ -70,12 +113,10 @@ $(document).ready(function () {
     var minDate = (year +"-"+ month +"-"+ day);
 
     var link = window.location.href.split("?")
-//    console.log(link[1])
     updatePlan(link[1]);
 
     hideAll();
     $('#accountsuccess').hide();
-//    golivedate();
 
     hideInterval = setInterval(function() {
             if ($('#nextbutton').length > 0) {
@@ -96,9 +137,58 @@ $(document).ready(function () {
         elements[i].disabled = true
     }
 
-    display_next_screen();
-//    nextStep()
+    chatinterval = setInterval(function() {
+        if (window.fcWidget) {
+            clearInterval(chatinterval)
+            window.fcWidget.user.get().then(function(result) {
+                chatuserid = result.data.alias
+            });
+        }
+    }, 100)
+
+    if (cookie_available) {
+        jumpToNextScreen()
+    } else {
+        display_next_screen();
+    }
 });
+
+function jumpToNextScreen() {
+    elements = document.getElementsByClassName('progress')
+    for(i=0; i< current_screen_index; i++) {
+        elements[i].disabled = false
+    }
+
+    current_screen_index -= 1;
+    in_progress_screen_index = current_screen_index
+    next_screen_index = current_screen_index + 1
+
+    if (current_screen_index > 2) {
+        current_screen_index = 1
+    }
+
+    if ('profile' in cookie_data) {
+        displayProfiledata()
+    }
+
+    if ('listblingnumbers' in cookie_data) {
+        displayRandomNumbers(cookie_data['listblingnumbers'])
+        if (cookie_data['blingnumber'] != '') {
+            addblingnumber(cookie_data['blingnumber'])
+        }
+    }
+
+    if ('welcome_message' in cookie_data) {
+        add_welcome_messages(cookie_data['welcome_message'])
+    }
+
+    if ('welcome_message' in cookie_data) {
+        add_voicemail_message(cookie_data['voicemail_message'])
+    }
+
+    display_next_screen()
+
+}
 
 function do_nothing() {
     return
@@ -151,7 +241,9 @@ function display_next_screen() {
     document.getElementsByClassName('progress')[current_screen_index].disabled = false
     clicked_out_order = false;
     $('#progress_' + (current_screen_index + 1)).addClass('progressclick')
-    console.log(current_screen_index)
+    document.cookie = "currentindex=" + current_screen_index
+    document.cookie = "expires="+ new Date(new Date().getTime() + 60*24*7*60000);
+    document.cookie = "blingautosignupdetails="+ JSON.stringify(cookie_data)
 }
 
 function validate() {
@@ -202,18 +294,47 @@ function signUp() {
 
 	const valid = validate();
 	if (valid) {
-	    signup_details['fullname'] = $('#name')[0].value
-	    signup_details['email'] = $('#email')[0].value
-	    signup_details['number'] = $('#phone')[0].value
-	    signup_details['business'] = $('#business')[0].value
-	    signup_details['title'] = $('#title')[0].value
-
+	    update_signup_profile()
+	    cookie_data['profile'] = {
+	        'fullname': $('#name')[0].value,
+	        'email': $('#email')[0].value,
+	        'number': $('#phone')[0].value,
+	        'business': $('#business')[0].value,
+	        'title': $('#title')[0].value
+	    }
         display_next_screen();
 	}
 }
 
+function update_signup_profile() {
+    signup_details['fullname'] = $('#name')[0].value
+    signup_details['email'] = $('#email')[0].value
+    signup_details['number'] = $('#phone')[0].value
+    signup_details['business'] = $('#business')[0].value
+    signup_details['title'] = $('#title')[0].value
+}
+
+function displayProfiledata() {
+    $('#name')[0].value = cookie_data['profile']['fullname']
+    $('#email')[0].value = cookie_data['profile']['email']
+    $('#phone')[0].value = cookie_data['profile']['number']
+    $('#business')[0].value = cookie_data['profile']['business']
+    $('#title')[0].value = cookie_data['profile']['title']
+
+    update_signup_profile()
+}
+
 function updatePlan(plan) {
-    selectedPlan = plan
+     selectedPlan = plan
+     if (!(plan in plan_details)) {
+        if ('plan' in cookie_data) {
+            selectedPlan = cookie_data['plan']
+        } else {
+            selectedPlan = "Plus"
+        }
+     }
+
+     cookie_data['plan'] = selectedPlan
      plan = document.getElementById(selectedPlan)
      details = plan_details[selectedPlan].split("|")
 
@@ -258,62 +379,36 @@ function updatePlan(plan) {
 
     showAllPlans();
     $('#'+ selectedPlan).hide();
-    $('#wdcprice')[0].innerText = Math.floor(details[0] / 2)
-    $('#wncprice')[0].innerText = Math.floor(details[0] / 2)
-    $('#dncprice')[0].innerText = Math.floor(details[0] / 2)
+    add_on_package["wdc"]["amount"] = Math.floor(details[0] / 2)
+    add_on_package["w8c"]["amount"] = Math.floor(details[0] / 2)
+    add_on_package["d5c"]["amount"] = Math.floor(details[0] / 2)
 
-    for(i in signup_details['add_on_plan']) {
-        additional_plan = signup_details['add_on_plan'][i]
-        div = document.createElement('h4')
-        div.style = 'color: black; font-size: 12px'
-        text = "+ " + additional_plan['name']
-        div.id = additional_plan['plan'] + "_div"
-        text += "  <button id=" +additional_plan['plan']+"_button onclick=cancelPlan(this.id) style='background-color: #f00664; border-radius: 50%; border: none; outline:none; color: white; padding: 3px'>x</button>"
-        div.innerHTML = text
-        signup_details['add_on_plan'][i]['amount'] = Math.floor(signup_details['plan_amount']/2)
-        document.getElementById('plandetails').appendChild(div)
-    }
-    updatePlanList();
+    $('#wdcprice')[0].innerText = add_on_package["wdc"]["amount"]
+    $('#w8cprice')[0].innerText = add_on_package["w8c"]["amount"]
+    $('#d5cprice')[0].innerText = add_on_package["d5c"]["amount"]
 
 }
 
 function addPlan(plan) {
+    if (signup_details['add_on_plan'].includes(plan)) {
+        id = signup_details['add_on_plan'].indexOf(plan)
+        signup_details['add_on_plan'].splice(id,  1)
 
-    $('#' + plan).addClass("button-add-click");
-    additional_plan = {'plan': plan}
-    switch(plan) {
-        case 'wdc':
-            additional_plan['name'] = "Weekend Day coverage"
-            break;
-        case 'wnc':
-            additional_plan['name'] = "Weekend Night coverage"
-            break;
-        case 'dnc':
-            additional_plan['name'] = "Daily Night coverage"
+        $('#' + plan).removeClass("click-plan");
+        $('#' + plan)[0].removeChild($('#' + plan)[0].children[0])
+        $('#' + plan).addClass("options");
+        console.log(signup_details['add_on_plan'])
+        return
     }
 
-    additional_plan['amount'] = Math.floor(signup_details['plan_amount']/2)
+    $('#' + plan).removeClass("options");
+    $('#' + plan).addClass("click-plan");
+    signup_details['add_on_plan'].push(plan)
 
-    signup_details['add_on_plan'][plan] = additional_plan
-
-
-//    div = document.createElement('h4')
-//    div.style = 'color: black; font-size: 12px'
-//    text = "+ " + additional_plan['name']
-//    div.id = plan + "_div"
-//    text += "  <button id=" +plan+"_button onclick=cancelPlan(this.id) style='background-color: #f00664; border-radius: 50%; border: none; outline:none; color: white; padding: 3px'>x</button>"
-//    div.innerHTML = text
-//
-//    document.getElementById('plandetails').appendChild(div)
-}
-
-function cancelPlan(planid) {
-    plan = planid.split("_")[0]
-    node = document.getElementById(plan + "_div")
-    document.getElementById('plandetails').removeChild(node)
-    delete signup_details['add_on_plan'][plan]
-    $('#' + plan).show();
-    updatePlanList();
+    image = document.createElement('img')
+    image.src = "./images/black_tick.png"
+    image.style = "width: 15px; height: 15px"
+    $('#' + plan)[0].insertBefore(image, $('#' + plan)[0].children[0])
 }
 
 function showAllPlans() {
@@ -331,6 +426,7 @@ function addblingnumber(id) {
     signup_details['blingphonenumber'] = id
     $('#' + id).addClass('button-add-click')
     $('#nextbutton')[0].disabled = false;
+    cookie_data['blingnumber'] = id
 }
 
 function nextStep() {
@@ -352,7 +448,12 @@ function nextStep() {
                 break;
             case 2: display_next_screen();
                 break;
-            case 3: display_next_screen();
+            case 3:
+                if (signup_details['startdate'] == "laterdate" && $('#delaydate')[0].value == "") {
+                    $('#delaydate').addClass('error-outline')
+                    return
+                }
+                display_next_screen();
                 break;
             case 4: display_next_screen();
                 break;
@@ -366,7 +467,6 @@ function selectplan(id) {
         selectedPlan = id
         $('#'+ id).addClass('click')
         $('#'+ id).removeClass('plan hover')
-        updatePlanList();
 }
 
 
@@ -422,9 +522,16 @@ function paynow() {
 function golivedate() {
     var nextDate = new Date();
     $('#needhelp').show();
+    $('#adddelaydate').hide();
+    flag = false
 
     var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     $('#datesavailable')[0].innerHTML = ""
+    $('#delaydate').removeClass('error-outline')
+
+    if (signup_details['startdate'] == 'laterdate') {
+        flag = true
+    }
 
     for(i=0; i<6; i++) {
         button = document.createElement('button')
@@ -439,14 +546,15 @@ function golivedate() {
         button.id = nextDate.toLocaleString('default', options)
         button.className = "btn-custom calendar-date"
         text = '<div style="background-color:#69ffa5; height: 15%;"></div>'
-        text += '<span style="font-family: droid; font-size: 11px; width: 100%">'+tempDate[1].trim() +'</span>'
-        text += '<p style="font-family: droid; font-size: 14px">'+tempDate[0]+'</p>'
+        text += '<span style="font-family: droid; font-size: 11px; width: 100%">'+tempDate[1].trim() +'</span><br>'
+        text += '<span style="font-family: droid; font-size: 14px">'+tempDate[0]+'</span>'
         button.innerHTML = text;
 
-         if (i==1) {
+         if (!flag && i>0 && ![6, 0].includes(nextDate.getDay())) {
             tempDate = nextDate.toLocaleString('default', options);
             signup_details['startdate'] = tempDate
             button.className = "btn-custom calendar-add-click"
+            flag = true
         }
         document.getElementById('datesavailable').appendChild(button);
         nextDate.setDate(nextDate.getDate() + 1);
@@ -455,15 +563,38 @@ function golivedate() {
     button = document.createElement('button')
     button.id = "laterdate"
     button.className = "btn-custom calendar-date"
+    if (signup_details['startdate'] == 'laterdate') {
+        button.className = "btn-custom calendar-add-click"
+        $('#adddelaydate').show();
+     }
+    button.onclick = function() {
+         updateDate(this.id)
+     }
+    button.style = "padding: 2px"
     text = '<div style="background-color:#69ffa5; height: 15%;"></div>'
-    text += '<span style="font-family: droid; font-size: 11px; width: 100%" onclick="laterdate()">Later Date</span>'
+    text += '<span style="font-family: droid; font-size: 11px; width: 100%">or</span><br>'
+    text += '<span style="font-family: droid; font-size: 10px">Later Date</span>'
     button.innerHTML = text;
     document.getElementById('datesavailable').appendChild(button);
+
+    $('#wdcprice')[0].innerText = add_on_package["wdc"]["amount"]
+    $('#w8cprice')[0].innerText = add_on_package["w8c"]["amount"]
+    $('#d5cprice')[0].innerText = add_on_package["d5c"]["amount"]
+    $('#utmprice')[0].innerText = add_on_package["utm"]["amount"]
+    $('#sccprice')[0].innerText = add_on_package["scc"]["amount"]
+    $('#cpcprice')[0].innerText = add_on_package["cpc"]["amount"]
+
 }
 
 function updateDate(date) {
     document.getElementById(signup_details['startdate']).classList.remove('calendar-add-click')
     document.getElementById(signup_details['startdate']).classList.add('calendar-date')
+    $('#adddelaydate').hide()
+
+    if (date == 'laterdate') {
+        $('#adddelaydate').show()
+    }
+
     document.getElementById(date).classList.add("calendar-add-click")
     document.getElementById(date).classList.remove("calendar-date")
     signup_details['startdate'] = date
@@ -495,7 +626,12 @@ function display_welcome() {
         signup_details['business']  + " here. what can we do for you today?",
     ]
 
-    $('#currentwelcome')[0].innerHTML = "<span style='color: grey'>Select a message or add a new custom message</span>"
+    cookie_data['welcome_message'] = messages
+    add_welcome_messages(messages)
+}
+
+function add_welcome_messages(messages) {
+    $('#currentwelcome')[0].innerHTML = "<span style='color: grey; font-size: 12px; padding-left:7px'>Select a message or add a new custom message<br></span>"
     for(i in messages) {
         button = document.createElement('button')
         button.id = "greeting_message_" + i;
@@ -505,7 +641,7 @@ function display_welcome() {
             signup_details['welcome_message'] = messages[i]
             signup_details['welcome_message_id'] = button.id
         }
-        button.style = "margin: 5px; padding: 5px; text-align: left"
+        button.style = "margin: 5px; padding: 6px; text-align: left; margin-top: 6px"
         button.onclick = function() {
             clickNewGreeting(this.innerText, this.id)
         }
@@ -525,7 +661,12 @@ function display_voicemail() {
         "Thanks for calling " + signup_details['business'] + ". Our office is closed. Please leave a message and we will callback soon.",
     ]
 
-    $('#currentvoicemail')[0].innerHTML = "<span style='color: grey'>Select a message or add a new custom message</span>"
+    cookie_data['voicemail_message'] = messages
+    add_voicemail_message(messages)
+}
+
+function add_voicemail_message(messages) {
+    $('#currentvoicemail')[0].innerHTML = "<span style='color: grey; font-size:12px; padding-left:7px'>Select a message or add a new custom message<br></span>"
     for(i in messages) {
         button = document.createElement('button')
         button.id = "voicemail_message_" + i;
@@ -536,7 +677,7 @@ function display_voicemail() {
             signup_details['voicemail_message_id'] = button.id
         }
 
-        button.style = "margin: 5px; padding: 5px; text-align: left"
+        button.style = "margin: 5px; padding: 6px; text-align: left; margin-top: 6px"
         button.onclick = function() {
             clickNewVoicemail(this.innerText, this.id)
         }
@@ -573,29 +714,8 @@ function listnumbers() {
         url: UI_URL + 'list/phonenumber/',
         data: {email: signup_details['email'], areacode: $('#areacode')[0].value},
         success: function (data) {
-            type = "showing random numbers"
-            for(i=0; i< data.length; i++) {
-                if(data[i].substring(1,4) == $('#areacode')[0].value) {
-                    type = "showing numbers with selected area code:"
-                    break;
-                }
-            }
-            $('#getareacode').show();
-            $('#areacode')[0].value = ""
-            $('#loader').hide();
-            document.getElementById('displaynumber').innerHTML = "<p style='font-size: 12px; color: #f00664'>"+ type+"</p> "
-            document.getElementById('displaynumber').style = "margin-bottom: 30px; margin-top: 10px"
-            div = document.createElement('div')
-            div.style = "margin-top: 10px; display: flex; justify-content: space-around"
-            innerhtml = ""
-
-            for(i=0; i< data.length; i++) {
-                var match = data[i].match(/^(\d{1})(\d{3})(\d{3})(\d{4})$/);
-                num = '(' + match[2] + ') ' + match[3] + '-' + match[4];
-                innerhtml += "<Button class='btn-custom button-add' id="+data[i]+" onclick=addblingnumber(this.id)>" + num + "</Button>"
-            }
-            div.innerHTML = innerhtml
-            document.getElementById('displaynumber').appendChild(div)
+            cookie_data['listblingnumbers'] = data
+            displayRandomNumbers(data)
         },
         error: function(err) {
             $('#getareacode').show();
@@ -603,6 +723,32 @@ function listnumbers() {
             console.log(err)
         }
       });
+}
+
+function displayRandomNumbers(data) {
+    type = "showing random numbers"
+    for(i=0; i< data.length; i++) {
+        if(data[i].substring(1,4) == $('#areacode')[0].value) {
+            type = "showing numbers with selected area code:"
+            break;
+        }
+    }
+    $('#getareacode').show();
+    $('#areacode')[0].value = ""
+    $('#loader').hide();
+    document.getElementById('displaynumber').innerHTML = "<p style='font-size: 12px; color: #f00664'>"+ type+"</p> "
+    document.getElementById('displaynumber').style = "margin-bottom: 30px; margin-top: 10px"
+    div = document.createElement('div')
+    div.style = "margin-top: 10px; display: flex; justify-content: space-around"
+    innerhtml = ""
+
+    for(i=0; i< data.length; i++) {
+        var match = data[i].match(/^(\d{1})(\d{3})(\d{3})(\d{4})$/);
+        num = '(' + match[2] + ') ' + match[3] + '-' + match[4];
+        innerhtml += "<Button class='btn-custom button-add' id="+data[i]+" onclick=addblingnumber(this.id)>" + num + "</Button>"
+    }
+    div.innerHTML = innerhtml
+    document.getElementById('displaynumber').appendChild(div)
 }
 
 function clickNewGreeting(greeting, id) {
@@ -619,7 +765,6 @@ function clickNewGreeting(greeting, id) {
 
 function updateGreeting() {
     lastchild = document.getElementById('currentwelcome').lastChild
-    lastid = parseInt(lastchild.id.split("_")[2])
     newMessage = $('#greetingmessage')[0].value
 
      $('#greetingmessage').removeClass('error-outline')
@@ -628,16 +773,22 @@ function updateGreeting() {
         return
     }
 
+    div = document.createElement('div')
     button = document.createElement('button')
-    button.id = "greeting_message_" + lastid;
+    div.appendChild(button)
+    button.id = "greeting_message_" + welcome_next_id;
+    welcome_next_id += 1;
     button.className = "btn-custom button-add"
-    button.style = "margin: 5px; padding: 5px; text-align: left"
+    button.style = "margin: 5px; padding: 6px; text-align: left; margin-top: 6px"
     button.onclick = function() {
         clickNewGreeting(this.innerText, this.id)
     }
     button.innerText = newMessage
     document.getElementById('currentwelcome').removeChild(lastchild)
-    document.getElementById('currentwelcome').appendChild(button)
+    eElement = document.getElementById('currentwelcome')
+    eElement.insertBefore(div, eElement.children[1]);
+    cookie_data['welcome_message'].pop()
+    cookie_data['welcome_message'].unshift(newMessage)
     clickNewGreeting(newMessage, button.id)
     $('#greetingmessage')[0].value = ""
 }
@@ -656,7 +807,6 @@ function clickNewVoicemail(voicemail, id) {
 
 function updateVoicemail() {
     lastchild = document.getElementById('currentvoicemail').lastChild
-    lastid = parseInt(lastchild.id.split("_")[2])
     newMessage = $('#voicemailmessage')[0].value
 
      $('#voicemailmessage').removeClass('error-outline')
@@ -666,15 +816,19 @@ function updateVoicemail() {
     }
 
     button = document.createElement('button')
-    button.id = "voicemail_message_" + lastid;
+    button.id = "voicemail_message_" + voicemail_next_id;
+    voicemail_next_id += 1;
     button.className = "btn-custom button-add"
-    button.style = "margin: 5px; padding: 5px; text-align:left"
+    button.style = "margin: 5px; padding: 6px; text-align:left; margin-top: 6px"
     button.onclick = function() {
         clickNewVoicemail(this.innerText, this.id)
     }
     button.innerText = newMessage
     document.getElementById('currentvoicemail').removeChild(lastchild)
-    document.getElementById('currentvoicemail').appendChild(button)
+    eElement = document.getElementById('currentvoicemail')
+    cookie_data['voicemail_message'].pop()
+    cookie_data['voicemail_message'].unshift(newMessage)
+    eElement.insertBefore(button, eElement.children[1]);
     clickNewVoicemail(newMessage, button.id)
     $('#voicemailmessage')[0].value = ""
 }
@@ -715,50 +869,35 @@ function myFunction() {
 function display_process_payment() {
     $('#checkoutdata').show();
     $('#gameplay').hide();
-    hideInterval = setInterval(function() {
-        if ($('#nextbutton').length > 0) {
-            clearInterval(hideInterval);
-            $('#nextbutton').hide();
+    $('#nextbutton').hide()
+
+    $('#planname1')[0].innerText = selectedPlan
+    $('#plancalls')[0].innerText = plan_count[selectedPlan]
+    $('#monthlyfee')[0].innerText = "$" +signup_details['plan_amount']
+    document.getElementById('addonplans').innerText = ""
+    total = parseInt(signup_details['plan_amount'])
+
+    console.log(signup_details['add_on_plan'])
+    for (i in signup_details['add_on_plan']) {
+        planname = signup_details['add_on_plan'][i]
+        details = add_on_package[planname]
+        tr = document.createElement("tr")
+        tr.style = "width: 100%"
+        text = '<td style="width: 70%; font-size: 11px">+' + details['name']
+        text += '</td>'
+        text += '<td style="text-align: right">$' + details['amount']
+        text += '</td>'
+        tr.innerHTML = text
+        document.getElementById('addonplans').appendChild(tr)
+        if (planname == 'cpc') {
+            continue
         }
-    }, 100)
+        total += parseInt(details['amount'])
+    }
+
+    $('#total')[0].innerText = "$" + total
 }
 
-function updatePlanList() {
-//        $('#planlist')[0].innerHTML = ""
-//
-//        total_amount = 0;
-//        // main plan selected
-//        text = "<tr>"
-//        text += '<td style="padding: 5px; color: black; font-weight: normal; padding-top: 10px; padding-bottom: 10px">'
-//        text += '<span>'+selectedPlan+' Plan</span><br>'
-//        text += '<span style="font-size: 14px">'+plan_count[selectedPlan]+'</span>'
-//        text += '</td>'
-//        text += '<td style="padding: 5px; color: black; font-weight: normal">$'+signup_details['plan_amount']+'</td>'
-//        text += '</tr>'
-//        total_amount += parseInt(signup_details['plan_amount'])
-//        // additional plans
-//
-//        for(i in signup_details['add_on_plan']) {
-//            plan = signup_details['add_on_plan'][i]
-//            text += "<tr>"
-//            text += '<td style="padding: 5px; color: black; font-weight: normal; padding-top: 10px; padding-bottom: 10px">'
-//            text += '<span>'+plan['name']+'</span>'
-//            text += '<td style="padding: 5px; color: black; font-weight: normal">$'+plan['amount']+'</td>'
-//            text += '</tr>'
-//            total_amount += parseInt(plan['amount'])
-//        }
-//
-//        plan = signup_details['add_on_plan'][i]
-//        text += '<tr style="background-color: #69ffa5">'
-//        text += '<td style="padding: 5px; color: black; font-weight: normal; padding-top: 10px; padding-bottom: 10px">'
-//        text += '<span>Total</span>'
-//        text += '<td style="padding: 5px; color: black; font-weight: normal">$'+total_amount+'</td>'
-//        text += '</tr>'
-//
-//        signup_details['total_amount'] = total_amount
-//
-//        $('#planlist')[0].innerHTML = text
-}
 
 function nextPayment() {
     $('#pullpayment')[0].click()
@@ -796,18 +935,18 @@ var card = elements.create('card', {
 iconStyle: 'solid',
 style: {
   base: {
-    iconColor: '#c4f0ff',
-    color: '#fff',
-    fontWeight: 500,
+    iconColor: '#f00664',
+    color: 'black',
+    fontWeight: 300,
     fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-    fontSize: '16px',
+    fontSize: '15px',
     fontSmoothing: 'antialiased',
 
     ':-webkit-autofill': {
-      color: '#fce883',
+      color: 'black',
     },
     '::placeholder': {
-      color: '#69ffa5',
+      color: 'black',
     },
   },
   invalid: {
@@ -879,29 +1018,25 @@ function checkout() {
       });
 }
 
-function chatnow() {
-    tidioChatApi.open();
-    tidioChatApi.messageFromOperator("Hi, I am here. How can I help you?");
-}
-
-function callback() {
-    tidioChatApi.open();
-    tidioChatApi.messageFromOperator("Hi, We would love to talk to you. Please drop your callback number. An account manager will call you soon.");
-}
-
-function schedulecall() {
-    tidioChatApi.open();
-    tidioChatApi.messageFromOperator("Hi, We would love to talk to you. Please click the link below to setup some time as per your availability.");
-    tidioChatApi.messageFromOperator("https://calendly.com/alexcarter-100/15min");
-}
-
-function laterdate() {
-    tidioChatApi.open();
-    tidioChatApi.messageFromOperator("Hi, What date would you like to start? We can definitely get you started as per your convenience.")
-}
-
 function needhelp() {
-    tidioChatApi.open();
-    tidioChatApi.messageFromOperator("Hey, my name is Alex. How can I help you.")
-    tidioChatApi.messageFromOperator("I can also give you a call to chat further. If you would like that, may I have your phone number?")
+//      $.ajax({
+//          type: 'post',
+//          url: 'http://localhost:8080/business/checkoutsession',
+//          headers: {
+//            'Accept': 'application/json',
+//            'Authorization': 'Bearer <access-token>',
+//            'Content-Type': 'application/json'
+//          },
+//          data: {lineitem: "Pro", amount: "20", bid: 1030},
+//          success: function (data) {
+//              console.log(data)
+//          },
+//          error: function(err) {
+//              console.log("error is " + err)
+//          }
+//        });
+//    window.fcWidget.open({ name: "Alex", replyText: "Hey, my name is Alex. How can I help you."  });
+//    window.fcWidget.open({ name: "Alex", replyText: "I can also give you a call to chat further. If you would like that, may I have your phone number?"  });
+    window.fcWidget.open()
 }
+

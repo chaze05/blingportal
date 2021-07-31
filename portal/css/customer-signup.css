@@ -562,13 +562,13 @@ outline:0 !important;
 .button-add-click {
     color: white;
     background-color: #f00664;
+    border: 1px solid #ff0064;
     outline: none;
-    border: none;
 }
 
 .button-add-click:hover {
-    color: yellow;
-    border: none;
+    color: white;
+    border: 1px solid #ff0064;
     outline: none;
 }
 
@@ -623,26 +623,36 @@ outline:0 !important;
     color: black;
     margin: 3px;
     margin-bottom: 0px;
-    margin-top: -2px;
+    margin-top: 10px;
     padding: 5px;
-    width: 220px;
-    height: 120px;
+    width: 240px;
+    height: 103px;
     text-align: left;
-}
-
-.options:hover {
-    background-color: #f00664;
-    color: white;
+    z-index: 10;
 }
 
 .short1 {
     color: #f00664;
 }
 
-p:hover {
-        color: yellow !important;
-    }
+.options:hover, .options:hover .child {
+    background-color: #f00664;
+    color: white;
+}
 
+.click-plan {
+    background-color: #FFF791;
+    border: 1px solid #ff0064;
+    margin: 3px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    padding: 5px;
+    width: 240px;
+    height: 103px;
+    text-align: left;
+    z-index: 10;
+    outline: none;
+}
 
 .checkout-table {
     padding: 5px;
@@ -656,16 +666,16 @@ p:hover {
 
 .example.example1 * {
   font-family: Roboto, Open Sans, Segoe UI, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .example.example1 fieldset {
-  margin: 10px;
-  padding: 10px;
-  padding-top: 20px;
+  margin: 8px;
+  padding: 3px;
+  padding-top: 10px;
   border-style: none;
-  background-color: #f00664;
+  background-color: #ebebeb;
   border-radius: 4px;
 }
 
@@ -681,7 +691,7 @@ p:hover {
 .example.example1 label {
   width: 15%;
   padding: 10px 0;
-  color: white;
+  color: black;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -715,28 +725,28 @@ p:hover {
   width: 80%;
   height: 100%;
   padding: 8px 11px 8px 5px;
-  color: white;
+  color: black;
   background-color: transparent;
   -webkit-animation: 1ms void-animation-out;
 }
 
 .example.example1 input::-webkit-input-placeholder {
-  color:  #69ffa5;
+  color:  black;
 }
 
 .example.example1 input::-moz-placeholder {
-  color: yellow;
+  color: black;
 }
 
 .example.example1 input:-ms-input-placeholder {
-  color: yellow;
+  color: black;
 }
 
 .example.example1 button {
   display: block;
   width: calc(100% - 30px);
   height: 40px;
-  margin: 20px 15px 0;
+  margin: 10px 15px 10px;
   background-color: #69ffa5;
   border-radius: 4px;
   color: black;
