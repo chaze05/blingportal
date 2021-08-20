@@ -486,7 +486,7 @@ body{
 }
 
 /* Messaging  */
-.messagingBox {
+.messagingBox{
    border-radius: 30px;
    background:#4f5784c9;
    display: flex;
