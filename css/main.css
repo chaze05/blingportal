@@ -609,6 +609,7 @@ body{
 }
 .replyBox{
    text-align: right;
+   margin-bottom: 15px;
 }
 .replyBox .message{
    background: #fefe00d5;

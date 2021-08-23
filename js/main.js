@@ -215,3 +215,33 @@ $('.mainParent li a').on('click',function(){
 
     }
 });
+function formatAMPM(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
+function formatDate() {
+    var datenow = new Date();
+    var month = datenow.getMonth()+1;
+    var date = datenow.getDate();
+    var year = datenow.getFullYear();
+    var dateSent =   month+"/"+date+"/"+year;
+    return dateSent;
+}
+$('.send').on('click',function(E){
+    E.preventDefault();
+    var dateNow = new Date();
+    var message = $(this).parent().find('textarea').val()
+    var reply ='<div class="replyBox">'+
+                    '<span class="message">'+message+'</span>'+
+                    '<img src="img/pic.png" alt="">'+
+                    '<span class="time">'+formatAMPM(dateNow)+"   "+formatDate() +'</span>'+
+               '</div>';
+    $('.messageArea').append(reply);
+    $(this).parent().find('textarea').val('');
+});
