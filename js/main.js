@@ -245,3 +245,9 @@ $('.send').on('click',function(E){
     $('.messageArea').append(reply);
     $(this).parent().find('textarea').val('');
 });
+$('.typeArea textarea').on('keyup',function(e){
+    if (e.keyCode === 13) {
+    event.preventDefault();
+    $('.send').click();
+  }
+})
