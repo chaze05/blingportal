@@ -138,7 +138,6 @@ $(function(){
     function search(mobile){
             $.getJSON("https://www.bling-center.com/business/inbound/calldetail/amicpa", function(data){
             var currentProcessDate ="";
-            var number = new RegExp(mobile,"i");
             $.each(data, function(key,value){
                 var date = value.createdDate.split("T")[0];
                 var customernum = value.customerPhoneNumber;
