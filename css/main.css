@@ -1,0 +1,703 @@
+.dFlex{
+   display: flex;
+}
+body{
+   margin: 0;
+}
+.sideBar{
+   position: fixed;
+   width: 250px;
+   height: 100%;
+   left: 0;
+   top: 0;
+   background: #f00664; 
+   z-index: 10;
+   overflow: auto;
+}
+.sideBar .logoHolder{
+   padding: 15px 0;
+   text-align: center;
+}
+.sideBar .logoHolder a{
+   display: block;
+}
+.sideBar ul{
+   list-style: none;
+   margin:0;
+   padding: 0;
+}
+.sideBar ul li a{
+   display: block;
+   padding: 15px;
+   color:white;
+   text-decoration: none;
+   font-size: 18px;
+   font-weight: 600;
+   font-family: sans-serif;
+   position: relative;
+   padding-left:35px;
+}
+.sideBar ul li  a:hover,.sideBar ul li  a.active{
+    color: #fefd00;
+}
+.sideBar ul li > a.active.notactive{
+   color:white;
+}
+.sideBar ul li a i{
+   margin-right: 10px;
+   font-size: 20px;
+   width: 20px;
+}
+.sideBar ul li.parent > a:before{
+   position: absolute;
+   content: '';
+   z-index: 10;
+   width: 20px;
+   height: 20px;
+   right: 25px;
+   top: 0;
+   bottom: 0;
+   margin: auto;
+   background-image: url(../img/down.png);
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center right;
+}
+.sideBar ul li.parent > a.active:before{
+   transform: rotate(180deg);
+}
+.sideBar ul li  a::after{
+   position: absolute;
+   content: '';
+   height: 100%;
+   width: 0;;
+   left: 0;
+   top: 0;
+   right: 0;
+   margin: auto;
+   z-index: 1;
+   background: rgba(255,255,255,0.2);
+   transition: width .35s ease-in-out;
+}
+
+.sideBar ul li  a:hover::after,.sideBar ul li  a.active::after{
+   width: 100%;
+}
+.sideBar ul li > a.active.notactive::after{
+   width: 0;
+}
+.sideBar ul li a + ul{
+   padding-left: 0;
+   display: none;
+}
+.sideBar ul li a + ul li a{
+   padding-left: 75px;
+}
+.sideBar .details{
+   padding: 30px 15px;
+   text-align: center;
+}
+.sideBar .details span{
+   display: block;
+   font-size: 18px;
+   font-family: sans-serif;
+   font-weight: 500;
+   color:white;
+   padding: 10x 0;
+}
+
+.sideBar .profileInfo{
+   text-align: center;
+   margin: 30px 0;
+}
+.sideBar .profileInfo .imgHolder{
+   width: 80px;
+   height: 80px;
+   margin: 10px auto;
+}
+.sideBar .profileInfo .imgHolder img{
+   width: 100%;
+   border-radius: 50%;
+   height: 100%;
+}
+
+.sideBar .profileInfo .detailsBox span{
+   display: block;
+   font-size: 15px;
+   color: white;
+   font-weight: 600;
+   font-family: sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+.header{
+   position: fixed;
+   width: 100%;
+   right: 0;
+   background: #2d3035;
+   z-index: 5;
+}
+
+.header .area{
+font-size: 30px;
+    color: #fefd00;
+    font-weight: 600;
+    position: relative;
+    /* left: 300px; */
+    /* top: 0; */
+    /* bottom: 0; */
+    margin: auto;
+    padding: 0;
+    text-transform: capitalize;
+    /* height: 38px; */
+    display: inline;
+    flex: 1 0 50%;
+    padding-left: 280px;
+}
+
+.header .profileBox{
+   position: relative;
+   flex-direction: column;
+   flex-wrap: wrap;
+   justify-content: flex-end;
+   align-items: center;
+   flex-direction: row;
+}
+.header .profileBox .profile{
+   order: 2;
+   padding: 25px 0;
+   padding-right: 30px;;
+}
+.header .profileBox .profile a{
+   display: block;
+   border-radius: 50%;
+   overflow: hidden;
+   width: 60px;
+   height: 60px;
+   background: white;
+   border: 1px solid #ddd;
+}
+.header .profileBox .profile a img{
+   width: 100%;
+   height: 100%;
+}
+.header .profileBox .details .contact{
+   display: block;
+   padding-right: 20px;
+   text-align: right;
+   font-size: 16px;
+   font-weight: 600;
+   font-family: sans-serif;
+   color:#fefd00;
+}
+
+body{
+      background: #22252a;
+}
+
+.btnGet{
+   display: block;
+   text-decoration: none;
+   padding: 10px;
+   border-radius: 10xp;
+   color: #fefd00;
+   background: #2d3035;
+   max-width: 100px;
+   text-align: center;
+   cursor: pointer
+}
+.btnGet:hover{
+   color: #fefd00;
+   text-decoration: none;
+}
+
+.audioBox audio{
+   width: 100%;
+}
+.mainContent{
+   padding: 100px 30px 50px 280px;
+}
+.mainContent .holder .areaBox{
+   display: none;
+}
+.mainContent .holder  .active{
+   display: block;
+}
+.mainContent h3{
+   color:#fefd00 ;
+   margin-bottom: 0;
+}
+.mainContent .holder{
+   width: 100%;
+   margin: 0 auto;
+   display: flex;
+   justify-content: space-between;
+}
+
+.holder .areaBox{
+   flex: 1 0 70%;
+   display: flex;
+   justify-content: space-evenly;
+   flex-wrap: wrap;
+   margin-top: 30px;
+   align-items: center;
+}
+.holder .dashboard .recordBox{
+   flex: 0 0 30%;
+   border-radius: 10px;
+   margin: 15px 0;
+   border: 2px solid #2d3035;
+   overflow: hidden;
+}
+.holder .dashboard .recordBox img{
+   width: 100%;
+}
+.holder .dashboard .recordBox .recordInfo{
+   padding: 0 15px;
+   background: #2d3035;
+}
+.holder .dashboard .recordBox .dataHolder{
+   display: block;
+   font-size: 14px;
+   font-weight: 500;
+   padding: 10px 0;
+   color: #8a8d93;
+   color: #fefd009c;
+}
+.holder .dashboard .heading{
+   width: 100%;
+}
+.holder  .viewBox{
+   flex:0 0 64%;
+   margin: 10px 0;
+}
+.holder .dashboard .divDetails{
+   margin: 10px 0;
+}
+.holder .dashboard .divDetails .heading{
+   margin-bottom: 30px !important;
+}
+.holder .dashboard .divDetails ul{
+   list-style: none;
+   padding: 0;
+   margin: 0;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background: #2d3035;
+   border-radius: 30px;
+   padding: 15px 20px;
+}
+.holder .dashboard .divDetails ul li {
+   text-align: center;
+   text-transform: capitalize;
+   flex: 1;
+   padding: 0 5px;
+}
+.holder .dashboard .divDetails ul li .data{
+   display: block;
+   color: #fefd00;
+   font-size: 16px;
+   margin-bottom: 5px;
+}
+.holder .dashboard .divDetails ul li .colored{
+   padding: 5px 10px;
+   border-radius: 30px;
+   background-color: red;
+   color: #fefd00;
+}
+.holder .dashboard .divDetails ul li .callback{
+   background:#f00664;
+   color: #fefd00;
+}
+.holder .dashboard .divDetails ul li .lead{
+   background:greenyellow;
+   color: #f00664;
+}
+.holder .dashboard .divDetails ul li .other{
+   background:orange;
+   color: black;
+}
+.holder .dashboard .divDetails ul li .legend{
+   color:#8a8d93;
+   font-size: 14px;
+}
+.holder .paremetersBox{
+   flex: 0 0 35%;
+   border-radius: 10px;
+   padding:20px;
+   /* position: fixed;
+   top: 100px;
+   right: 30px;
+   width: 350px; */
+}
+.holder .paremetersBox .paremeters{
+   background: #2d3035;
+   border-radius: 5px;
+   padding-top:20px;
+}
+.holder .paremetersBox .paremeters h3{
+   font-size: 22px;
+   font-family: sans-serif;
+   font-weight: 500;;
+   text-transform: capitalize;
+   text-align: center;
+   color: #fefd00; 
+   margin: 0;
+   margin-bottom: 20px;
+}
+.holder .paremetersBox .paremeters .serviceBox{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 35px 15px;
+   padding-bottom: 15px;
+}
+.holder .paremetersBox .paremeters .serviceBox .service{
+   display: block;
+   color: white;
+   font-size: 24px;;
+   font-weight: 600;
+   font-family: sans-serif;
+}
+.holder .paremetersBox .paremeters .serviceBox .slideHolder{
+   width: 110px;
+   height: 35px;
+   border-radius: 30px;
+   background: gray;
+   position: relative;
+   text-align: center;
+   display: flex;
+   font-size: 18px;
+   align-items: center;
+   justify-content: center;
+   font-weight: 600;
+}
+.holder .paremetersBox .paremeters .serviceBox .slideHolder:before{
+   position: absolute;
+   content: '';
+   background: white;
+   border-radius: 50%;;
+   width: 25px;
+   height: 25px;
+   left: 5px;
+   top: 5px;
+   bottom: 5px;
+   transition: left .5 linear;
+   -moz-transition: left 0.5s linear; /* Firefox 4 */
+   -webkit-transition: left 0.5s linear; /* Safari and Chrome */
+   -o-transition: left 0.5s linear; /* Opera */
+   -ms-transition: left 0.5s linear; /* Explorer 10 */
+}
+.holder .paremetersBox .paremeters .serviceBox .slideHolder.active{
+   background: #f00664;
+   color: white;
+}
+.holder .paremetersBox .paremeters .serviceBox .slideHolder.active:before{
+   left: calc(100% - 30px);
+}
+
+.dashboard1 .heading{
+   display: block;
+   margin: 15px 0;
+   color: white;
+}
+.dashboard1 .heading .dFlex{
+   width: 100px;
+   background: red;
+   height: 100px;
+}
+
+#inbox .messageBox{
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   margin-bottom: 20px;
+   cursor: pointer;
+   position: relative
+}
+#inbox .messageBox{
+   padding: 15px 5px;
+   border-radius: 10px;
+   background: #2d3035;
+}
+#inbox .messageBox > div{
+   flex: 0;
+}
+#inbox .messageBox .profile{
+   flex-shrink: 1;;
+   flex-basis:25%
+}
+#inbox .messageBox .profile img{
+   width: 80px;
+   height: 80px;
+   border-radius: 50%;
+   
+}
+#inbox .messageBox .profile .name{
+   font-size: 16px;
+   font-weight: 700;
+   margin-left: 15px;
+   color: #cfd1d2;
+}
+#inbox .messageBox .messageArea{
+   flex-shrink: 1;;
+   flex-basis:50%;
+   max-width:550px;
+}
+#inbox .messageBox .messageArea p{
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   width: 100%;
+   overflow: hidden;
+   margin-bottom: 0;
+}
+#inbox .messageBox > div span,#inbox .messageBox > div p{
+   color: #cfd1d2;;
+}
+#inbox .messageBox .dateTime{
+   flex-shrink: 1;;
+   flex-basis:20%;
+}
+#inbox .messageBox .dateTime span{
+   display: block;
+   font-size: 16px;
+   color: #cfd1d2;
+   text-align: right;
+   padding-right: 30px;
+}
+#inbox .messageBox.new{
+   background: #fefd00;
+}
+#inbox .messageBox.new p, #inbox .messageBox.new .dateTime span, #inbox .messageBox.new .profile .name{
+   color:#181818;
+   font-weight: 800;
+}
+#inbox .messageBox .new{
+   position: absolute;
+   padding: 3px 15px;
+   color: #fefd00;
+   background: #f00664;
+   top: 5px;
+   border-radius: 30px;
+   right: 5px;
+}
+#inbox .messageBox.new2{
+   background: #f00664;
+}
+#inbox .messageBox.new2 p, #inbox .messageBox.new2 .dateTime span, #inbox .messageBox.new2 .profile .name{
+   color:#fefd00;
+   font-weight: 800;
+}
+#inbox .messageBox .new2{
+   color: #f00664;
+   background: #fefd00;
+   font-weight: 600;
+}
+
+/* Messaging  */
+.messagingBox{
+   border-radius: 30px;
+   background:#4f5784c9;
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+   overflow: hidden;
+}
+.topBox{
+   display: flex;
+   align-items: flex-start;
+   position: relative;
+   padding: 15px;
+   background: #4f5784;
+}
+.topBox .pic {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
+}
+.topBox .pic::before{
+   position: absolute;
+   content: '';
+   width: 15px;
+   height: 15px;
+   bottom: 3px;
+   right: 3px;
+   border-radius: 50%;
+   background: yellowgreen;
+}
+.topBox .pic img{
+   width: 70px;
+   height: 70px;
+   border-radius: 50%;
+}
+.infoBox{
+   margin-right: 20px;
+   padding-top:7px;
+}
+.infoBox .name{
+   display: block;
+   font-size: 16px;
+   color: white;
+   font-weight: 600;
+}
+.infoBox .count{
+   display: block;
+   font-size: 11px;
+   color: white;
+   font-weight: 500;
+}
+.actions{
+   padding-top: 7px;
+}
+.actions a{
+   display: inline-block;
+   font-size: 20px;
+   color: white;
+   margin: 0 10px;
+}
+.option{
+   position: absolute;
+   top: 15px;
+   right: 20px;
+   cursor: pointer;
+}
+.option span{
+   width: 6px;
+   height: 6px;
+   margin:3px 0;
+   border-radius: 30%;
+   display:block;
+   background:white;
+}
+
+
+.messageArea{
+   padding: 15px;
+   height: 350px;
+   overflow: auto;
+}
+.messageArea img{
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   display: inline-block;
+}
+.messageArea .time{
+   display: block;
+   color: white;
+   font-size: 12px;
+   margin-top: 5px;
+}
+
+.messageArea .message{
+   display: inline-block;
+   width: auto;
+   padding: 10px 7px;
+   color: black;
+   font-size: 18px;
+   font-weight: 600;;
+   border-radius: 20px;
+}
+.senderBox .message{
+   background: #f00664ab;
+   color: white;
+}
+
+.senderBox img{
+   margin-right: 10px;
+}
+.senderBox .time{
+   padding-left: 70px;
+}
+.replyBox .time{
+   padding-right: 70px;
+}
+.replyBox img{
+   margin-left: 10px
+}
+.replyBox{
+   text-align: right;
+   margin-bottom: 15px;
+}
+.replyBox .message{
+   background: #fefe00d5;
+}
+.typeArea{
+   padding: 15px 30px 20px 30px;
+   background:#4f5784c9;
+}
+.typeArea .inputHolder{
+   position: relative;
+   overflow: hidden;
+   border-radius: 30px;
+   padding: 0 50px;
+   background: #363c5b;
+}
+.typeArea .inputHolder textarea{
+   width: 100%;
+   padding: 15px;
+   outline: none;
+   background: #363c5b;
+   border: 0;
+   outline: none;
+   color: white;
+   font-size: 20px;
+   resize: none;
+
+}
+.typeArea .inputHolder a{
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   width: 50px;
+   top:0;
+   font-size: 30px;
+   bottom: 0;
+   background: #363c5b;
+   color: white;;
+   text-align: center;
+   text-decoration: none;
+}
+.typeArea .inputHolder .attach{
+   left: 0;
+}
+.typeArea .inputHolder .send{
+   right: 0;
+
+}
+/* Messaging  */
+
+/* SEARCHBOX */
+.searchBox{
+   margin:35px auto 50px;
+}
+.searchBox span{
+   display: block;
+   color: #fefd00;
+   font-size: 30px;
+   margin-bottom: 10px;
+}
+.searchBox input{
+   width: 100%;
+   border: 0;
+   border-bottom: 1px solid #fefd00;
+   outline: none;
+   text-align: center;
+   height: 55px;
+   font-size: 40px;
+   background:#2d3035;
+   color: white;
+}
+/* SEARCHBOX */
